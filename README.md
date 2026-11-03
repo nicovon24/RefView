@@ -4,7 +4,42 @@ RefView is a Spanish-first, bilingual football refereeing platform. Its first im
 
 ## Status
 
-The repository contains product, architecture, and SDD planning plus a runnable static design prototype. There is no Next.js application or playable 3D scene yet.
+The repository contains product, architecture, and SDD planning, a runnable static design prototype, and an initial Next.js application foundation. The application renders a neutral WebGL field, not a playable incident. There are no authored players, referee controls, decisions, scoring, attempt records, or AI requests yet.
+
+## Run the application foundation
+
+Use Node.js 24 and pnpm 10.33.2. Docker is needed for the PostgreSQL smoke test. In PowerShell from the repository root:
+
+```powershell
+pnpm install --frozen-lockfile
+Copy-Item .env.example apps/web/.env
+docker compose up -d postgres
+pnpm db:generate
+pnpm db:validate
+pnpm test
+pnpm test:db
+pnpm lint
+pnpm typecheck
+pnpm build
+pnpm dev
+```
+
+Open `http://127.0.0.1:3000` (redirects to Spanish `/es`) or `/en`. The full static concept is also available from the application at `/prototype/index.html`. `TEST_DATABASE_URL` must point to a reachable PostgreSQL instance; the DB test fails rather than silently substituting SQLite or mocks. `docker compose down` stops only this project's service and retains its named volume.
+
+For a browser smoke check with Playwright CLI, leave `pnpm dev` running in one terminal and use a second terminal:
+
+```powershell
+playwright-cli open http://127.0.0.1:3000 --browser=chrome
+playwright-cli snapshot
+playwright-cli click "getByRole('link', { name: 'EN' })"
+playwright-cli resize 390 844
+playwright-cli screenshot
+playwright-cli close
+```
+
+Confirm the Spanish root redirect, English text and `lang="en"`, a visible 3D field and ready message, and no horizontal mobile overflow. The actual browser check on 2026-11-03 used Headless Chrome 156 on Windows with an AMD Radeon RX 6700 XT, 16 GB RAM, at 1280×720 and 390×844. WebGL2 was available; no simulator frame-time or FPS claim is made from this neutral static field.
+
+The app currently uses a separate local PostgreSQL service on `127.0.0.1:55439`. No migration or application model exists. Generated Prisma code is ignored and must be regenerated after installation. Canvas loading and ready states were observed in Chrome; the unsupported-WebGL state was checked by disabling browser WebGL contexts. The rendering-error message is implemented but has not been exercised.
 
 To review the interactive design locally:
 
@@ -39,6 +74,4 @@ See:
 - XState, Zod, Vitest, and Playwright CLI.
 - Deterministic authored scenarios and evaluation that work without an AI provider.
 
-Application run instructions will be added after the application workspace exists.
-
-The next implementation gate is application bootstrap and a controllable referee scene. Nicolas must approve or correct the proposed football brief before it becomes accepted training content; the shared contracts have passed independent review but await that content decision before they are frozen.
+The next implementation gate is the deterministic timeline and observation core followed by a controllable referee scene. Nicolas must approve or correct the proposed football brief before it becomes accepted training content; the shared contracts have passed independent review but await that content decision before they are frozen.

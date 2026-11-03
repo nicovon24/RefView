@@ -53,4 +53,4 @@ The objective is to let a desktop user brief, play, decide, review, and replay o
 
 ## Next step
 
-Obtain independent review of the RV-003 contracts and Nicolas's review of the RV-002 football proposal. After reconciliation, RV-004 may bootstrap the application. Rendered visual approval remains a later RV-008/RV-011 gate.
+RV-004 has verified the scenario-independent application and test foundation while RV-002 and RV-003 remain in review. Nicolas's RV-002 authoring approval is still required before RV-003 freezes and dependent domain/persistence work begins. Rendered visual approval remains a later RV-008/RV-011 gate.

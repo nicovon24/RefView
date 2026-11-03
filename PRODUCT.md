@@ -71,4 +71,4 @@ The Coach receives only permitted attempt evidence, curated facts, deterministic
 
 ## Current state
 
-Product and technical planning are documented, and a bilingual interactive visual prototype exists under `docs/prototype/`. Its two football views are generated still concepts. A runnable application and playable 3D simulator do not exist yet.
+Product and technical planning are documented, and a bilingual interactive visual prototype exists under `docs/prototype/`. Its two football views are generated still concepts. A runnable Next.js application foundation now renders a neutral WebGL field preview; a playable 3D incident, referee controls, and evaluated attempts do not exist yet.

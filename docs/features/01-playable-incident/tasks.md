@@ -18,15 +18,17 @@ Task status lives only in [`../../specs/tasks.md`](../../specs/tasks.md). Paths 
 - Ownership: coordinator only until frozen.
 - Deliver: all files under `docs/contracts/`, the testing strategy, state machine, valid/invalid examples, server authority, anonymous/user ownership, and idempotent finalization.
 - Verify: independent read-only review; every invalid example maps to a future Zod/domain/database test; renderer, client, physics, and AI have no scoring authority.
-- Stop condition: do not scaffold the app while coordinate, time, public/private, decision, or persistence semantics conflict.
+- Stop condition: do not implement domain or persistence behavior while coordinate, time, public/private, decision, or persistence semantics remain unresolved. RV-004 may proceed within its scenario-independent boundary.
 
 ## RV-004 - Workspace and test foundation
 
 - Requirements: INC-REQ-010.
-- Dependencies: RV-003 frozen.
-- Ownership/writes: coordinator-owned bootstrap because root manifests, lockfile, shared configuration, and initial package boundaries move together. A later worker may receive a disjoint application path only after this gate passes. No scenario content or database schema beyond connection proof.
+- Dependencies: RV-001 verified and this scenario-independent bootstrap boundary reconciled across tracker, requirements, design, and review addendum. RV-003 freeze is not required for RV-004; it remains required for RV-005 and RV-006.
+- Ownership/writes: coordinator-owned root manifests, lockfile, shared configuration, initial application boundaries, and connection-only database setup.
+- Scope boundary: infrastructure, Spanish/English shell, shared visual foundation, client Canvas lifecycle, unit-test tooling, and real PostgreSQL connectivity only. Do not implement or encode scenario coordinates, clocks, events, evidence, decisions, evaluation, ownership, publication, attempts, or persistence models.
 - Deliver: Next.js App Router with strict TypeScript; Spanish/English locale skeleton; Radix/Tailwind/CVA foundation; pinned Three/R3F/Drei/Rapier/XState/Zod; pinned stable Prisma 7; Vitest; PostgreSQL test connection; Playwright CLI instructions.
-- Acceptance: fresh install; development server; one server-rendered route; one client Canvas loading state; one unit test; one real-PostgreSQL smoke test; lint, strict typecheck, production build, and browser smoke pass.
+- Acceptance: reproducible locked install; development server; one server-rendered route with Spanish default and English alternative; client Canvas loading, ready, unsupported-WebGL, and error presentation; one meaningful unit test; one generated-Prisma-client smoke test against real PostgreSQL; lint, strict typecheck, production build, Playwright CLI browser smoke, and independent read-only review of shared configuration.
+- Completion boundary: verifies the application/test foundation only. It does not verify INC-REQ-010's complete simulator flow, approve RV-002, freeze RV-003, or satisfy later simulator/persistence acceptance.
 - TDD: a deliberate environment smoke test may begin red for missing setup, then pass. Do not fabricate red tests for generated static files.
 - Stop conditions: Prisma 7/runtime incompatibility, unpinned critical versions, or no reproducible PostgreSQL path.
 

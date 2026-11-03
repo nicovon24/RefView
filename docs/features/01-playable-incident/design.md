@@ -4,6 +4,8 @@
 
 The incident brief and shared contracts are drafted. The shared contracts passed independent review but remain unfrozen until Nicolas reviews the proposed incident content. The running scene will also require his visual review before it becomes accepted training content. The selected camera starts behind the referee and offers first person as a toggle.
 
+RV-004 is a verified scenario-independent bootstrap: application/tooling, bilingual shell, neutral Canvas lifecycle, and real database connection proof. Scenario facts, contracts, domain behavior, models, and migrations remain gated on the RV-002/RV-003 review and freeze.
+
 ## Canonical incident
 
 At an authored match minute, an attacking midfielder sends a through pass into the right channel. The receiver is onside by a visible margin. A pursuing defender fails to play the ball and carelessly trips the attacker just inside the penalty area. A covering defender is positioned to prevent a DOGSO interpretation. The reviewed outcome is a penalty kick with no disciplinary sanction.

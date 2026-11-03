@@ -12,6 +12,8 @@ python -m http.server 4173 --directory docs\prototype
 
 Open `http://127.0.0.1:4173` in a desktop browser. The simulator concept targets keyboard and mouse; the remaining application is responsive. The prototype has been checked in Playwright CLI at 1440 × 1000 and 390 × 844 in Chromium.
 
+The same static files are copied into the Next.js application at `/prototype/index.html` for concept review. This copy is not an implemented simulator; this folder remains the source of truth.
+
 ## Implemented in this prototype
 
 - Complete simulator journey: role → scenario → briefing → live camera concept → decision → debrief → illustrative VAR workspace → next scenario.
@@ -71,7 +73,7 @@ No reference branding, layout, footage, kits, teams, characters, stadium or broa
 ## Next concrete milestone
 
 1. Obtain Nicolás's explicit review of RV-002 football facts and evidence requirements before accepting it as training content.
-2. Bootstrap the Next.js application and implement the canonical timeline and deterministic scenario data contract.
+2. Continue from the Next.js foundation with the canonical timeline and deterministic scenario data contract after RV-003 freezes.
 3. Build the first React Three Fiber scene with referee locomotion, adjustable camera framing, authored actor motion and evidence visibility.
 4. Replace still concepts with live and replay cameras driven by the same timeline.
 5. Measure Chromium performance on a named device and add adjustable quality, loading and error states.
