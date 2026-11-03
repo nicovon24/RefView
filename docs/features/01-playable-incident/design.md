@@ -2,9 +2,9 @@
 
 ## Design status
 
-The incident brief and shared contracts are drafted. The shared contracts passed independent review but remain unfrozen until Nicolas reviews the proposed incident content. The running scene will also require his visual review before it becomes accepted training content. The selected camera starts behind the referee and offers first person as a toggle.
+Nicolas approved the proposed incident football brief on 2026-11-03. The shared contracts and executable timeline addendum passed independent review and are frozen for RV-005/RV-006. The running scene will still require Nicolas's visual review before it becomes accepted training content. The selected camera starts behind the referee and offers first person as a toggle.
 
-RV-004 is a verified scenario-independent bootstrap: application/tooling, bilingual shell, neutral Canvas lifecycle, and real database connection proof. Scenario facts, contracts, domain behavior, models, and migrations remain gated on the RV-002/RV-003 review and freeze.
+RV-004 is a verified scenario-independent bootstrap: application/tooling, bilingual shell, neutral Canvas lifecycle, and real database connection proof. Domain and persistence work may now follow the frozen RV-003 contracts; rendered scenario evidence remains an RV-008/RV-011 gate.
 
 ## Canonical incident
 

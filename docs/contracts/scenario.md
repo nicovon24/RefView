@@ -14,6 +14,7 @@ type ScenarioManifest = Readonly<{
   classification: "clear" | "interpretative" | "inconclusive";
   lawsEdition: "IFAB-2026-27";
   competitionProfileId: string;
+  field: FieldGeometry;
   durationTicks: number;
   tickRateHz: 60;
   decisionGate: Readonly<{
@@ -88,9 +89,13 @@ This boundary reduces accidental answer leakage; it is not an anti-cheat guarant
 - Events use the ordering contract in [`clocks-and-events.md`](clocks-and-events.md).
 - Rapier may resolve the user referee against static geometry. It does not simulate or rewrite authored player/ball tracks.
 
+For RV-005's first pure-core slice, use a narrow `TimelineFixture` rather than claiming to validate the entire `ScenarioManifest`. It contains the immutable scenario ref, inclusive duration, complete authored actor and ball samples at each integer tick, and canonical events. Each actor sample has a stable actor ID, finite metre position, finite yaw in radians, an animation clip ID, and integer clip phase in millionths of a cycle. Each ball sample has a finite metre centre and finite quaternion orientation. No user-controlled referee pose or camera belongs to the authored state. Production keyframe compression and animation-asset mapping are later adapters; they must produce the same integer-tick samples and may not alter authored facts.
+
+`MatchState` and `MatchEffect` remain session-composition placeholders for RV-012; the first-slice validator does not assert those contracts. Public/private projection and reviewed first-incident content also remain separate tasks. This is a scope boundary, not a claim that the full manifest or projection has been implemented.
+
 ## Valid and invalid examples
 
-Valid:
+Valid manifest-header excerpt (not a complete `ScenarioManifest` fixture):
 
 ```json
 {

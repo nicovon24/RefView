@@ -53,4 +53,4 @@ The objective is to let a desktop user brief, play, decide, review, and replay o
 
 ## Next step
 
-RV-004 has verified the scenario-independent application and test foundation while RV-002 and RV-003 remain in review. Nicolas's RV-002 authoring approval is still required before RV-003 freezes and dependent domain/persistence work begins. Rendered visual approval remains a later RV-008/RV-011 gate.
+RV-002 football-brief approval, RV-003 shared-contract freeze, and RV-004 application foundation are verified. RV-005 begins with TDD for the pure canonical timeline before observation and scoring-authority slices. RV-006 may proceed on disjoint database paths with real PostgreSQL tests. Rendered visual approval remains a later RV-008/RV-011 gate.

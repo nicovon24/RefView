@@ -38,7 +38,7 @@ The offence location is the authored point of contact, not the ball or either pl
 | `defence-02` | Second-last opponent at the pass snapshot and a possible live-view occluder. |
 | `defence-01` | Goalkeeper, set centrally and able to react. |
 
-The eight player actors share immutable authored tracks. User movement never changes their action.
+The seven football player actors share immutable authored tracks. The eighth actor is the user-controlled referee; user movement never changes the footballers' action.
 
 ## Canonical chronology
 
@@ -132,6 +132,8 @@ The reviewed key is `stop + penaltyKick + noCard`. Evaluation remains dimensiona
 - [IFAB 2026/27 law changes](https://www.theifab.com/law-changes/latest/): current-edition context.
 
 ## Nicolas review checkpoints
+
+Nicolas approved the proposed onside buildup, careless trip just inside the penalty area, covering defender, and penalty/no-card authoring target on 2026-11-03. This approval covers the football brief, not the future rendered scene or measured evidence contrast.
 
 ### RV-002 brief approval
 

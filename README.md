@@ -74,4 +74,4 @@ See:
 - XState, Zod, Vitest, and Playwright CLI.
 - Deterministic authored scenarios and evaluation that work without an AI provider.
 
-The next implementation gate is the deterministic timeline and observation core followed by a controllable referee scene. Nicolas must approve or correct the proposed football brief before it becomes accepted training content; the shared contracts have passed independent review but await that content decision before they are frozen.
+The next implementation gate is the deterministic timeline and observation core followed by a controllable referee scene. Nicolas approved the proposed football brief on 2026-11-03; its rendered evidence still requires his later review. RV-003 shared contracts are frozen, and RV-005 is in progress with TDD-first pure-core slices.
