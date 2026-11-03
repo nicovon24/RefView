@@ -1,0 +1,21 @@
+# Local browser inspection and generated review output
+.playwright-cli/
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/surface-brief-body.md
+
+# Local runtime and build artifacts
+node_modules/
+.next/
+dist/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+
+# Local IDE and OS files
+.DS_Store
+Thumbs.db
+.vscode/

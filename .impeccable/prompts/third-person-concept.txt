@@ -1,0 +1,9 @@
+Use case: stylized-concept
+Asset type: original visual concept asset for a desktop web football referee simulator
+Primary request: the same believable football incident near the penalty-area boundary, viewed from a comfortable elevated third-person gameplay camera behind and slightly above the main referee; the referee in a bright turquoise shirt is running diagonally toward an attacker in red challenged by a defender in deep blue, with the ball at the decisive contact and 8 to 10 other naturally positioned players visible
+Scene/backdrop: original modern football stadium at dusk, full but non-identifiable crowd, accurate regulation pitch scale, penalty-area lines clearly readable
+Style/medium: premium contemporary real-time 3D sports video game render with natural human proportions and motion, physically based turf, kits, ball and shadows; original art direction, not copied from FIFA, EA Sports, Premier League Player, any real club, player, league, stadium or broadcast package
+Composition/framing: 16:9 landscape, camera 5 to 7 meters behind and 3 to 4 meters above the referee, referee low center foreground, decisive challenge in the middle distance, clear spatial relationships and enough pitch context to judge angle and distance, no UI chrome baked into image
+Lighting/mood: realistic dusk floodlights, crisp visibility, grounded shadows, lively stadium without cinematic blur
+Color palette: natural green pitch, fictional red and deep blue teams, turquoise referee, neutral stadium
+Constraints: no logos, no text, no watermark, no real teams or people, no impossible anatomy, exactly one ball, no exaggerated saturation

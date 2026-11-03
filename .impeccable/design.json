@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-03T02:59:42.281Z",
+  "title": "Design System: RefView",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Field Ink",
+        "tonalRamp": [
+          "oklch(15% 0.025 170)",
+          "oklch(26% 0.025 170)",
+          "oklch(38% 0.025 170)",
+          "oklch(49% 0.025 170)",
+          "oklch(61% 0.025 170)",
+          "oklch(72% 0.025 170)",
+          "oklch(84% 0.025 170)",
+          "oklch(95% 0.025 170)"
+        ]
+      },
+      "night": {
+        "role": "neutral",
+        "displayName": "Stadium Night",
+        "tonalRamp": [
+          "oklch(15% 0.015 170)",
+          "oklch(26% 0.015 170)",
+          "oklch(38% 0.015 170)",
+          "oklch(49% 0.015 170)",
+          "oklch(61% 0.015 170)",
+          "oklch(72% 0.015 170)",
+          "oklch(84% 0.015 170)",
+          "oklch(95% 0.015 170)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Reading Paper",
+        "tonalRamp": [
+          "oklch(15% 0.009 120)",
+          "oklch(26% 0.009 120)",
+          "oklch(38% 0.009 120)",
+          "oklch(49% 0.009 120)",
+          "oklch(61% 0.009 120)",
+          "oklch(72% 0.009 120)",
+          "oklch(84% 0.009 120)",
+          "oklch(95% 0.009 120)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "lime": {
+        "role": "primary",
+        "displayName": "Selection Lime",
+        "tonalRamp": [
+          "oklch(15% 0.15 115)",
+          "oklch(26% 0.15 115)",
+          "oklch(38% 0.15 115)",
+          "oklch(49% 0.15 115)",
+          "oklch(61% 0.15 115)",
+          "oklch(72% 0.15 115)",
+          "oklch(84% 0.15 115)",
+          "oklch(95% 0.15 115)"
+        ]
+      },
+      "lime-hover": {
+        "role": "primary",
+        "displayName": "Selection Lime Hover",
+        "tonalRamp": [
+          "oklch(15% 0.15 115)",
+          "oklch(26% 0.15 115)",
+          "oklch(38% 0.15 115)",
+          "oklch(49% 0.15 115)",
+          "oklch(61% 0.15 115)",
+          "oklch(72% 0.15 115)",
+          "oklch(84% 0.15 115)",
+          "oklch(95% 0.15 115)"
+        ]
+      },
+      "teal": {
+        "role": "secondary",
+        "displayName": "Referee Turquoise",
+        "tonalRamp": [
+          "oklch(15% 0.1 187)",
+          "oklch(26% 0.1 187)",
+          "oklch(38% 0.1 187)",
+          "oklch(49% 0.1 187)",
+          "oklch(61% 0.1 187)",
+          "oklch(72% 0.1 187)",
+          "oklch(84% 0.1 187)",
+          "oklch(95% 0.1 187)"
+        ]
+      },
+      "coral": {
+        "role": "tertiary",
+        "displayName": "Decision Coral",
+        "tonalRamp": [
+          "oklch(15% 0.16 28)",
+          "oklch(26% 0.16 28)",
+          "oklch(38% 0.16 28)",
+          "oklch(49% 0.16 28)",
+          "oklch(61% 0.16 28)",
+          "oklch(72% 0.16 28)",
+          "oklch(84% 0.16 28)",
+          "oklch(95% 0.16 28)"
+        ]
+      },
+      "blue": {
+        "role": "tertiary",
+        "displayName": "Focus Blue",
+        "tonalRamp": [
+          "oklch(15% 0.16 266)",
+          "oklch(26% 0.16 266)",
+          "oklch(38% 0.16 266)",
+          "oklch(49% 0.16 266)",
+          "oklch(61% 0.16 266)",
+          "oklch(72% 0.16 266)",
+          "oklch(84% 0.16 266)",
+          "oklch(95% 0.16 266)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Quiet Green",
+        "tonalRamp": [
+          "oklch(15% 0.03 165)",
+          "oklch(26% 0.03 165)",
+          "oklch(38% 0.03 165)",
+          "oklch(49% 0.03 165)",
+          "oklch(61% 0.03 165)",
+          "oklch(72% 0.03 165)",
+          "oklch(84% 0.03 165)",
+          "oklch(95% 0.03 165)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "tonalRamp": [
+          "oklch(15% 0.012 145)",
+          "oklch(26% 0.012 145)",
+          "oklch(38% 0.012 145)",
+          "oklch(49% 0.012 145)",
+          "oklch(61% 0.012 145)",
+          "oklch(72% 0.012 145)",
+          "oklch(84% 0.012 145)",
+          "oklch(95% 0.012 145)"
+        ]
+      },
+      "hud": {
+        "role": "neutral",
+        "displayName": "HUD Shade",
+        "tonalRamp": [
+          "oklch(15% 0.02 170)",
+          "oklch(26% 0.02 170)",
+          "oklch(38% 0.02 170)",
+          "oklch(49% 0.02 170)",
+          "oklch(61% 0.02 170)",
+          "oklch(72% 0.02 170)",
+          "oklch(84% 0.02 170)",
+          "oklch(95% 0.02 170)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Match Display",
+        "purpose": "Image-led home headline; the shipped Barlow Condensed face is semibold."
+      },
+      "headline": {
+        "displayName": "Page Headline",
+        "purpose": "Condensed page hierarchy with contextual size overrides."
+      },
+      "title": {
+        "displayName": "Section Title",
+        "purpose": "Section headings and operational panel titles."
+      },
+      "body": {
+        "displayName": "Reading Body",
+        "purpose": "Instructions and explanations, capped at 72ch."
+      },
+      "label": {
+        "displayName": "Functional Label",
+        "purpose": "Bold compact labels; major HUD and provenance text uses the final readability size."
+      }
+    },
+    "shadows": [
+      {
+        "name": "overlay",
+        "value": "0 12px 32px rgba(8,20,17,.16)",
+        "purpose": "Mobile navigation and toast."
+      },
+      {
+        "name": "hud",
+        "value": "0 8px 24px rgba(0,0,0,.16)",
+        "purpose": "Readable plates above pitch imagery."
+      },
+      {
+        "name": "coach-launcher",
+        "value": "0 8px 26px rgba(9,20,17,.25)",
+        "purpose": "Floating Coach entry."
+      },
+      {
+        "name": "coach-drawer",
+        "value": "-16px 0 38px rgba(7,17,15,.22)",
+        "purpose": "Side drawer separation."
+      },
+      {
+        "name": "message",
+        "value": "0 6px 16px rgba(10,22,18,.07)",
+        "purpose": "Prepared-response message surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Shared settling curve."
+      },
+      {
+        "name": "view-in",
+        "value": "500ms; opacity .2 to 1; translateY(8px) to 0",
+        "purpose": "Destination entrance; removed for reduced motion."
+      },
+      {
+        "name": "drawer-in",
+        "value": "400ms; translateX(100%) to 0",
+        "purpose": "Coach entrance; removed for reduced motion."
+      },
+      {
+        "name": "button",
+        "value": "200ms; translateY(-2px) on hover",
+        "purpose": "Action feedback; transition removed for reduced motion."
+      },
+      {
+        "name": "role-image",
+        "value": "700ms; scale(1.025) on hover",
+        "purpose": "Role preview; transition removed for reduced motion."
+      },
+      {
+        "name": "camera",
+        "value": "350ms; filter and transform",
+        "purpose": "Illustrative camera framing; currently remains under reduced motion."
+      },
+      {
+        "name": "navigation",
+        "value": "250ms; scaleX(0) to scaleX(1)",
+        "purpose": "Navigation underline; currently remains under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1100px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      }
+    ],
+    "focus": {
+      "value": "3px solid var(--blue); outline-offset:3px",
+      "purpose": "Global visible keyboard focus."
+    },
+    "provenance": {
+      "sourceFiles": [
+        "docs/prototype/index.html",
+        "docs/prototype/styles.css",
+        "docs/prototype/app.js"
+      ],
+      "assetRegister": "docs/prototype/assets/README.md",
+      "surfaceBrief": ".impeccable/surfaces/docs-prototype-index-html.md",
+      "documentationMode": "Scan of final prototype; direction language inherited from the existing brief without a new interview.",
+      "finishDisposition": "SHIP for static prototype, supplied by coordinator; not production acceptance.",
+      "requestedIdentity": {
+        "model": "gpt-6-astra",
+        "effort": "high"
+      },
+      "runtimeConfirmedIdentity": {
+        "model": "unconfirmed",
+        "effort": "unconfirmed"
+      },
+      "tonalRampNote": "Synthesized OKLCH display ramps for the design panel only; they are not implemented CSS tokens. Gamut mapping is browser dependent."
+    },
+    "limitations": [
+      "Static images do not prove 3D gameplay, physics, occlusion, animation or synchronized replay.",
+      "Production camera default remains unresolved between existing first-person requirements and the prototype's behind-referee default.",
+      "Reduced-motion support is partial; camera and navigation transitions remain.",
+      "Component previews are visual samples; app behaviours and self-hosted font loading remain host responsibilities."
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main next action; compact and bold.",
+      "html": "<button class=\"ds-button ds-primary ds-focus\" type=\"button\">Elegir escenario</button>",
+      "css": ".ds-button{font:800 16px/1.48 'Source Sans 3','Segoe UI',sans-serif;min-height:46px;border:0;border-radius:6px;padding:13px 18px;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.ds-button:hover{transform:translateY(-2px)}.ds-button:disabled{opacity:.46;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}.ds-primary{background:var(--lime,#cfea55);color:var(--ink,#10201d)}.ds-primary:hover{background:#dcf66f}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Supporting action on a light surface.",
+      "html": "<button class=\"ds-button ds-secondary ds-focus\" type=\"button\">Repetir escenario</button>",
+      "css": ".ds-button{font:800 16px/1.48 'Source Sans 3','Segoe UI',sans-serif;min-height:46px;border:0;border-radius:6px;padding:13px 18px;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.ds-button:hover{transform:translateY(-2px)}.ds-button:disabled{opacity:.46;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}.ds-secondary{background:var(--ink,#10201d);color:var(--paper,#f1f2ed)}"
+    },
+    {
+      "name": "Decision Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Consequential action with an explicit label; colour alone carries no football meaning.",
+      "html": "<button class=\"ds-button ds-danger ds-focus\" type=\"button\">Confirmar decisión</button>",
+      "css": ".ds-button{font:800 16px/1.48 'Source Sans 3','Segoe UI',sans-serif;min-height:46px;border:0;border-radius:6px;padding:13px 18px;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.ds-button:hover{transform:translateY(-2px)}.ds-button:disabled{opacity:.46;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}.ds-danger{background:var(--coral,#b94236);color:white}"
+    },
+    {
+      "name": "Coach Input",
+      "kind": "input",
+      "refersTo": "input-coach",
+      "description": "Native labelled text input from the prepared-response drawer.",
+      "html": "<label class=\"ds-field\">Pregunta al Coach<input class=\"ds-input ds-focus\" placeholder=\"Escribí tu pregunta\"></label>",
+      "css": ".ds-field{display:grid;gap:7px;font:400 16px/1.48 'Source Sans 3','Segoe UI',sans-serif;color:var(--ink,#10201d)}.ds-input{min-width:0;border:1px solid #abb7b0;background:white;color:var(--ink,#10201d);padding:11px;font:inherit}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-item",
+      "description": "Text navigation with a persistent active bottom rule and animated hover rule.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Principal\"><button class=\"ds-nav-item ds-focus ds-active\" type=\"button\" aria-current=\"page\">Simulador</button><button class=\"ds-nav-item ds-focus\" type=\"button\">Academy</button></nav>",
+      "css": ".ds-nav{display:flex;height:68px;background:var(--paper,#f1f2ed)}.ds-nav-item{position:relative;border:0;background:transparent;padding:0 15px;font:650 .91rem/1.48 'Source Sans 3','Segoe UI',sans-serif;color:#40514c;cursor:pointer}.ds-nav-item:after{content:'';position:absolute;left:14px;right:14px;bottom:0;height:3px;background:var(--ink,#10201d);transform:scaleX(0);transition:transform .25s cubic-bezier(.16,1,.3,1)}.ds-nav-item.ds-active:after,.ds-nav-item:hover:after{transform:scaleX(1)}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}"
+    },
+    {
+      "name": "Availability Tag",
+      "kind": "chip",
+      "refersTo": "tag-live",
+      "description": "Static status label; retain explicit content-truth wording.",
+      "html": "<span class=\"ds-tag\">CONCEPTO ILUSTRATIVO</span>",
+      "css": ".ds-tag{display:inline-block;background:var(--lime,#cfea55);color:var(--ink,#10201d);border-radius:999px;padding:6px 9px;font:800 .75rem/1.48 'Source Sans 3','Segoe UI',sans-serif;letter-spacing:.06em}"
+    },
+    {
+      "name": "Decision Panel",
+      "kind": "custom",
+      "refersTo": "decision-panel",
+      "description": "High-opacity compact decision plate; behaviour is supplied by the application.",
+      "html": "<section class=\"ds-panel\" aria-labelledby=\"ds-decision-title\"><h2 id=\"ds-decision-title\">Tu decisión</h2><p>Elegí con la evidencia disponible.</p><div class=\"ds-choices\"><button class=\"ds-choice ds-focus ds-selected\" aria-pressed=\"true\" type=\"button\">Detener</button><button class=\"ds-choice ds-focus\" aria-pressed=\"false\" type=\"button\">Continuar</button></div></section>",
+      "css": ".ds-panel{width:min(380px,calc(100vw - 44px));padding:22px;border-radius:10px;background:var(--hud,rgba(11,22,20,.9));color:white;box-shadow:0 8px 24px rgba(0,0,0,.16);font:400 16px/1.48 'Source Sans 3','Segoe UI',sans-serif}.ds-panel h2{font:600 2rem/.98 'Barlow Condensed','Arial Narrow',sans-serif;letter-spacing:-.025em;margin:0 22px 8px 0}.ds-panel p{font-size:.88rem;color:#bdc9c4}.ds-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}.ds-choice{border:1px solid #67746f;background:transparent;color:white;border-radius:5px;padding:12px;font:800 16px/1.48 'Source Sans 3','Segoe UI',sans-serif;cursor:pointer}.ds-choice.ds-selected{background:var(--lime,#cfea55);color:var(--ink,#10201d);border-color:var(--lime,#cfea55)}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}"
+    },
+    {
+      "name": "Ruled Profile Section",
+      "kind": "card",
+      "refersTo": "profile-section",
+      "description": "Flat section with shared grid borders, without card elevation.",
+      "html": "<section class=\"ds-section\"><h2>Preferencias</h2><label class=\"ds-preference\">Idioma<select class=\"ds-focus\"><option>Español</option><option>English</option></select></label></section>",
+      "css": ".ds-section{padding:28px;border:1px solid var(--line,#cfd6d1);background:var(--paper,#f1f2ed);color:var(--ink,#10201d);font:400 16px/1.48 'Source Sans 3','Segoe UI',sans-serif}.ds-section h2{font:600 2.3rem/.98 'Barlow Condensed','Arial Narrow',sans-serif;letter-spacing:-.025em;margin:0 0 14px}.ds-preference{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--line,#cfd6d1)}.ds-preference select{background:transparent;border:0;border-bottom:1px solid var(--ink,#10201d);padding:5px;font:inherit;color:inherit}.ds-focus:focus-visible{outline:3px solid var(--blue,#4d72d8);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Camera de partido",
+    "overview": "RefView is grounded in the referee's view of football: natural pitch colour, close attention to the incident, and compact controls that let the scene lead. Deep green-black chrome, off-white reading surfaces, lime selections, turquoise cues, and restrained coral decisions connect the product. The tone is direct, composed, and practical.\n\nThe interface changes density with the task. Simulator controls sit at the edge of the scene; learning, discussion, and review use generous light surfaces, strong condensed headings, readable body text, and ruled sections. Branding stays replaceable: the name and original circular mark are identity elements, while semantic colour roles, typography roles, layout, and accessible interaction remain independent.",
+    "keyCharacteristics": [
+      "Field-led composition with compact, high-opacity controls.",
+      "Condensed display typography paired with open, readable body typography.",
+      "Flat, ruled reading surfaces and selective overlay elevation.",
+      "Visible distinctions between authored evidence, interpretation, and illustrative content.",
+      "Spanish-first content with complete English counterparts."
+    ],
+    "rules": [
+      {
+        "name": "The State Plus Label Rule",
+        "body": "Selection, warning, and availability must have a textual or structural cue as well as colour.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do preserve semantic colour and type roles so the brand can change independently of the workflows.",
+      "Do keep incident imagery dominant during simulator use and reading surfaces calm outside it.",
+      "Do keep fictional, illustrative, proposed, and prepared-response disclosures close to the affected content.",
+      "Do test Spanish and English, keyboard focus, and narrow layouts after component changes.",
+      "Do preserve asset origins, licenses, and generation prompts when replacing or reusing visual material."
+    ],
+    "donts": [
+      "Don't present generated stills or matching timecodes as validated live 3D or synchronized evidence.",
+      "Don't invent scores, observation measurements, or AI capabilities to make the interface appear complete.",
+      "Don't encode a decision or availability state with colour alone.",
+      "Don't turn quiet reading sections into a dense grid of elevated rounded cards.",
+      "Don't treat prototype review as production gameplay, persistence, accessibility, or training-content acceptance."
+    ]
+  }
+}
