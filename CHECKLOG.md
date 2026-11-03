@@ -5,8 +5,8 @@ This is a manually verified orientation note, not an automatic changelog or the 
 ## Current state
 
 - Current phase: RV-002 football brief, RV-003 shared contracts, and RV-004 foundation are verified; RV-005 TDD core is in progress. Authoritative task status remains in `docs/specs/tasks.md`.
-- What exists: the previous product/design/documentation foundation plus a Next.js App Router workspace, Spanish/English routes, a neutral WebGL field preview, pinned dependencies, Vitest locale tests, a generated-Prisma-client connection smoke test against local PostgreSQL, a reviewed pure canonical-timeline fixture/checksum slice, and reviewed pure fixed-step live/replay cursors. The root test suite passes 46 tests.
-- What does not exist: an authored or playable incident, referee movement, complete scenario validation, observation logic, persistence models/migrations, scored attempts, AI requests, or deployment. The static prototype's generated scene images remain visual concepts, not validated animation or evidence.
+- What exists: the previous product/design/documentation foundation plus a Next.js App Router workspace, Spanish/English routes, a neutral WebGL field preview, pinned dependencies, Vitest locale tests, a generated-Prisma-client connection smoke test against local PostgreSQL, reviewed pure canonical-timeline and live/replay cursors, and reviewed synthetic observation geometry. The root test suite passes 54 tests.
+- What does not exist: an authored or playable incident, referee movement, complete scenario validation, eligible-live observation summaries or scores, persistence models/migrations, scored attempts, AI requests, or deployment. The static prototype's generated scene images remain visual concepts, not validated animation or evidence.
 - Repository baseline before the foundation: branch `master`, commit `c9e5204 Initial commit`, and an existing zero-byte untracked `prompt.md` that remains untouched. The user subsequently supplied the GitHub repository URL for versioning.
 
 ## Decisions
@@ -34,9 +34,10 @@ This is a manually verified orientation note, not an automatic changelog or the 
 | 2026-11-03 | Frozen RV-003 after an executable timeline addendum and independent `FIX`/correction/`PASS` review; prepared coordinator-owned domain/simulation package configuration. Began RV-005 with sequential TDD handoffs. | `docs/contracts/clocks-and-events.md`, `docs/contracts/scenario.md`, `packages/domain/`, `packages/simulation/`, and `docs/features/01-playable-incident/review.md`. |
 | 2026-11-03 | Completed the narrow RV-005 handoff A fixture/checksum slice with tests-first red/green evidence and independent `PASS` after two focused correction rounds. Playback, observation, and scoring remain open. | `packages/domain/src/`, `docs/features/01-playable-incident/review.md`. |
 | 2026-11-03 | Completed RV-005 handoff B pure playback with red/green evidence and independent `PASS` after removing a callback path that could skip events. Observation, scoring authority, and UI integration remain open. | `packages/simulation/src/`, `docs/contracts/clocks-and-events.md`, `docs/features/01-playable-incident/review.md`. |
+| 2026-11-03 | Froze and independently reviewed synthetic C1 observation geometry; implemented and independently reviewed private fixture validation, viewpoint reconstruction, and four-way visibility measurement. Live trace eligibility, scoring, and human-readability validation remain open. | `docs/contracts/observation-and-camera.md`, `packages/simulation/src/observation-geometry.ts`, `docs/features/01-playable-incident/review.md`. |
 
 ## Resume next
 
 1. Read `docs/specs/tasks.md` for the current task state.
-2. Pin the RV-005 observation calibration contract, then implement and independently review its TDD slice. The initial referee scene remains a later ticket.
+2. Freeze RV-005 C2 live-trace coverage, eligibility, and confidence rules; implement and independently review them with behavioral red/green tests. The initial referee scene remains a later ticket.
 3. Keep the neutral field distinct from incident evidence. RV-006 PostgreSQL persistence may begin independently only with bounded schema ownership and real database tests.

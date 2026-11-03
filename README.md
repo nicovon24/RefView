@@ -4,7 +4,7 @@ RefView is a Spanish-first, bilingual football refereeing platform. Its first im
 
 ## Status
 
-The repository contains product, architecture, and SDD planning, a runnable static design prototype, and an initial Next.js application foundation. The application renders a neutral WebGL field, not a playable incident. There are no authored players, referee controls, decisions, scoring, attempt records, or AI requests yet.
+The repository contains product, architecture, and SDD planning, a runnable static design prototype, an initial Next.js application foundation, and separately tested pure timeline, playback, and synthetic observation-geometry modules. The application renders a neutral WebGL field, not a playable incident. There are no authored players, referee controls, decisions, scoring, attempt records, or AI requests yet.
 
 ## Run the application foundation
 
@@ -74,4 +74,4 @@ See:
 - XState, Zod, Vitest, and Playwright CLI.
 - Deterministic authored scenarios and evaluation that work without an AI provider.
 
-The next implementation gate is the deterministic timeline and observation core followed by a controllable referee scene. Nicolas approved the proposed football brief on 2026-11-03; its rendered evidence still requires his later review. RV-003 shared contracts are frozen, and RV-005 is in progress with TDD-first pure-core slices.
+The next implementation gate is the live-trace eligibility and observation-scoring slice, followed by the controllable referee scene and authored incident. Nicolas approved the proposed football brief on 2026-11-03; its rendered evidence still requires his later review. RV-003 shared contracts are frozen, and RV-005 remains in progress. Pure geometry does not prove that evidence was displayed, perceived, or understood.
