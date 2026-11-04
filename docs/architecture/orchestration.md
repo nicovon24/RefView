@@ -15,13 +15,17 @@ Use model orchestration to improve bounded planning, implementation, research, a
 
 | Work class | Requested model | Effort | Typical outputs |
 | --- | --- | --- | --- |
-| Fundamental | `gpt-6-astra` | `xhigh` | Product boundaries, architecture, domain authority, canonical timeline, scoring semantics, shared contracts |
+| Fundamental | `gpt-6-astra` | `high` | Product boundaries, architecture, domain authority, canonical timeline, scoring semantics, shared contracts |
 | Substantial planning | `gpt-6-astra` | `high` | Feature decomposition, acceptance, integration plan, task contracts, planning review |
 | Implementation | `gpt-6-sol` | `medium` | Bounded code and tests under exclusive paths |
 | Research | `gpt-6-luna` | `high` | Focused official-source or license research informing one decision |
 | Independent review | `gpt-6-sol` | `high` | Read-only acceptance, diff, invariant, security, and evidence review |
 
-Use Astra xhigh selectively. Official guidance positions xhigh for difficult long-running tasks where additional latency and cost are justified, while high fits hard planning and complex agentic workflows. Do not use xhigh for routine decomposition or implementation.
+Use Astra high as the default for planning and coordination. Reserve xhigh for exceptional decisions where the additional reasoning is clearly justified; do not use it for routine decomposition or implementation.
+
+## Observed batching preference
+
+Nicolas wants upcoming implementation batches to conserve model usage while continuing steady progress. Keep each batch centered on one concrete, reviewable outcome; group only tightly related work, and avoid reopening already settled planning or broadening the batch into unrelated tickets. Use Astra high for planning and coordination, reserving xhigh for exceptional decisions where its extra reasoning is justified; use Sol medium/high for bounded implementation and focused review. Report what was completed, what remains, and the evidence so the next batch can resume without repeating work. This is a working preference, not a restriction on Nicolas changing scope.
 
 ## Observed foundation planning
 

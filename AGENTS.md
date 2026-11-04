@@ -65,13 +65,15 @@ Request models as follows:
 
 | Work | Requested model | Effort |
 | --- | --- | --- |
-| Fundamental product, domain, architecture, authority, or shared-contract decisions | `gpt-6-astra` | `xhigh` |
+| Fundamental product, domain, architecture, authority, or shared-contract decisions | `gpt-6-astra` | `high` |
 | Substantial but non-fundamental planning, decomposition, and coordination | `gpt-6-astra` | `high` |
 | Bounded implementation | `gpt-6-sol` | `medium` |
 | Focused research | `gpt-6-luna` | `high` |
 | Independent read-only review | `gpt-6-sol` | `high` |
 
 Record requested model/effort separately from runtime-confirmed model/effort. Use `unconfirmed` when the runtime does not expose confirmation. A task name, profile, or global default is not proof of the effective runtime model.
+
+Prefer Astra `high` for planning and coordination to conserve usage. Reserve Astra `xhigh` for exceptional decisions where the additional reasoning is clearly justified; do not select it by default.
 
 Every delegated task must return changed files, requirements covered, red/green evidence where TDD applies, commands and observed results, remaining limitations, and requested versus runtime-confirmed identity.
 
