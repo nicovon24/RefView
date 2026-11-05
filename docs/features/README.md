@@ -33,6 +33,10 @@ Cross-cutting work:
 - [`08-ai-coach/`](08-ai-coach/requirements.md)
 - [`09-simulator-research/`](09-simulator-research/requirements.md)
 
+- [`22-academy-rules-directory/`](22-academy-rules-directory/requirements.md)
+- [`23-academy-topic-hubs/`](23-academy-topic-hubs/requirements.md)
+- [`24-academy-law-expansion/`](24-academy-law-expansion/requirements.md)
+
 ## Planning boundary
 
 Only tasks whose dependencies, contracts, ownership paths, and verification are concrete may move to `Ready`. Far-horizon tickets are intentionally adjustable. Refinement should preserve stable IDs and change acceptance/dependencies explicitly rather than silently expanding implementation.
