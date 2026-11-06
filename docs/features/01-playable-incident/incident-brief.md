@@ -151,6 +151,24 @@ After the scene exists, Nicolas must inspect the running scene and record answer
 - Is decisive contact genuinely visible from the good position and genuinely restricted from the poor one?
 - Are the fall, reactions, whistle window, camera, lighting, field markings, and kit contrast credible enough to teach the intended evidence?
 
+### Rendered-scene responses, 2026-11-03
+
+Nicolas inspected the local authoring preview at `http://127.0.0.1:3000/es/simulator/incident-preview` after the articulated A/B and pass-view redesign. His first response to the explicit scene question was “esta bastante bien, obviamente la idea es deespues mejorar mucho la nterfaz y que se vea 100% el screen y se vean mucho mejor los personajes”. The interface, full-screen presentation, and character quality remain later improvements.
+
+He then answered the seven checkpoint prompts in sequence. The following preserves the wording and distinguishes interpretation from quotation:
+
+| Checkpoint | Nicolas's words | Recorded interpretation |
+| --- | --- | --- |
+| 1, animated onside pose | “1 si” | Yes for the displayed pass view. |
+| 2, careless challenge for the ball | “2 es falta sin tarjeta”; then “2 correcto, se ve zancadilla normal o sea imprudente” | The tackle reads as an ordinary careless trip. The response does not separately describe every excluded visual alternative. |
+| 3, contact inside the area | “3 adentro del area” | Yes. |
+| 4, no DOGSO | “4 no es dogso” | Yes. |
+| 5, no-card / SPA result | “5 noe me parece tarjeta si es tarjeta es una amarilla fina” | No card is Nicolas's preferred result; he describes a possible yellow as marginal. This is not a separate explanation of the SPA exception. |
+| 6, good/poor visibility | “7 si se ve el contacto”; then, after the explicit A/B first-/third-person follow-up, “6 queda bien” | The first numbering appears to refer to item 6; the follow-up accepts the stated A/B contrast. |
+| 7, teaching credibility | “7 si” | Yes, with the stated later presentation improvements. |
+
+These are scene-review answers in the active conversation, not an authenticated account action, an exact source/renderer hash approval, a trusted imported evidence record, production observation calibration, or final MVP acceptance. Keep the authored incident in draft until the technical binding and publication requirements are satisfied.
+
 ## Research execution record
 
 - Requested research model/effort: `gpt-6-luna` / `high`.

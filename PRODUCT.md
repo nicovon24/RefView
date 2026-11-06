@@ -12,10 +12,7 @@ Referees in training, practicing referees, fans, players, and coaches. The produ
 
 ## Development order
 
-1. Simulator.
-2. Academy.
-3. Community.
-4. Assessments.
+The current delivery sequence is Academy, Assessments, the clearly fictional Community visual journey, and early Profile. The local 3D playtest and saved/scored first simulator incident come last. Academy currently focuses on original bilingual illustrated guides for all 17 Laws, deeper navigable topics, and official 2026/27 references. Nicolas deferred the lesson editorial/publication path while that rules experience is built. Its compatible practice link is completed when a real Assessment is published. Simulator history joins Profile once real owned attempts exist. Cosmetic simulator refinement follows functional acceptance; incident evidence defects still block training publication. This changes delivery priority, not the first MVP's acceptance criteria.
 
 Profile and language preferences support every stage. Monetization is outside the first prototype; a meaningful free experience is required.
 
@@ -64,11 +61,11 @@ The Coach receives only permitted attempt evidence, curated facts, deterministic
 ## Product journeys
 
 - Simulator: choose role -> choose scenario or session -> briefing -> play -> decide -> debrief -> replay -> continue.
-- Academy: explore topic -> approachable explanation -> example -> precise rule reference -> optional Coach question -> related practice.
-- Community: fictional demonstration match list -> distinct match page -> revisable rating -> evidence-focused comments -> like/dislike.
+- Academy: browse original Law summaries -> explore a topic -> read a reviewed published lesson with example and precise rule reference -> ask a prepared follow-up -> open related published practice when available.
+- Community: chronological feed of person-authored opinions about selected plays -> match conversation -> optional photo, file, or external link -> agreement/disagreement -> comments and replies. Fans and referees who self-report watching the match may separately rate the referee's performance in that match. Repository-authored posts and generated images remain visibly labeled examples. Actual uploads require a reviewed media contract; direct video file upload is outside the first social version.
 - Assessments: choose practice -> answer or analyze -> reasoned correction -> targeted next practice.
 - Profile: progress, attempts, saved content, preferences, and language.
 
 ## Current state
 
-Product and technical planning are documented, and a bilingual interactive visual prototype exists under `docs/prototype/`. Its two football views are generated still concepts. A runnable Next.js application foundation now renders a neutral WebGL field preview; a playable 3D incident, referee controls, and evaluated attempts do not exist yet.
+Product and technical planning are documented, and a bilingual interactive visual prototype exists under `docs/prototype/`. Its two football views are generated still concepts. The Next.js application includes bilingual illustrated guides to all 17 Laws, neutral referee controls, an authored WebGL incident review workspace, and an unsaved/unscored local incident playtest. Procedural motion and the review workspace were refined under RV-019. An approved training publication and complete user-facing saved/evaluated attempt flow do not exist yet.

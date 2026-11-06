@@ -1,6 +1,6 @@
 # RefView agent guide
 
-RefView is a Spanish-first, bilingual football refereeing product. The first implementation priority is a playable authored 3D simulator incident. Code, identifiers, configuration, comments, and technical documentation must be written in English.
+RefView is a Spanish-first, bilingual football refereeing product. The current delivery order is Academy Law summaries and controlled lesson publication, Assessments, the clearly fictional Community visual journey, and early Profile, followed last by the local 3D playtest and saved/scored first authored simulator incident. Cosmetic simulator refinement follows functional acceptance. Evidence-critical incident defects still block training publication. Code, identifiers, configuration, comments, and technical documentation must be written in English.
 
 ## Resume protocol
 
@@ -59,7 +59,7 @@ The coordinator owns shared contracts, project documentation, root configuration
 
 ## Delegation and model policy
 
-Only the coordinator delegates. Keep at most two subagents active. Delegate only a bounded task with satisfied dependencies, observable acceptance, exclusive paths, required verification, and an expected handoff. Subagents must not delegate, update the canonical tracker, revert other work, stage broadly, or modify files outside their assignment.
+Only the coordinator delegates. Keep at most four subagents active, subject to the runtime's actual session limit. Delegate only bounded, independent tasks with satisfied dependencies, observable acceptance, exclusive paths, required verification, and an expected handoff. Subagents must not delegate, update the canonical tracker, revert other work, stage broadly, or modify files outside their assignment.
 
 Request models as follows:
 
@@ -84,5 +84,6 @@ An independent read-only review is required for delegated implementation, shared
 ## Safety and ownership
 
 - Preserve user changes and unrelated work. The untracked `prompt.md` predates project scaffolding and must not be modified without explicit direction.
-- Do not create a remote repository, push, deploy, purchase assets, or enable a paid provider unless the user asks.
+- Keep implementation changes local by default. Do not stage files, create commits, or push to GitHub without Nicolas's explicit permission for that action, even if an earlier turn authorized a previous commit or push. A request to continue implementation is not Git authorization.
+- Do not create a remote repository, deploy, purchase assets, or enable a paid provider unless the user asks.
 - Check licenses and document the origin of every external asset, animation, sound, rule excerpt, and reference.

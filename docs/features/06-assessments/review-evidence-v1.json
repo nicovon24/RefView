@@ -1,0 +1,446 @@
+{
+  "artifactKind": "refview-assessment-starter-review-evidence-v1",
+  "note": "Editorial candidate only; contains private answer keys. Keep outside public routes.",
+  "items": [
+    {
+      "itemId": "careless-trip-penalty-restart",
+      "version": 1,
+      "contentHash": "sha256:cfd82af1ae1d01b0fc54b79290945ecfeb3a7cf2b91124480cb0df22143bef7f",
+      "rubricHash": "sha256:ffef04600b4366e59d8c281933e189c0d798c4ee675fd297776e706fa8c6e1f1",
+      "reviewedSource": {
+        "schemaVersion": 1,
+        "itemId": "careless-trip-penalty-restart",
+        "version": 1,
+        "lawsEdition": "IFAB-2026-27",
+        "topicId": "challenge",
+        "level": "beginner",
+        "localized": {
+          "es": {
+            "title": "Zancadilla imprudente en el área",
+            "prompt": "Según los hechos escritos, ¿debe detenerse el juego, cuál es la reanudación, hay sanción disciplinaria y quién cometió la infracción?"
+          },
+          "en": {
+            "title": "Careless trip in the penalty area",
+            "prompt": "Using the written facts, should play be stopped, what is the restart, is there a disciplinary sanction, and who committed the offence?"
+          }
+        },
+        "publicEvidence": [
+          {
+            "evidenceId": "authored-facts",
+            "text": {
+              "es": "Caso ficticio escrito: el balón está en juego. defence-04 disputa el balón, no lo toca y zancadillea de forma imprudente a attack-09 dentro de su propia área penal. La acción no es temeraria ni usa fuerza excesiva. No hay otra conducta sancionable y los hechos no establecen una ocasión manifiesta de gol.",
+              "en": "Written fictional case: the ball is in play. defence-04 challenges for the ball, does not touch it, and carelessly trips attack-09 inside the defender's own penalty area. The action is neither reckless nor excessive. There is no other card-worthy conduct, and the facts do not establish an obvious goal-scoring opportunity."
+            }
+          }
+        ],
+        "correction": {
+          "correctionVersion": 1,
+          "summary": {
+            "es": "Penalti sin tarjeta para defence-04.",
+            "en": "Penalty kick without a card for defence-04."
+          },
+          "explanation": {
+            "es": "La zancadilla imprudente con el balón en juego es una infracción de tiro libre directo. Al cometerse dentro de la propia área penal, se sanciona con penalti. La imprudencia, sin otra conducta sancionable, no exige tarjeta; los hechos escritos tampoco establecen DOGSO.",
+            "en": "A careless trip while the ball is in play is a direct-free-kick offence. Because it occurs inside the offender's own penalty area, the restart is a penalty kick. Carelessness alone, with no other card-worthy conduct, does not require a card; the written facts also do not establish DOGSO."
+          },
+          "evidenceIds": [
+            "authored-facts"
+          ],
+          "sourceIds": {
+            "es": [
+              "law-12-direct-free-kick-es",
+              "law-14-penalty-es"
+            ],
+            "en": [
+              "law-12-direct-free-kick-en",
+              "law-14-penalty-en"
+            ]
+          }
+        },
+        "officialSources": [
+          {
+            "sourceId": "law-12-direct-free-kick-en",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "en",
+            "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+            "lawNumber": 12,
+            "sectionCode": "12.1",
+            "displayLabel": "Law 12 §1, p. 115",
+            "printedPage": 115,
+            "inspectedAt": "2026-11-03",
+            "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+          },
+          {
+            "sourceId": "law-12-direct-free-kick-es",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "es",
+            "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+            "lawNumber": 12,
+            "sectionCode": "12.1",
+            "displayLabel": "Regla 12 §1, p. 123",
+            "printedPage": 123,
+            "inspectedAt": "2026-11-04",
+            "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+          },
+          {
+            "sourceId": "law-14-penalty-en",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "en",
+            "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+            "lawNumber": 14,
+            "sectionCode": "14.intro",
+            "displayLabel": "Law 14 opening rule, p. 135",
+            "printedPage": 135,
+            "inspectedAt": "2026-11-03",
+            "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+          },
+          {
+            "sourceId": "law-14-penalty-es",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "es",
+            "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+            "lawNumber": 14,
+            "sectionCode": "14.intro",
+            "displayLabel": "Regla 14 disposición inicial, p. 145",
+            "printedPage": 145,
+            "inspectedAt": "2026-11-04",
+            "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+          }
+        ],
+        "recommendationRefs": [
+          {
+            "targetItemId": "reckless-challenge-not-dogso",
+            "targetVersion": 1,
+            "topicId": "challenge",
+            "lawsEdition": "IFAB-2026-27"
+          }
+        ],
+        "type": "restartDiscipline",
+        "inputSpec": {
+          "kind": "restartDiscipline",
+          "offenderHandles": [
+            "defence-04"
+          ]
+        },
+        "privateRubric": {
+          "rubricVersion": 1,
+          "acceptedAnswers": [
+            {
+              "kind": "restartDiscipline",
+              "stopPlay": true,
+              "restart": "penaltyKick",
+              "discipline": "none",
+              "offenderHandle": "defence-04"
+            }
+          ],
+          "reasoningDimensions": []
+        }
+      }
+    },
+    {
+      "itemId": "challenge-severity-rule",
+      "version": 1,
+      "contentHash": "sha256:dc5bb1d47f34a86a0112c411e3109a51ec743822fcfcfc8453232bf38c7fa7cf",
+      "rubricHash": "sha256:1802297539b604a8e9caa535cc47e61cb9dead4c6f84fe0b170f643918553bfc",
+      "reviewedSource": {
+        "schemaVersion": 1,
+        "itemId": "challenge-severity-rule",
+        "version": 1,
+        "lawsEdition": "IFAB-2026-27",
+        "topicId": "challenge",
+        "level": "beginner",
+        "localized": {
+          "es": {
+            "title": "Entrada temeraria",
+            "prompt": "Un defensor disputa el balón y el árbitro juzga que la entrada fue temeraria; hubo contacto con un adversario. ¿Qué combinación describe correctamente la Regla 12?"
+          },
+          "en": {
+            "title": "Reckless challenge",
+            "prompt": "A defender challenges for the ball and the referee judges the challenge reckless; it involved contact with an opponent. Which combination correctly applies Law 12?"
+          }
+        },
+        "publicEvidence": [
+          {
+            "evidenceId": "severity-thresholds",
+            "text": {
+              "es": "La Regla 12 distingue una entrada imprudente, una temeraria que desatiende el peligro para un adversario y el uso de fuerza excesiva que pone en peligro su integridad.",
+              "en": "Law 12 distinguishes a careless challenge, a reckless one that disregards danger to an opponent, and excessive force that endangers an opponent's safety."
+            }
+          }
+        ],
+        "correction": {
+          "correctionVersion": 1,
+          "summary": {
+            "es": "Tiro libre directo y amonestación.",
+            "en": "Direct free kick and caution."
+          },
+          "explanation": {
+            "es": "Una entrada temeraria con contacto se sanciona con tiro libre directo y amonestación. Una entrada solo imprudente no exige tarjeta; el uso de fuerza excesiva corresponde a la expulsión.",
+            "en": "A reckless challenge involving contact is punished by a direct free kick and caution. A merely careless challenge needs no card; excessive force calls for a sending-off."
+          },
+          "evidenceIds": [
+            "severity-thresholds"
+          ],
+          "sourceIds": {
+            "es": [
+              "law-12-direct-free-kick-es"
+            ],
+            "en": [
+              "law-12-direct-free-kick-en"
+            ]
+          }
+        },
+        "officialSources": [
+          {
+            "sourceId": "law-12-direct-free-kick-en",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "en",
+            "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+            "lawNumber": 12,
+            "sectionCode": "12.1",
+            "displayLabel": "Law 12 §1, p. 115",
+            "printedPage": 115,
+            "inspectedAt": "2026-11-03",
+            "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+          },
+          {
+            "sourceId": "law-12-direct-free-kick-es",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "es",
+            "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+            "lawNumber": 12,
+            "sectionCode": "12.1",
+            "displayLabel": "Regla 12 §1, p. 123",
+            "printedPage": 123,
+            "inspectedAt": "2026-11-04",
+            "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+          }
+        ],
+        "recommendationRefs": [
+          {
+            "targetItemId": "careless-trip-penalty-restart",
+            "targetVersion": 1,
+            "topicId": "challenge",
+            "lawsEdition": "IFAB-2026-27"
+          }
+        ],
+        "type": "ruleQuestion",
+        "inputSpec": {
+          "kind": "ruleQuestion",
+          "options": [
+            {
+              "optionId": "choice-a",
+              "label": {
+                "es": "Tiro libre directo y amonestación.",
+                "en": "Direct free kick and caution."
+              }
+            },
+            {
+              "optionId": "choice-b",
+              "label": {
+                "es": "Tiro libre directo sin sanción disciplinaria.",
+                "en": "Direct free kick without discipline."
+              }
+            },
+            {
+              "optionId": "choice-c",
+              "label": {
+                "es": "Tiro libre directo y expulsión en toda entrada temeraria.",
+                "en": "Direct free kick and sending-off for every reckless challenge."
+              }
+            },
+            {
+              "optionId": "choice-d",
+              "label": {
+                "es": "Tiro libre indirecto.",
+                "en": "Indirect free kick."
+              }
+            }
+          ]
+        },
+        "privateRubric": {
+          "rubricVersion": 1,
+          "acceptedAnswers": [
+            {
+              "kind": "ruleQuestion",
+              "optionId": "choice-a"
+            }
+          ],
+          "reasoningDimensions": []
+        }
+      }
+    },
+    {
+      "itemId": "reckless-challenge-not-dogso",
+      "version": 1,
+      "contentHash": "sha256:cc16f97584047ec7ae6fd88873f3343846e848cc5e12e1ee53bf931d8dcdd124",
+      "rubricHash": "sha256:df1d22b252515c522b87aa5bc878c1cad20c02e9f6745b4ebccade7dcff9c577",
+      "reviewedSource": {
+        "schemaVersion": 1,
+        "itemId": "reckless-challenge-not-dogso",
+        "version": 1,
+        "lawsEdition": "IFAB-2026-27",
+        "topicId": "challenge",
+        "level": "intermediate",
+        "localized": {
+          "es": {
+            "title": "Entrada temeraria sin DOGSO",
+            "prompt": "Según los hechos escritos, decide si detener el juego, la reanudación, la sanción y el infractor. Explica brevemente por qué corresponde una amonestación aunque no haya DOGSO. La explicación se guarda para autoevaluación y no recibe puntuación automática."
+          },
+          "en": {
+            "title": "Reckless challenge without DOGSO",
+            "prompt": "Using the written facts, decide whether to stop play, the restart, the sanction, and the offender. Briefly explain why a caution applies even without DOGSO. Your explanation is saved for self-review and receives no automatic score."
+          }
+        },
+        "publicEvidence": [
+          {
+            "evidenceId": "authored-facts",
+            "text": {
+              "es": "Caso ficticio escrito: defence-07 contacta a attack-11 al disputar el balón fuera del área penal de defence-07. Los hechos establecen una infracción temeraria de tiro libre directo, sin fuerza excesiva. La dirección no es directa hacia la portería, el control del balón es incierto y hay dos defensores que pueden intervenir: no hay ocasión manifiesta de gol. No existe otra conducta sancionable.",
+              "en": "Written fictional case: defence-07 contacts attack-11 while challenging for the ball outside defence-07's penalty area. The facts establish a reckless direct-free-kick offence without excessive force. The direction is not directly towards goal, ball control is uncertain, and two covering defenders can intervene: there is no obvious goal-scoring opportunity. There is no other misconduct."
+            }
+          }
+        ],
+        "correction": {
+          "correctionVersion": 1,
+          "summary": {
+            "es": "Tiro libre directo y amonestación a defence-07.",
+            "en": "Direct free kick and caution for defence-07."
+          },
+          "explanation": {
+            "es": "La infracción temeraria fuera del área exige tiro libre directo y amonestación. La tarjeta se debe a la temeridad por sí misma. La dirección, el control incierto y los dos defensores que pueden intervenir descartan DOGSO en estos hechos escritos; eso no elimina la amonestación.",
+            "en": "The reckless offence outside the penalty area requires a direct free kick and caution. Recklessness itself warrants the card. The direction, uncertain control, and two covering defenders exclude DOGSO in these written facts; that does not remove the caution."
+          },
+          "evidenceIds": [
+            "authored-facts"
+          ],
+          "sourceIds": {
+            "es": [
+              "law-12-direct-free-kick-es",
+              "law-12-dogso-es"
+            ],
+            "en": [
+              "law-12-direct-free-kick-en",
+              "law-12-dogso-en"
+            ]
+          }
+        },
+        "officialSources": [
+          {
+            "sourceId": "law-12-direct-free-kick-en",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "en",
+            "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+            "lawNumber": 12,
+            "sectionCode": "12.1",
+            "displayLabel": "Law 12 §1, p. 115",
+            "printedPage": 115,
+            "inspectedAt": "2026-11-03",
+            "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+          },
+          {
+            "sourceId": "law-12-direct-free-kick-es",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "es",
+            "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+            "lawNumber": 12,
+            "sectionCode": "12.1",
+            "displayLabel": "Regla 12 §1, p. 123",
+            "printedPage": 123,
+            "inspectedAt": "2026-11-04",
+            "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+          },
+          {
+            "sourceId": "law-12-dogso-en",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "en",
+            "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+            "lawNumber": 12,
+            "sectionCode": "12.dogso",
+            "displayLabel": "Law 12 DOGSO, p. 124",
+            "printedPage": 124,
+            "inspectedAt": "2026-11-03",
+            "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+          },
+          {
+            "sourceId": "law-12-dogso-es",
+            "publisher": "IFAB",
+            "edition": "IFAB-2026-27",
+            "language": "es",
+            "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+            "lawNumber": 12,
+            "sectionCode": "12.dogso",
+            "displayLabel": "Regla 12 DOGSO, p. 133",
+            "printedPage": 133,
+            "inspectedAt": "2026-11-04",
+            "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+          }
+        ],
+        "recommendationRefs": [
+          {
+            "targetItemId": "challenge-severity-rule",
+            "targetVersion": 1,
+            "topicId": "challenge",
+            "lawsEdition": "IFAB-2026-27"
+          }
+        ],
+        "type": "authoredIncidentAnalysis",
+        "inputSpec": {
+          "kind": "authoredIncidentAnalysis",
+          "offenderHandles": [
+            "defence-07"
+          ],
+          "reasoningRequired": true,
+          "reasoningMaxCodePoints": 600
+        },
+        "privateRubric": {
+          "rubricVersion": 1,
+          "acceptedAnswers": [
+            {
+              "kind": "authoredIncidentAnalysis",
+              "stopPlay": true,
+              "restart": "directFreeKick",
+              "discipline": "yellow",
+              "offenderHandle": "defence-07"
+            }
+          ],
+          "reasoningDimensions": [
+            {
+              "dimensionId": "decisionJustification",
+              "prompt": {
+                "es": "Justifica la reanudación y la sanción con los hechos escritos.",
+                "en": "Justify the restart and sanction using the written facts."
+              },
+              "status": "unscored"
+            },
+            {
+              "dimensionId": "relevantFact",
+              "prompt": {
+                "es": "Identifica el contacto temerario y los hechos que descartan DOGSO.",
+                "en": "Identify the reckless contact and facts excluding DOGSO."
+              },
+              "status": "unscored"
+            },
+            {
+              "dimensionId": "ruleConnection",
+              "prompt": {
+                "es": "Relaciona la temeridad con la amonestación, independientemente de DOGSO.",
+                "en": "Connect recklessness to the caution independently of DOGSO."
+              },
+              "status": "unscored"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

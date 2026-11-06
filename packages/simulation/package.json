@@ -10,7 +10,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@refview/domain": "workspace:*"
+    "@refview/domain": "workspace:*",
+    "xstate": "5.33.3"
   },
   "devDependencies": {
     "eslint": "9.39.5",

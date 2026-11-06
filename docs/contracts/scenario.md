@@ -78,9 +78,17 @@ type PlayableScenario = Readonly<{
 
 Playable IDs are opaque (`cue-001`), never names such as `EV-TRIP-CONTACT`. The client records only tick-stamped view/input data and selected decisions; the server joins those traces to private evidence definitions during evaluation.
 
-The private projection adds reviewed facts, source references, allowed interpretations, deterministic rubric, debrief content, and review record. Server-side evaluation consumes both the submitted attempt trace and this private projection.
+For the main-referee v1, canonical authored actor IDs such as `defence-04` remain in the private timeline, events, evidence, and stored decisions. Canonical actor IDs must not match the reserved public-handle pattern `^actor-[0-9]{3}$`. The challenge projection derives a deterministic bijection from the Unicode-code-unit-sorted canonical roster to `actor-001`, `actor-002`, and so on; it rejects a roster beyond `actor-999`. Public tracks use only those handles, consistently at every tick and in replay. The inverse mapping remains server-side and is reconstructed from the attempt's pinned scenario version. The user submits `offenderActorHandle` in the transport decision; the server rejects unknown handles and resolves the canonical `offenderActorId` before validating, digesting, evaluating, or storing the decision. Public attempt views map it back to the handle. The user-controlled referee is outside the authored roster.
+
+A separate immutable asset registry contains unique canonical animation/audio IDs, content fingerprints, and license/origin references. Sort those IDs by Unicode code units and assign `asset-001` onward, rejecting more than 999 entries. Every clip and cue asset ID must have exactly one registry binding; missing, duplicate, unknown, or unused bindings are invalid for v1. One handle must identify the same asset across tracks and cues. Only opaque handles and licensed rendering data enter the playable projection; private registry identifiers and semantic event/evidence IDs do not. Actor and asset mappings are part of the immutable scenario content. The first authored scenario must use a neutral public scenario ID such as `incident-001`; a ruling-revealing slug is not challenge-safe.
+
+The trusted authoring boundary derives `contentHash` from the complete immutable canonical source, excluding the hash field itself and mutable publication metadata. Serialize the tuple `["refview-scenario-content-v1", normalizedSource]` as JSON: recursively sort object keys, normalize negative zero to zero, reject non-JSON and nonfinite values, UTF-8 encode, then SHA-256 hash the bytes. Normalize timeline samples by tick, actors by canonical ID, events by `(tick, ordinal, eventId)`, evidence definitions by evidence ID with samples by tick, cues by `(tick, ordinal, cueId)`, options by option ID, official sources by unique source ID, and asset registry by canonical asset ID before hashing. Preserve any other explicitly authored ordered arrays. The source includes ref/schema, competition profile identity and hash, geometry, canonical tracks/events, facts/evidence/rubric, safe options/cues, official sources, and asset bindings/fingerprints. Public and private stored projections must derive from this same validated source; independently supplied JSON blobs or a caller-supplied expected hash alone do not prove correspondence. Review record IDs and review/retirement timestamps belong only to `ScenarioPublication` and are joined after content hashing. The FNV world-state checksum remains a separate diagnostic over canonical authored state; public projected-state checksums require their own comparison and cannot be equated to the canonical checksum.
+
+The private projection adds authored facts, source references, allowed interpretations, deterministic rubric, and prepared debrief content. A separate publication read joins review metadata only after content validation. Server-side evaluation consumes both the submitted attempt trace and the pinned private projection.
 
 This boundary reduces accidental answer leakage; it is not an anti-cheat guarantee for a browser-rendered scenario.
+
+The full authored-training source/compiler and publication admission contract is specified in [`authoring-and-publication-v2.md`](authoring-and-publication-v2.md). Its `schemaVersion: 2` source, derived digest, and compiled DTOs are distinct from this document's v1 manifest excerpt and the existing narrow pure `ScenarioInput` derivation. Neither v1 hash is the full-source hash or an authored-training publication credential.
 
 ## Tracks and events
 
@@ -99,7 +107,7 @@ Valid manifest-header excerpt (not a complete `ScenarioManifest` fixture):
 
 ```json
 {
-  "ref": { "scenarioId": "penalty-boundary-trip", "version": 1 },
+  "ref": { "scenarioId": "incident-001", "version": 1 },
   "schemaVersion": 1,
   "contentHash": "sha256:<64-lowercase-hex>",
   "classification": "clear",

@@ -20,11 +20,12 @@ The same static files are copied into the Next.js application at `/prototype/ind
 - Third-person and first-person visual camera states sharing one incident concept.
 - Decision UI for play-on/stop, restart and discipline.
 - Debrief separating proposed facts, interpretation, available evidence, rule reference and VAR threshold.
-- Academy topic navigation, approachable explanation, technical detail, reference and practice link.
-- Two distinct fictional community matches, editable local demo rating, local demo comment and comment voting states.
+- Academy search across seven local topics. The Challenges example has a guided explanation, technical detail, reference and practice link; the other six topics are explicitly marked as previews without those materials.
+- A fictional Community fixture with local demo rating, comment and voting interactions. Selecting the second match currently changes only the selector and toast; it does not load distinct rating or discussion data.
 - Assessment answer, correction and recommended next practice.
-- Profile progress, attempts, saved content and preferences as explicitly illustrative data.
-- Spanish/English switching across the principal interface and prepared AI Coach responses.
+- Profile progress and attempts as illustrative data. Saved links and preference controls currently illustrate layout and do not persist changes.
+- Spanish/English switching across the principal interface, the scenario catalogue's supporting states, and prepared AI Coach responses. Some older incidental labels still need a complete language audit.
+- Explicit catalogue demonstrations of loading, error, empty search, and planned-content states, each with recovery; none represents a network request.
 - Local-only persistence for language, the demo community rating and the most recent prototype decision.
 
 ## Illustrated, not implemented as production capability
@@ -70,10 +71,6 @@ No reference branding, layout, footage, kits, teams, characters, stadium or broa
 - Generated rasters carry embedded prompt provenance.
 - This static prototype cannot test TDD contracts for the future engine, deterministic scenario playback, production answer secrecy, authentication, database ownership, network error handling, WebGL performance or actual rule evaluation.
 
-## Next concrete milestone
+## Current handoff
 
-1. Obtain Nicolás's explicit review of RV-002 football facts and evidence requirements before accepting it as training content.
-2. Continue from the Next.js foundation with the canonical timeline and deterministic scenario data contract after RV-003 freezes.
-3. Build the first React Three Fiber scene with referee locomotion, adjustable camera framing, authored actor motion and evidence visibility.
-4. Replace still concepts with live and replay cameras driven by the same timeline.
-5. Measure Chromium performance on a named device and add adjustable quality, loading and error states.
+The Next.js application now has a shared site shell and local 3D incident previews. The static concept's scenario-state demonstrations remain separate from those real preview routes. Academy search is local to the seven illustrative topics; Community's second match and Profile's saved items/preferences are explicitly unavailable or illustrative. Before RV-018 can be fully verified, review all remaining incidental labels in both languages and complete the final design-guideline and journey audit. The training incident still needs its own rendered observation calibration and complete playable/scored workflow.

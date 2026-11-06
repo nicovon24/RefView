@@ -1,0 +1,69 @@
+@font-face{font-family:'Barlow Condensed';src:url('/prototype/assets/BarlowCondensed-SemiBold.ttf') format('truetype');font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:'Source Sans 3';src:url('/prototype/assets/SourceSans3-Variable.ttf') format('truetype');font-style:normal;font-weight:300 800;font-display:swap}
+.rv-academy{--ink:#10201d;--paper:#f1f2ed;--line:#cbd5cd;min-height:100dvh;background:var(--paper);color:var(--ink);font:400 16px/1.5 'Source Sans 3','Segoe UI',sans-serif}
+.rv-academy *{min-width:0}
+.rv-academy a:focus-visible,.rv-academy button:focus-visible,.rv-academy summary:focus-visible{outline:3px solid #4d72d8;outline-offset:4px}
+.rv-academy__main a:hover{color:#17613d;text-decoration-thickness:2px}.rv-academy__save button:hover:not(:disabled){background:#315d40;border-color:#315d40}.rv-academy__followups summary:hover{color:#17613d}
+.rv-academy__skip{position:absolute;top:-100px;left:20px;z-index:10;padding:10px 14px;background:#cfea55;color:var(--ink);font-weight:800}.rv-academy__skip:focus{top:12px}
+.rv-academy__main{width:min(100% - 2 * clamp(20px,5vw,72px),1360px);margin:0 auto;padding:45px 0 110px}
+.rv-academy__hero{padding:45px 0 70px;border-bottom:1px solid var(--line)}
+.rv-academy__eyebrow,.rv-academy__meta{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#44624d}
+.rv-academy__hero h1,.rv-academy h2,.rv-academy__state h1{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+.rv-academy__hero h1{max-width:15ch;margin:0 0 20px;font-size:clamp(3.5rem,7vw,6rem)}
+.rv-academy__hero>h1+p{max-width:55ch;font-size:clamp(19px,2vw,24px);line-height:1.35}
+.rv-academy__section{padding:35px 0 48px;border-bottom:1px solid var(--line)}
+.rv-academy__section-title{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}.rv-academy__section-title h2,.rv-academy__section h2,.rv-academy__references h2{margin:0 0 25px;font-size:clamp(2rem,3vw,3rem)}.rv-academy__section-title span{font-size:14px;font-weight:700}
+.rv-academy__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0;border-top:1px solid var(--line)}
+.rv-academy__card{display:flex;flex-direction:column;align-items:flex-start;padding:30px 28px 30px 0;border-bottom:1px solid var(--line)}.rv-academy__card h3{font:600 clamp(2rem,3vw,2.7rem)/1.03 'Barlow Condensed','Arial Narrow',sans-serif;margin:18px 0 10px}.rv-academy__card>p:not(.rv-academy__meta){margin:0 0 22px;max-width:54ch}.rv-academy__card .rv-academy__meta{margin:0}.rv-academy__card-footer{display:flex;align-items:end;justify-content:space-between;gap:16px;width:100%;margin-top:auto;padding-top:20px;font-size:14px;font-weight:700}.rv-academy__card a{font-weight:800;text-underline-offset:4px;white-space:nowrap}
+.rv-academy__state{max-width:760px;padding:clamp(28px,5vw,64px);margin:30px 0;background:#e4eadd;border-left:5px solid #73936e}.rv-academy__state h1,.rv-academy__state h3{margin:0 0 15px;font:600 clamp(2rem,4vw,3rem)/1.05 'Barlow Condensed','Arial Narrow',sans-serif}.rv-academy__state p{margin:0;max-width:60ch}
+.rv-academy__back{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid #a9bbaa;border-radius:6px;background:#e4eadd;color:#315440;text-decoration:none}.rv-academy__back:hover{border-color:#315440;background:#d6e2d2}.rv-academy__back svg{display:block;flex:none}.rv-academy__hero--lesson{padding-top:35px}.rv-academy__hero--lesson .rv-academy__meta{margin:0 0 16px}.rv-academy__preview{max-width:760px;margin:32px 0 0;padding:20px 24px;background:#dce8d6;border-top:2px solid #385c44}.rv-academy__preview strong{display:block;font-size:15px}.rv-academy__preview p{max-width:65ch;margin:6px 0 0}
+.rv-academy__save{max-width:55ch;margin-top:28px;padding:18px 22px;background:#e4eadd;border-left:4px solid #73936e}.rv-academy__save button{min-height:44px;padding:8px 18px;border:1px solid #193b29;background:#193b29;color:#fff;font:inherit;font-weight:800;cursor:pointer}.rv-academy__save button:disabled{cursor:wait;opacity:.65}.rv-academy__save p{margin:8px 0 0;font-size:15px;line-height:1.45}.rv-academy__save p:empty{display:none}.rv-academy__save a{font-weight:800;text-underline-offset:3px}
+.rv-academy__columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,290px);gap:clamp(40px,6vw,100px);align-items:start;padding-top:45px}.rv-academy__plain{max-width:72ch;margin:0 0 35px;font-size:clamp(19px,1.7vw,23px);line-height:1.5}.rv-academy__body>.rv-academy__section:first-of-type{border-top:1px solid var(--line)}.rv-academy__body .rv-academy__section>p{max-width:72ch}
+.rv-academy__evidence{display:grid;grid-template-columns:1fr 1fr;gap:24px 34px}.rv-academy__evidence>div{border-top:1px solid #aab8ab;padding-top:14px}.rv-academy__evidence h3{margin:0 0 8px;font-size:15px}.rv-academy__evidence p{margin:0;color:#344d42}
+.rv-academy__followups{border-top:1px solid #aab8ab}.rv-academy__followups details{border-bottom:1px solid #aab8ab;padding:16px 0}.rv-academy__followups summary{cursor:pointer;font-weight:800}.rv-academy__followups details p{max-width:68ch;margin:10px 0 0}.rv-academy__prepared{color:#3d5946;font-size:13px;font-weight:800}.rv-academy__citation{font-size:13px;color:#52675a}
+.rv-academy__practice{display:grid;gap:14px;max-width:72ch;list-style:none;padding:0}.rv-academy__practice li{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px;background:#fff;border:1px solid var(--line)}.rv-academy__practice span{font-weight:800}.rv-academy__practice a{color:#175838;font-weight:800;text-underline-offset:3px}
+.rv-academy__references{border-top:2px solid #79917e;padding-top:24px}.rv-academy__references h2{font-size:2rem}.rv-academy__references ul{padding:0;list-style:none}.rv-academy__references li{display:grid;gap:6px;margin-bottom:0;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px;overflow-wrap:anywhere}.rv-academy__references li span{color:#344d42}.rv-academy__references a{font-weight:800;text-underline-offset:3px}
+@media(max-width:900px){.rv-academy__columns{grid-template-columns:1fr}.rv-academy__references{max-width:700px}}
+@media(max-width:620px){.rv-academy__main{padding-top:25px}.rv-academy__hero{padding:35px 0 48px}.rv-academy__hero h1{font-size:clamp(3.2rem,12vw,5rem)}.rv-academy__evidence{grid-template-columns:1fr}.rv-academy__state{margin-top:18px}.rv-academy__card{padding-right:0}.rv-academy__card-footer{align-items:start;flex-direction:column}.rv-academy__preview{margin-top:26px}}
+.rv-academy__rules-intro{max-width:65ch;margin:0 0 28px;color:#344d42}
+.rv-academy__rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1px;margin:0;padding:1px;list-style:none;background:var(--line)}
+.rv-academy__rules-grid li{display:flex;background:var(--paper)}
+.rv-academy__rules-grid a{display:flex;flex:1;flex-direction:column;gap:12px;min-height:220px;padding:22px;color:var(--ink);text-decoration:none}
+.rv-academy__rules-grid a:hover{background:#e4eadd}
+.rv-academy__rules-top{display:flex;align-items:start;justify-content:space-between;gap:16px}
+.rv-academy__law-icon{width:48px;height:48px;flex:none;color:#315440}
+.rv-academy__rules-number{color:#44624d;font-size:13px;font-weight:800;letter-spacing:.08em}
+.rv-academy__rules-name{font:600 clamp(1.6rem,2.2vw,2rem)/1.08 'Barlow Condensed','Arial Narrow',sans-serif}
+.rv-academy__rules-overview{max-width:44ch;color:#344d42;font-size:15px;line-height:1.4}
+.rv-academy__rules-action{margin-top:auto;color:#315440;font-size:14px;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.rv-academy__law-topics{display:grid;gap:12px;max-width:720px;margin:0;padding:0;list-style:none}
+.rv-academy__law-topics li{padding:22px;border:1px solid var(--line);background:#fff}
+.rv-academy__law-topics h3{margin:0 0 8px;font:600 2rem/1.1 'Barlow Condensed','Arial Narrow',sans-serif}
+.rv-academy__law-topics p{margin:0 0 18px}
+.rv-academy__law-topics a{font-weight:800;text-underline-offset:3px}
+.rv-academy__topic-body>.rv-academy__section:first-child{padding-top:0}
+.rv-academy__topic-body>.rv-academy__section>p{max-width:65ch}
+.rv-academy__topic-orientation>p{max-width:65ch;font-size:18px;line-height:1.55}
+.rv-academy__topic-orientation h3{margin:28px 0 12px;font:600 1.6rem/1.1 'Barlow Condensed','Arial Narrow',sans-serif}
+.rv-academy__topic-orientation ul{display:grid;gap:9px;max-width:65ch;margin:0;padding-left:22px}
+.rv-academy__topic-orientation li{padding-left:4px}
+@media(max-width:620px){.rv-academy__rules .rv-academy__section-title{display:block}.rv-academy__rules .rv-academy__section-title h2{margin-bottom:8px}.rv-academy__rules .rv-academy__section-title span{display:block;margin-bottom:16px}.rv-academy__rules-grid a{min-height:180px}.rv-academy__rules-name{font-size:1.85rem}}
+.rv-academy__law-jumps{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.rv-academy__law-jumps a{padding:8px 14px;border:1px solid #9cafa0;border-radius:99px;color:#254b34;font-size:14px;font-weight:800;text-underline-offset:3px}
+.rv-academy__law-body>.rv-academy__section:first-child{padding-top:0}
+.rv-academy__law-figure{margin:0 0 28px}
+.rv-academy__law-figure svg{display:block;width:100%;height:auto;max-width:800px;background:#dce8d6;border:1px solid #b8c8ba}
+.rv-academy__law-figure figcaption{padding-top:9px;color:#3d5946;font-size:13px}
+.rv-academy__law-explanation{max-width:68ch;font-size:18px;line-height:1.55}
+.rv-academy__law-guide h3{margin:32px 0 16px;font:600 1.8rem/1.1 'Barlow Condensed','Arial Narrow',sans-serif}
+.rv-academy__law-keypoints{display:grid;gap:0;max-width:72ch;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.rv-academy__law-keypoints li{padding:16px 0;border-bottom:1px solid var(--line)}
+.rv-academy__law-keypoints strong{font-size:16px}
+.rv-academy__law-keypoints p{margin:5px 0 0;color:#344d42}
+.rv-academy__law-adjacent{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:42px}
+.rv-academy__law-adjacent a{display:grid;gap:5px;padding:19px;border:1px solid var(--line);background:#fff;text-decoration:none}
+.rv-academy__law-adjacent a:hover{background:#e4eadd}
+.rv-academy__law-adjacent a:last-child{text-align:right}
+.rv-academy__law-adjacent span{color:#52675a;font-size:13px;font-weight:700}
+.rv-academy__law-adjacent strong{font-size:16px;line-height:1.35}
+@media(max-width:620px){.rv-academy__law-jumps{gap:8px}.rv-academy__law-adjacent{grid-template-columns:1fr}.rv-academy__law-adjacent>span{display:none}.rv-academy__law-adjacent a:last-child{text-align:left}}

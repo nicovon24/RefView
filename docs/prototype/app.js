@@ -5,6 +5,9 @@
     camera: "third",
     decision: null,
     assessmentAnswer: null,
+    role: "main",
+    catalogState: "ready",
+    plannedScenario: "deflection",
   };
 
   const views = [...document.querySelectorAll("[data-view]")];
@@ -38,10 +41,17 @@
     document.querySelectorAll("[data-es][data-en]").forEach((element) => {
       element.textContent = element.dataset[state.lang];
     });
+    document.querySelectorAll("[data-es-aria-label][data-en-aria-label]").forEach((element) => {
+      element.setAttribute("aria-label", element.dataset[`${state.lang}AriaLabel`]);
+    });
     document.getElementById("language-toggle").innerHTML = state.lang === "es" ? "ES <span>/ EN</span>" : "EN <span>/ ES</span>";
     document.getElementById("language-toggle").setAttribute("aria-label", copy("Cambiar a inglés", "Switch to Spanish"));
-    const search = document.querySelector(".search-field input");
-    if (search) search.placeholder = copy("Buscar tema o situación…", "Search topic or situation…");
+    academySearch.placeholder = copy("Buscar entre siete temas…", "Search seven topics…");
+    renderAcademy();
+    const scenarioSearch = document.getElementById("scenario-search");
+    scenarioSearch.placeholder = scenarioSearch.dataset[`${state.lang}Placeholder`];
+    renderCatalog();
+    renderRole();
     const coachInput = document.getElementById("coach-input");
     coachInput.placeholder = copy("Preguntá sobre este intento…", "Ask about this attempt…");
     const commNote = document.querySelector(".var-notes textarea");
@@ -60,6 +70,14 @@
   function showView(name, pushHash = true) {
     const target = document.querySelector(`[data-view="${name}"]`);
     if (!target) return;
+    if (name === "var") {
+      const back = document.querySelector(".var-header .back-button");
+      const fromRole = state.view === "simulator";
+      back.dataset.simStep = fromRole ? "simulator" : "debrief";
+      back.dataset.es = fromRole ? "Volver a roles" : "Volver al debrief";
+      back.dataset.en = fromRole ? "Back to roles" : "Back to debrief";
+      back.textContent = back.dataset[state.lang];
+    }
     state.view = name;
     views.forEach((view) => view.classList.toggle("is-active", view === target));
     const live = name === "live";
@@ -72,8 +90,10 @@
     menu.hidden = true;
     menuButton.setAttribute("aria-expanded", "false");
     window.scrollTo({ top: 0, behavior: "auto" });
-    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-    target.focus({ preventScroll: true });
+    const heading = target.querySelector("h1");
+    const focusTarget = heading || target;
+    if (!focusTarget.hasAttribute("tabindex")) focusTarget.setAttribute("tabindex", "-1");
+    focusTarget.focus({ preventScroll: true });
   }
 
   document.querySelectorAll("[data-nav]").forEach((button) => {
@@ -99,17 +119,104 @@
     assistant: ["Árbitro asistente · concepto planificado", "Assistant referee · planned concept"],
     var: ["VAR · workspace ilustrativo", "VAR · illustrative workspace"],
   };
+  function renderRole() {
+    document.querySelectorAll("[data-role]").forEach((item) => {
+      const selected = item.dataset.role === state.role;
+      item.classList.toggle("is-selected", selected);
+      item.setAttribute("aria-pressed", String(selected));
+    });
+    const label = roleLabels[state.role];
+    const output = document.getElementById("selected-role-label");
+    output.dataset.es = label[0];
+    output.dataset.en = label[1];
+    output.textContent = label[state.lang === "es" ? 0 : 1];
+    const continueButton = document.getElementById("role-continue");
+    const actions = {
+      main: ["Elegir escenario", "Choose scenario"],
+      assistant: ["Ver estado del asistente", "View assistant status"],
+      var: ["Abrir VAR ilustrativo", "Open illustrative VAR"],
+    };
+    continueButton.dataset.es = actions[state.role][0];
+    continueButton.dataset.en = actions[state.role][1];
+    continueButton.textContent = actions[state.role][state.lang === "es" ? 0 : 1];
+  }
   document.querySelectorAll("[data-role]").forEach((button) => {
     button.addEventListener("click", () => {
-      document.querySelectorAll("[data-role]").forEach((item) => item.classList.remove("is-selected"));
-      button.classList.add("is-selected");
-      const role = button.dataset.role;
-      const label = roleLabels[role];
-      const output = document.getElementById("selected-role-label");
-      output.dataset.es = label[0];
-      output.dataset.en = label[1];
-      output.textContent = label[state.lang === "es" ? 0 : 1];
-      if (role !== "main") showToast(copy("Este rol se muestra como concepto; todavía no es jugable.", "This role is shown as a concept and is not playable yet."));
+      state.role = button.dataset.role;
+      renderRole();
+    });
+  });
+  document.getElementById("role-continue").addEventListener("click", () => {
+    showView(state.role === "main" ? "scenario" : state.role === "assistant" ? "role-unavailable" : "var");
+  });
+
+  const catalogSearch = document.getElementById("scenario-search");
+  const catalogPanels = [...document.querySelectorAll("[data-catalog-panel]")];
+  const catalogItems = [...document.querySelectorAll("[data-catalog-item]")];
+  const plannedTitles = {
+    deflection: ["Rebote o pase deliberado", "Deflection or deliberate play"],
+    advantage: ["Ventaja y segunda acción", "Advantage and second action"],
+  };
+  function renderCatalog() {
+    const query = catalogSearch.value.trim().toLocaleLowerCase(state.lang);
+    let matches = 0;
+    catalogItems.forEach((item) => {
+      const matched = !query || item.dataset[`search${state.lang[0].toUpperCase()}${state.lang.slice(1)}`].toLocaleLowerCase(state.lang).includes(query);
+      item.hidden = !matched;
+      if (matched && item.tagName === "BUTTON") matches += 1;
+    });
+    document.querySelector(".scenario-layout").classList.toggle("catalog-planned-only", catalogItems[0].hidden);
+    const visibleState = state.catalogState === "ready" && matches === 0 ? "empty-search" : state.catalogState;
+    catalogPanels.forEach((panel) => { panel.hidden = panel.dataset.catalogPanel !== visibleState; });
+    const count = document.getElementById("catalog-count");
+    count.hidden = visibleState !== "ready";
+    count.textContent = copy(`${matches} de 3 ejemplos del concepto`, `${matches} of 3 concept examples`);
+    const planned = document.getElementById("planned-scenario-title");
+    planned.textContent = plannedTitles[state.plannedScenario][state.lang === "es" ? 0 : 1];
+    planned.setAttribute("lang", state.lang);
+  }
+  function setCatalogState(next) {
+    state.catalogState = next;
+    renderCatalog();
+    const active = catalogPanels.find((panel) => !panel.hidden);
+    const focusTarget = next === "ready"
+      ? active.querySelector(".scenario-feature:not([hidden]) h2") ||
+        active.querySelector(".scenario-queue [data-catalog-item]:not([hidden])") ||
+        document.getElementById("scenario-title")
+      : active.querySelector("h2") || document.getElementById("scenario-title");
+    if (focusTarget.matches("button, a[href], input, select, textarea")) focusTarget.removeAttribute("tabindex");
+    else if (!focusTarget.hasAttribute("tabindex")) focusTarget.setAttribute("tabindex", "-1");
+    focusTarget.focus({ preventScroll: true });
+  }
+  catalogSearch.addEventListener("input", () => {
+    state.catalogState = "ready";
+    renderCatalog();
+  });
+  document.querySelectorAll("[data-catalog-demo]").forEach((button) => {
+    button.addEventListener("click", () => setCatalogState(button.dataset.catalogDemo));
+  });
+  document.getElementById("clear-scenario-search").addEventListener("click", () => {
+    catalogSearch.value = "";
+    setCatalogState("ready");
+    catalogSearch.focus();
+  });
+  document.querySelectorAll("[data-catalog-planned]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.plannedScenario = button.dataset.catalogPlanned;
+      setCatalogState("planned-content");
+    });
+  });
+  document.querySelector("[data-catalog-ready]").addEventListener("click", () => {
+    document.querySelector(".scenario-feature .button").focus();
+  });
+  document.querySelectorAll("[data-main-fixture]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.role = "main";
+      renderRole();
+      catalogSearch.value = "";
+      state.catalogState = "ready";
+      renderCatalog();
+      showView("scenario");
     });
   });
 
@@ -284,15 +391,60 @@
     discipline: { es: ["Disciplina: la sanción necesita contexto", "Intensidad, riesgo, oportunidad y conducta se evalúan por separado."], en: ["Discipline: sanction needs context", "Intensity, risk, opportunity and conduct are assessed separately."] },
     var: { es: ["VAR: corregir no es volver a arbitrar", "La intervención depende de la categoría revisable y del umbral de error."], en: ["VAR: correction is not re-refereeing", "Intervention depends on the reviewable category and the error threshold."] },
   };
-  document.querySelectorAll("[data-topic]").forEach((button) => button.addEventListener("click", () => {
-    document.querySelectorAll("[data-topic]").forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    const content = topics[button.dataset.topic];
+  const academySearch = document.querySelector('[name="academy-search"]');
+  const topicButtons = [...document.querySelectorAll("[data-topic]")];
+  const academyPreview = document.createElement("p");
+  academyPreview.className = "academy-preview-note";
+  academyPreview.dataset.es = "Vista preliminar del tema. La lección completa, la referencia y la práctica de este tema todavía no están disponibles en el concepto.";
+  academyPreview.dataset.en = "Topic preview only. This topic's complete lesson, reference and practice are not available in the concept yet.";
+  document.querySelector(".academy-view .lesson-lead").after(academyPreview);
+  let selectedTopic = "challenges";
+  function renderAcademy() {
+    const query = academySearch.value.trim().toLocaleLowerCase(state.lang);
+    const visible = topicButtons.filter((button) => {
+      const matches = !query || button.dataset[state.lang].toLocaleLowerCase(state.lang).includes(query);
+      button.hidden = !matches;
+      return matches;
+    });
+    if (visible.length && !visible.some((button) => button.dataset.topic === selectedTopic)) selectedTopic = visible[0].dataset.topic;
+    topicButtons.forEach((button) => {
+      const active = !button.hidden && button.dataset.topic === selectedTopic;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    const empty = visible.length === 0;
+    document.getElementById("academy-empty").hidden = !empty;
+    document.querySelector(".academy-view .lesson").hidden = empty;
+    document.querySelector(".academy-view .official-reference").hidden = empty;
+    document.getElementById("academy-search-count").textContent = copy(`${visible.length} de 7 temas ilustrativos`, `${visible.length} of 7 illustrative topics`);
+    if (empty) return;
+    const challenge = selectedTopic === "challenges";
+    academyPreview.hidden = challenge;
+    academyPreview.textContent = academyPreview.dataset[state.lang];
+    const level = document.querySelector(".academy-view .lesson-level");
+    level.dataset.es = challenge ? "RUTA PARA PRINCIPIANTES · 8 MIN" : "VISTA PRELIMINAR · SIN LECCIÓN COMPLETA";
+    level.dataset.en = challenge ? "BEGINNER PATH · 8 MIN" : "TOPIC PREVIEW · NO COMPLETE LESSON";
+    level.textContent = level.dataset[state.lang];
+    document.querySelector(".academy-view .lesson-example").hidden = !challenge;
+    document.querySelector(".academy-view .lesson details").hidden = !challenge;
+    document.querySelector('.academy-view .lesson > [data-sim-step="briefing"]').hidden = !challenge;
+    document.querySelector(".academy-view .official-reference").hidden = !challenge;
+    const content = topics[selectedTopic];
     const title = document.getElementById("lesson-title");
     const lead = document.getElementById("lesson-lead");
     title.dataset.es = content.es[0]; title.dataset.en = content.en[0]; title.textContent = content[state.lang][0];
     lead.dataset.es = content.es[1]; lead.dataset.en = content.en[1]; lead.textContent = content[state.lang][1];
+  }
+  topicButtons.forEach((button) => button.addEventListener("click", () => {
+    selectedTopic = button.dataset.topic;
+    renderAcademy();
   }));
+  academySearch.addEventListener("input", renderAcademy);
+  document.getElementById("clear-academy-search").addEventListener("click", () => {
+    academySearch.value = "";
+    renderAcademy();
+    academySearch.focus();
+  });
 
   const ratingInput = document.getElementById("rating-input");
   const ratingOutput = document.getElementById("rating-output");
@@ -322,11 +474,14 @@
     const footer = button.parentElement;
     footer.querySelectorAll("button").forEach((item) => item.classList.toggle("is-active", item === button && !button.classList.contains("is-active")));
   });
-  document.querySelectorAll(".match-selector button").forEach((button) => button.addEventListener("click", () => {
-    document.querySelectorAll(".match-selector button").forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    showToast(copy("Partido ficticio seleccionado", "Fictional match selected"));
-  }));
+  document.getElementById("planned-match-button").addEventListener("click", () => {
+    const explanation = document.getElementById("planned-match-explanation");
+    explanation.hidden = false;
+    explanation.focus();
+  });
+  document.getElementById("active-match-button").addEventListener("click", () => {
+    document.getElementById("planned-match-explanation").hidden = true;
+  });
 
   document.querySelectorAll("[data-answer]").forEach((button) => button.addEventListener("click", () => {
     document.querySelectorAll("[data-answer]").forEach((item) => item.classList.remove("is-selected"));

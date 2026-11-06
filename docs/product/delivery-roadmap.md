@@ -2,46 +2,45 @@
 
 This is an outcome roadmap, not a second task tracker. Current status remains only in [`../specs/tasks.md`](../specs/tasks.md).
 
-## 1. Simulator foundation
+## 1. Academy: Laws and reviewed lessons
 
-- One reviewed, playable main-referee incident.
-- Deterministic live/replay timeline, evidence-aware evaluation, debrief, persistence, Spanish/English UI.
-- Meaningful assistant-referee and VAR tasks added only when they require actual movement, observation, signaling/checking, and communication.
-- Configurable authored sessions with visible time jumps after the first incident is accepted.
+- Offer useful original bilingual summaries and key points for all 17 Laws, with navigable topics and precise IFAB 2026/27 references.
+- Complete controlled publication of one approved lesson, then verify discovery, reading, prepared follow-ups, and saving.
+- Add a real compatible practice link after Assessments has a published exercise. User-supplied real plays expand topics later.
 
-Tickets: RV-001..017. RV-018 supplies the durable visual system and navigable full-product concept.
+Tickets: RV-020B, RV-021, RV-022, RV-026, RV-027, RV-029, RV-029A, and RV-052 scoped save. RV-024A closes the first Academy stage; RV-023/RV-024 close its later practice integration. RV-028 waits for user-supplied real cases.
 
-## 2. Academy foundation
+## 2. Assessments
 
-- Versioned Law/situation taxonomy and source model.
-- One complete learning loop from approachable explanation to technical reference and simulator practice.
-- Prepared Coach answers before hosted generation is required.
+- Publish the three approved bilingual exercises with private answer keys.
+- Complete answer, deterministic evaluation, saved result, reasoned correction, and next-practice flow.
+- Connect a compatible exercise from Academy.
 
-Tickets: RV-020..024, supported by provider-free Coach RV-060..061.
+Tickets: RV-040..044, RV-023..024.
 
-## 3. Community foundation
+## 3. Fictional Community visual journey
 
-- Fictional demonstration matches with unique match identity.
-- Reversible user rating, distribution, comments, likes/dislikes, and moderation/reporting boundaries.
-- Clear separation between community opinion and reviewed educational content.
+- Present clearly labeled fictional person-authored play opinions with optional illustrative media/link treatments, agreement/disagreement, comments, replies, and a secondary match referee rating.
+- Treat accounts, real contributor publishing, uploads, shared persistence, and moderation as a separate later functional stage.
 
-Tickets: RV-030..035. RV-035 is a readiness decision, not deployment authorization.
+Tickets: RV-030/031 foundation and the current visual slice of RV-036. RV-032..035 are superseded.
 
-## 4. Assessments foundation
+## 4. Early Profile
 
-- Rule questions, restart/discipline choices, authored incident analysis, and short reasoning.
-- Reuse of the simulator's versioned rules, facts, rubrics, and recommendation model.
+- Persist preferences, private session controls, and real saved Academy content.
+- Keep simulator history honestly empty until real scored attempts exist.
 
-Tickets: RV-040..044.
+Tickets: RV-050, RV-052, RV-054. RV-051 follows the simulator incident.
 
-## Cross-cutting profile and Coach
+## 5. Local 3D playtest and first simulator incident
 
-- Preferences and owned history begin anonymously; optional accounts require a separate need and review.
-- Prepared Coach responses are the functional baseline; hosted generation is optional and provider-independent.
+- Resume the unsaved local playtest only after the preceding application stages.
+- Correct evidence-critical contact/observation issues, bind the exact reviewed build, then publish one authored incident.
+- Complete decision, evaluation, explanation, replay, owner-bound PostgreSQL persistence, and Profile history. Cosmetic refinement follows functional acceptance.
 
-Tickets: RV-050..054 and RV-060..064.
+Tickets: RV-005..011, RV-051. Assistant, VAR, and configurable sessions remain later expansion under RV-012..017.
 
-## 5. Product expansion hypotheses
+## Later product expansion hypotheses
 
 - Larger authored scenario collections.
 - Multi-incident sessions with more actors and several minutes of authored play.
@@ -49,6 +48,6 @@ Tickets: RV-050..054 and RV-060..064.
 - Deeper personal analytics and expanded optional Coach usage.
 - Autonomous continuous matches only after authored sessions prove demand and browser feasibility.
 
-Tickets: RV-070..072. Catalog growth may run opportunistically after RV-017, but it is not a prerequisite for Academy. A `defer` autonomous-research decision is a valid outcome.
+Tickets: RV-060..064 for optional Coach and RV-070..072 for catalog/sequence expansion. Functional Community requires its own reviewed identity, media, moderation, and exposure decisions. A `defer` autonomous-research decision is a valid outcome.
 
 Payments are not part of the first prototype. Monetization options remain hypotheses to validate after the free core proves useful.

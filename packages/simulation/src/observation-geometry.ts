@@ -123,7 +123,7 @@ function entrySegment(start: Vec3m, end: Vec3m, box: FrozenBox): { entry: number
   }
   return { entry, exit, inside };
 }
-function validateView(sample: ViewSample, duration: number): void {
+export function validateView(sample: ViewSample, duration: number): void {
   integer(sample.tick, 0, duration, "view tick");
   const position = vec(sample.refereePosition);
   if (position.y !== 0) throw new RangeError("referee ground y must be zero");

@@ -1,0 +1,41 @@
+.rv-law-depth{padding:46px 0 56px;border-bottom:1px solid var(--line)}
+.rv-law-depth__heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,245px);gap:32px;align-items:start}
+.rv-law-depth__heading h2{margin:0;font-size:clamp(2.2rem,3.6vw,3.7rem)}
+.rv-law-depth__index{display:grid;gap:10px;padding:4px 0 0;border-top:2px solid #79917e}
+.rv-law-depth__index a{padding-top:8px;color:#27533a;font-size:14px;font-weight:800;text-underline-offset:3px}
+.rv-law-depth__sections{display:grid;gap:0;margin-top:36px}
+.rv-law-depth__section{scroll-margin-top:90px;padding:32px 0 38px;border-top:1px solid var(--line)}
+.rv-law-depth__section h3{max-width:24ch;margin:0 0 18px;font:600 clamp(1.8rem,2.7vw,2.7rem)/1.08 'Barlow Condensed','Arial Narrow',sans-serif}
+.rv-law-depth__section>p:not(.rv-law-depth__source){max-width:70ch;margin:0 0 16px;font-size:17px;line-height:1.56}
+.rv-law-depth__facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:0;margin:25px 0;border-top:1px solid #aebdb1}
+.rv-law-depth__facts>div{padding:15px 18px 17px 0;border-bottom:1px solid #aebdb1}
+.rv-law-depth__facts dt{color:#3a5946;font-size:13px;font-weight:800}
+.rv-law-depth__facts dd{margin:5px 0 0;font-size:17px;font-weight:700;line-height:1.35}
+.rv-law-depth__steps{display:grid;gap:0;max-width:70ch;margin:24px 0;padding:0;list-style:none;counter-reset:law-step;border-top:1px solid #aebdb1}
+.rv-law-depth__steps li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:2px 14px;padding:13px 0;border-bottom:1px solid #aebdb1;counter-increment:law-step}
+.rv-law-depth__steps li::before{grid-row:span 2;content:counter(law-step,decimal-leading-zero);color:#315440;font-weight:800}
+.rv-law-depth__steps strong{line-height:1.3}.rv-law-depth__steps span{color:#344d42;line-height:1.48}
+.rv-law-depth__section>p.rv-law-depth__caution{padding:14px 18px;background:#e4eadd;font-size:16px}
+.rv-law-depth__source{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;max-width:70ch;margin:25px 0 0;color:#3d5946;font-size:13px}
+.rv-law-depth__source a{font-weight:800;text-underline-offset:3px}
+@media(max-width:700px){.rv-law-depth__heading{grid-template-columns:1fr;gap:18px}.rv-law-depth__index{display:flex;overflow-x:auto;gap:16px;padding-bottom:10px}.rv-law-depth__index a{flex:none;max-width:185px}.rv-law-depth__section{scroll-margin-top:72px}}
+.rv-academy__topic-figure{padding-top:0;margin-top:0}
+.rv-academy__photo{margin:0 0 30px}
+.rv-academy__photo-image{display:block;width:100%;height:auto;aspect-ratio:1672/941;object-fit:cover;background:#d5ded3}
+.rv-academy__photo-caption{display:grid;gap:3px;max-width:70ch;margin-top:10px;color:#3d5946;font-size:13px;line-height:1.4}
+.rv-academy__photo-observe{color:#263f31;font-size:15px;font-weight:700}
+.rv-academy__technical{max-width:800px;margin:30px 0 0;padding:0 0 6px;border-top:1px solid #aebdb1;border-bottom:1px solid #aebdb1}
+.rv-academy__technical summary{padding:15px 0;color:#27533a;cursor:pointer;font-size:15px;font-weight:800;text-underline-offset:3px}
+.rv-academy__technical summary:hover{text-decoration:underline}
+.rv-academy__technical[open] .rv-academy__law-figure{margin:6px 0 20px}
+.rv-academy__technical--topic{margin-top:8px}
+.rv-academy__topic-body>.rv-law-depth{padding-top:12px}
+.rv-academy__topic-siblings{display:flex;flex-wrap:wrap;gap:10px 22px;max-width:68ch;margin:0;padding:0;list-style:none}
+.rv-academy__topic-siblings a{font-weight:800;text-underline-offset:3px}
+.rv-academy__figure-scroll{display:none}
+.rv-academy__law-figure:focus-visible{outline:3px solid #4d72d8;outline-offset:4px}
+@media(max-width:700px){
+  .rv-academy__law-figure{overflow-x:auto;overscroll-behavior-inline:contain}
+  .rv-academy__law-figure svg{min-width:620px}
+  .rv-academy__figure-scroll{display:inline;font-weight:700}
+}

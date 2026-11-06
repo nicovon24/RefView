@@ -48,11 +48,11 @@ The root coordinator's runtime model and effort were not exposed and remain unco
 2. **Frame:** choose one observable outcome and classify it as direct, SDD light, or delegated SDD.
 3. **Specify:** resolve authority boundaries and shared contracts; define `REQ-*`, task dependencies, ownership, tests, and stop conditions.
 4. **Make ready:** mark a task `Ready` only when its dependencies and verification are concrete.
-5. **Delegate or implement:** use the lowest-complexity path that preserves quality. Keep at most two workers and disjoint write sets.
+5. **Delegate or implement:** use the lowest-complexity path that preserves quality. Keep at most four workers, subject to the runtime's session limit, and disjoint write sets.
 6. **Receive:** inspect each handoff, diff, red/green evidence, commands, limitations, and model record before integration.
 7. **Integrate:** run focused tests, strict typecheck, lint, build, database checks, and relevant browser flows.
 8. **Review:** obtain independent read-only review for delegated work and shared/high-risk boundaries. Re-review affected fixes.
-9. **Close:** update the canonical tracker and CHECKLOG with observed evidence. Do not expand completion claims beyond the gate.
+9. **Close:** update the canonical tracker and CHECKLOG with observed evidence. Do not expand completion claims beyond the gate. Leave work local; staging, commits, and pushes require Nicolas's explicit permission for each action.
 
 ## Task assignment template
 
@@ -99,11 +99,11 @@ Playwright CLI and visual inspection verify the declared browser/device; perform
 
 ## Concurrency and ownership
 
-- One coordinator and no more than two active subagents.
+- One coordinator and no more than four active subagents, subject to the runtime's session limit.
 - Shared documents, manifests, lockfiles, configuration, and schema coordination have one owner at a time.
 - Parallel tasks require disjoint files and resolved contracts. RV-005 timeline work and RV-006 persistence may run in parallel after RV-003/RV-004.
 - Do not inspect or edit a worker's actively owned files. Wait for its handoff.
-- Workers do not commit, push, deploy, or update task status.
+- Neither coordinator nor workers stage, commit, or push without Nicolas's explicit permission for that action. A request to continue implementation is not Git authorization. Workers also do not deploy or update task status.
 - After two unsuccessful correction cycles, reduce or redesign the assignment.
 
 ## Evidence policy

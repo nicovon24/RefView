@@ -3,7 +3,7 @@
 ## RV-040 - Freeze assessment, scoring, and secrecy contracts
 
 - Requirements: all ASM requirements.
-- Dependencies: RV-034 and RV-020.
+- Dependencies: RV-020 and a reviewed owner/answer-key authority boundary. Community acceptance is independent.
 - Deliver: item types, immutable submissions, applicability, reveal timing, ownership/retry, reasoning treatment, correction/recommendation refs, and public/private projections.
 - Acceptance: independent scoring/persistence review and valid/invalid examples.
 
@@ -23,8 +23,8 @@
 ## RV-043 - Implement practice and correction journey
 
 - Requirements: ASM-REQ-001, ASM-REQ-005.
-- Dependencies: RV-042, RV-024, RV-051.
-- Deliver: topic selection -> answer/reasoning -> confirm -> correction -> actual next practice.
+- Dependencies: RV-042 and one published compatible next assessment.
+- Deliver: topic selection -> answer/reasoning -> confirm -> correction -> actual next assessment. A separately reviewed text exercise may discuss an authored incident; simulator-derived positioning evidence waits for RV-011.
 - Acceptance: Playwright CLI verifies Spanish/English, refresh/retry, keyboard use, secrecy, and scored/unscored/not-applicable dimensions.
 
 ## RV-044 - Assessments acceptance

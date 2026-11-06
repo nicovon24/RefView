@@ -1,0 +1,272 @@
+{
+  "artifactKind": "refview-academy-review-evidence-v1",
+  "editorialRoute": "/es/academy/editorial-preview",
+  "englishRoute": "/en/academy/editorial-preview",
+  "contentKind": "academy",
+  "lessonId": "careless-trip-in-penalty-area",
+  "version": 1,
+  "contentHash": "sha256:4056b7d5cac8d8886003602464dd82cb633fbc74e198c49597049a52cdf59f6b",
+  "reviewedSource": {
+    "schemaVersion": 1,
+    "lessonId": "careless-trip-in-penalty-area",
+    "version": 1,
+    "lawsEdition": "IFAB-2026-27",
+    "topicId": "challenge",
+    "level": "beginner",
+    "localized": {
+      "es": {
+        "title": "Una zancadilla dentro del área",
+        "lead": "Primero observá la acción. Después aplicá la regla.",
+        "plainExplanation": "Si un defensor hace una zancadilla imprudente a un adversario mientras la pelota está en juego, comete una infracción sancionada con tiro libre directo. Si la infracción ocurre dentro de su propia área penal, la reanudación es un penal. La imprudencia, por sí sola, no exige tarjeta: hay que comprobar por separado si existe otro motivo disciplinario.",
+        "technicalExplanation": "La Regla 12 distingue la zancadilla imprudente de una acción temeraria o con uso de fuerza excesiva. La Regla 14 define el penal por una infracción de tiro libre directo en el área penal propia mientras la pelota está en juego. Según la Regla 1, la línea forma parte del área que delimita. La evaluación de una ocasión manifiesta de gol considera, entre otros factores, la ubicación y cantidad de defensores."
+      },
+      "en": {
+        "title": "A trip inside the penalty area",
+        "lead": "Observe the challenge first. Apply the Law second.",
+        "plainExplanation": "A defender who carelessly trips an opponent while the ball is in play commits a direct-free-kick offence. When it happens inside the defender’s own penalty area, the restart is a penalty kick. Carelessness alone does not require a card: check separately for any other disciplinary ground.",
+        "technicalExplanation": "Law 12 distinguishes a careless trip from a reckless challenge or one using excessive force. Law 14 provides the penalty kick for a direct-free-kick offence in the offender’s own penalty area while the ball is in play. Under Law 1, a boundary line belongs to the area it encloses. DOGSO assessment considers, among other things, the location and number of defenders."
+      }
+    },
+    "example": {
+      "facts": {
+        "es": "El atacante estaba habilitado y la pelota seguía en juego. Un defensor le hizo una zancadilla imprudente dentro de su propia área penal. Otro defensor cubría la jugada, por lo que este ejemplo no se interpreta como privación de una ocasión manifiesta de gol. No hay otra conducta sancionable con tarjeta.",
+        "en": "The attacker was onside and the ball remained in play. A defender carelessly tripped the attacker inside the defender’s own penalty area. A covering defender prevents a denial-of-an-obvious-goal-scoring-opportunity interpretation in this example. There is no other card-worthy misconduct."
+      },
+      "evidence": {
+        "es": "El contacto entre pie o pierna y atacante; el lugar de la infracción respecto de la línea del área; si la pelota seguía en juego; y la posición del defensor que cubría. Una mala ubicación arbitral puede tapar el contacto sin cambiar los hechos redactados.",
+        "en": "The actual foot or leg contact; the offence location relative to the penalty-area line; whether the ball was in play; and the covering defender’s position. Poor referee positioning may hide the contact without changing the authored facts."
+      },
+      "interpretation": {
+        "es": "Con lo que se pudo observar, hay que juzgar si hubo zancadilla, la gravedad de la acción, si la infracción fue dentro del área o sobre su línea y si existe una causa independiente para amonestar o expulsar. Una postura corporal aislada no prueba el contacto.",
+        "en": "From what was observable, judge whether the contact was a trip, its degree of seriousness, whether the offence was inside or on the line, and whether a separate caution or sending-off ground exists. A pose alone cannot establish contact."
+      },
+      "ruleApplication": {
+        "es": "Con los hechos redactados para este ejemplo, corresponde detener el juego, conceder un penal y no mostrar tarjeta.",
+        "en": "On the facts authored for this example, stop play, award a penalty kick, and show no card."
+      }
+    },
+    "officialSources": [
+      {
+        "sourceId": "law-1-area-boundary-en",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "en",
+        "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+        "lawNumber": 1,
+        "sectionCode": "1.2",
+        "displayLabel": "Law 1 §2, p. 45",
+        "printedPage": 45,
+        "inspectedAt": "2026-11-03",
+        "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+      },
+      {
+        "sourceId": "law-1-area-boundary-es",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "es",
+        "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+        "lawNumber": 1,
+        "sectionCode": "1.2",
+        "displayLabel": "Regla 1 §2, p. 49",
+        "printedPage": 49,
+        "inspectedAt": "2026-11-04",
+        "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+      },
+      {
+        "sourceId": "law-1-lines-en",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "en",
+        "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+        "lawNumber": 1,
+        "sectionCode": "1.6",
+        "displayLabel": "Law 1 §6, p. 48",
+        "printedPage": 48,
+        "inspectedAt": "2026-11-03",
+        "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+      },
+      {
+        "sourceId": "law-1-lines-es",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "es",
+        "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+        "lawNumber": 1,
+        "sectionCode": "1.6",
+        "displayLabel": "Regla 1 §6, p. 52",
+        "printedPage": 52,
+        "inspectedAt": "2026-11-04",
+        "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+      },
+      {
+        "sourceId": "law-12-direct-free-kick-en",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "en",
+        "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+        "lawNumber": 12,
+        "sectionCode": "12.1",
+        "displayLabel": "Law 12 §12.1, pp. 115–116",
+        "printedPage": 115,
+        "inspectedAt": "2026-11-03",
+        "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+      },
+      {
+        "sourceId": "law-12-direct-free-kick-es",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "es",
+        "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+        "lawNumber": 12,
+        "sectionCode": "12.1",
+        "displayLabel": "Regla 12 §12.1, pp. 123–124",
+        "printedPage": 123,
+        "inspectedAt": "2026-11-04",
+        "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+      },
+      {
+        "sourceId": "law-12-dogso-en",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "en",
+        "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+        "lawNumber": 12,
+        "sectionCode": "12.dogso",
+        "displayLabel": "Law 12 DOGSO, p. 124",
+        "printedPage": 124,
+        "inspectedAt": "2026-11-03",
+        "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+      },
+      {
+        "sourceId": "law-12-dogso-es",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "es",
+        "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+        "lawNumber": 12,
+        "sectionCode": "12.dogso",
+        "displayLabel": "Regla 12 DOGSO, p. 133",
+        "printedPage": 133,
+        "inspectedAt": "2026-11-04",
+        "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+      },
+      {
+        "sourceId": "law-14-penalty-en",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "en",
+        "documentUrl": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+        "lawNumber": 14,
+        "sectionCode": "14.intro",
+        "displayLabel": "Law 14 opening rule, p. 135",
+        "printedPage": 135,
+        "inspectedAt": "2026-11-03",
+        "inspectedArtifactSha256": "sha256:89398520b353c6d995a1bb2557c97dc3c5aa1712c1d3009589f580a5a23c6a7d"
+      },
+      {
+        "sourceId": "law-14-penalty-es",
+        "publisher": "IFAB",
+        "edition": "IFAB-2026-27",
+        "language": "es",
+        "documentUrl": "https://downloads.theifab.com/downloads/reglas-de-juego-202627-paginas-individuales?l=es",
+        "lawNumber": 14,
+        "sectionCode": "14.intro",
+        "displayLabel": "Regla 14 disposición inicial, p. 145",
+        "printedPage": 145,
+        "inspectedAt": "2026-11-04",
+        "inspectedArtifactSha256": "sha256:5c4d4795af674701c934030416132835357d039fd6a68b248baf738714ebe7ab"
+      }
+    ],
+    "preparedFollowUps": [
+      {
+        "followUpId": "on-area-line",
+        "question": {
+          "es": "¿Y si el contacto fue sobre la línea?",
+          "en": "What if the contact was on the line?"
+        },
+        "answer": {
+          "es": "La línea pertenece al área que delimita. Si la infracción se comete sobre la línea del área penal propia, se considera dentro de ella.",
+          "en": "A boundary line belongs to the area it encloses. An offence on the offender’s penalty-area line is treated as inside the area."
+        },
+        "sourceIds": {
+          "es": [
+            "law-1-area-boundary-es",
+            "law-1-lines-es"
+          ],
+          "en": [
+            "law-1-area-boundary-en",
+            "law-1-lines-en"
+          ]
+        }
+      },
+      {
+        "followUpId": "reckless-challenge",
+        "question": {
+          "es": "¿Y si la entrada fue temeraria?",
+          "en": "What if the challenge was reckless?"
+        },
+        "answer": {
+          "es": "Una acción temeraria exige amonestación según la Regla 12. Habría que valorar todas las circunstancias, que serían distintas de los hechos de este ejemplo.",
+          "en": "Law 12 calls for a caution for a reckless challenge. The complete circumstances would need assessment and would differ from this example’s facts."
+        },
+        "sourceIds": {
+          "es": [
+            "law-12-direct-free-kick-es"
+          ],
+          "en": [
+            "law-12-direct-free-kick-en"
+          ]
+        }
+      },
+      {
+        "followUpId": "why-no-card",
+        "question": {
+          "es": "¿Por qué no hay amarilla?",
+          "en": "Why no yellow card?"
+        },
+        "answer": {
+          "es": "La imprudencia por sí sola no lleva amonestación. En los hechos de este ejemplo no aparece otra causa disciplinaria.",
+          "en": "Carelessness by itself does not require a caution. No separate disciplinary ground is present in this example’s authored facts."
+        },
+        "sourceIds": {
+          "es": [
+            "law-12-direct-free-kick-es"
+          ],
+          "en": [
+            "law-12-direct-free-kick-en"
+          ]
+        }
+      },
+      {
+        "followUpId": "why-penalty",
+        "question": {
+          "es": "¿Por qué penal y no tiro libre directo en el lugar?",
+          "en": "Why a penalty instead of a direct free kick at the spot?"
+        },
+        "answer": {
+          "es": "La zancadilla se sanciona como infracción de tiro libre directo. Como en este ejemplo ocurrió dentro del área penal del infractor, la Regla 14 establece el penal.",
+          "en": "A trip is a direct-free-kick offence. Because it happened in the offender’s own penalty area in this example, Law 14 provides the penalty kick."
+        },
+        "sourceIds": {
+          "es": [
+            "law-12-direct-free-kick-es",
+            "law-14-penalty-es"
+          ],
+          "en": [
+            "law-12-direct-free-kick-en",
+            "law-14-penalty-en"
+          ]
+        }
+      }
+    ],
+    "practiceRefs": [
+      {
+        "kind": "assessment",
+        "targetId": "careless-trip-penalty-restart",
+        "targetVersion": 1,
+        "topicId": "challenge",
+        "lawsEdition": "IFAB-2026-27"
+      }
+    ]
+  }
+}

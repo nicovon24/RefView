@@ -7,12 +7,18 @@
 # Local runtime and build artifacts
 node_modules/
 .next/
+.next-session-test/
 dist/
+# Local captures, review output, downloaded research, and optional diagnostics.
+# Force-add only the small set of reviewed evidence needed by a specific commit.
+/artifacts/
+/s.lang)
 coverage/
 playwright-report/
 test-results/
 apps/web/src/generated/
 *.tsbuildinfo
+__pycache__/
 .env
 .env.*
 !.env.example

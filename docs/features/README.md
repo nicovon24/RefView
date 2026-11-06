@@ -5,18 +5,20 @@ Task status lives only in [`../specs/tasks.md`](../specs/tasks.md). Feature file
 ## Delivery spine
 
 ```text
-Foundation and first incident (RV-001..011)
-  -> simulator roles/sessions acceptance (RV-012..017)
-  -> Academy acceptance (RV-020..024)
-  -> fictional Community acceptance (RV-030..034)
-  -> Assessments acceptance (RV-040..044)
+Foundation (RV-001..004) and preserved existing incident work (RV-005..008)
+  -> Academy Law summaries and controlled lesson publication (RV-029A, RV-024A)
+  -> Assessments and Academy practice integration (RV-041..044, RV-023..024)
+  -> fictional Community visual acceptance (RV-036 current slice)
+  -> early Profile acceptance (RV-054)
+  -> local 3D playtest and saved/scored first incident (RV-005..011)
+  -> Profile simulator history (RV-051) and cosmetic simulator refinement
 ```
 
 Cross-cutting work:
 
 - Full-product visual concept: RV-018, after workspace bootstrap and before final simulator/Academy UI inheritance.
 - Preferences/history/profile: RV-050..054, integrated when each upstream result contract exists.
-- Provider-free Coach: RV-060..061 bridges the first Academy lesson and Academy acceptance.
+- Provider-free Coach: RV-060..061 follows the accepted lesson and incident contexts. Academy's own labelled prepared lesson answers can precede it.
 - Hosted Coach: RV-062..064 is optional and requires explicit authorization/provider review.
 - Catalog/multi-incident research: RV-070..072 may proceed after simulator acceptance without blocking wider product foundations.
 
@@ -32,7 +34,7 @@ Cross-cutting work:
 - [`07-profile-preferences/`](07-profile-preferences/requirements.md)
 - [`08-ai-coach/`](08-ai-coach/requirements.md)
 - [`09-simulator-research/`](09-simulator-research/requirements.md)
-
+- [`17-app-first-delivery/`](17-app-first-delivery/requirements.md)
 - [`22-academy-rules-directory/`](22-academy-rules-directory/requirements.md)
 - [`23-academy-topic-hubs/`](23-academy-topic-hubs/requirements.md)
 - [`24-academy-law-expansion/`](24-academy-law-expansion/requirements.md)

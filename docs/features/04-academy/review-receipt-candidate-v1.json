@@ -1,0 +1,12 @@
+{
+  "kind": "academy",
+  "id": "careless-trip-in-penalty-area",
+  "version": 1,
+  "contentHash": "sha256:4056b7d5cac8d8886003602464dd82cb633fbc74e198c49597049a52cdf59f6b",
+  "evidenceSha256": "sha256:59b6703690e8f961d9c806a625c8a200f00c4c9b14c44dc113b6bbde527b452a",
+  "decisions": {
+    "footballInterpretationApproved": true,
+    "sourcesAndProvenanceApproved": true,
+    "spanishEnglishEquivalenceApproved": true
+  }
+}

@@ -3,16 +3,23 @@
 ## RV-030 - Freeze fictional-match, ownership, and moderation contracts
 
 - Requirements: all COM requirements.
-- Dependencies: RV-024.
+- Dependencies: reviewed RV-030A read boundary.
 - Deliver: match identity, rating/reaction uniqueness, comment/report/moderation states, owner authority, visibility, retention, deletion, rate limits, and explicit owner-only-demo versus shared-pilot scope.
 - Acceptance: independent security/privacy/contract review before shared mutations.
 
+## RV-030A - Freeze read-only fictional fixture boundary
+
+- Requirements: COM-REQ-001 and the read-only discussion-prompt portion of COM-REQ-003.
+- Dependencies: RV-018 design direction.
+- Deliver: stable match identity, bilingual fiction labels, unknown-ID handling, local read scope, and no-mutation limits in `../../contracts/fictional-community-read-v1.md`.
+- Acceptance: independent read-only contract review before RV-031 implementation.
+
 ## RV-031 - Author fictional fixtures and read views
 
-- Requirements: COM-REQ-001, COM-REQ-003.
-- Dependencies: RV-030.
-- Deliver: at least two distinct fictional matches, list/detail routes, visible fiction labels, and clearly marked fixture distributions/comments.
-- Acceptance: routes cannot collapse different meetings; no real-world performance claims or unlicensed incident media.
+- Requirements: COM-REQ-001 and the read-only discussion-prompt portion of COM-REQ-003.
+- Dependencies: reviewed RV-030A.
+- Deliver: at least two distinct fictional matches with local list/detail routes and visible fiction labels. Omit ratings, comments, counts, and reactions.
+- Acceptance: routes cannot collapse different meetings; unknown IDs return not-found; no real-world performance claims or unlicensed incident media. Browser checks cover both locales and mobile layout.
 
 ## RV-032 - Implement ratings and reactions
 

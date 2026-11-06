@@ -1,0 +1,56 @@
+﻿.rv-assessment{min-height:100vh;background:#f1f2ed;color:#10201d;font-family:"Source Sans 3","Segoe UI",sans-serif;font-size:16px;line-height:1.48}
+.rv-assessment *{box-sizing:border-box}
+.rv-assessment ::selection{background:#cfea55;color:#10201d}
+.rv-assessment a{color:#18483c;text-underline-offset:.22em}
+.rv-assessment a:focus-visible,.rv-assessment button:focus-visible,.rv-assessment input:focus-visible,.rv-assessment select:focus-visible,.rv-assessment textarea:focus-visible{outline:3px solid #4d72d8;outline-offset:3px}
+.rv-assessment__skip{position:absolute;left:-9999px}
+.rv-assessment__skip:focus{left:12px;top:12px;z-index:20;background:#fff;padding:10px}
+.rv-assessment__main{max-width:1140px;margin:0 auto;padding:40px 28px 96px}
+.rv-assessment__hero{padding:42px 0 38px;border-bottom:1px solid #aab9af}
+.rv-assessment__hero h1{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:clamp(3.6rem,8vw,6rem);line-height:.96;letter-spacing:-.025em;font-weight:600;margin:0 0 18px}
+.rv-assessment__hero p{font-size:1.2rem;max-width:63ch;margin:0}
+.rv-assessment__section{margin-top:44px}
+.rv-assessment__section>h2,.rv-assessment__question h2,.rv-assessment__correction h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:clamp(2rem,3vw,3rem);line-height:1;margin:0 0 20px;font-weight:600}
+.rv-assessment__filters{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:0 0 26px;padding:0 0 22px;border-bottom:1px solid #cfd6d1}
+.rv-assessment__filters span{font-size:.875rem;padding:9px 12px;background:#e5eae2}
+.rv-assessment__filters label{font-weight:700}
+.rv-assessment__filters select,.rv-assessment__form select,.rv-assessment__form textarea{font:inherit;color:#10201d;background:#fff;border:1px solid #71887a;border-radius:6px;padding:11px;min-height:46px}
+.rv-assessment__filters button,.rv-assessment__row button,.rv-assessment__form button,.rv-assessment__result button,.rv-assessment__button{font:inherit;font-weight:800;color:#10201d;background:#cfea55;border:0;border-radius:6px;padding:12px 18px;min-height:46px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.rv-assessment__filters button:hover,.rv-assessment__row button:hover,.rv-assessment__form button:hover,.rv-assessment__result button:hover,.rv-assessment__button:hover{background:#dcf66f}
+.rv-assessment__state{padding:34px 0;border-top:1px solid #cfd6d1;border-bottom:1px solid #cfd6d1;max-width:68ch;font-size:1.1rem}
+.rv-assessment__list{border-top:1px solid #aab9af}
+.rv-assessment__row{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:20px;padding:24px 0;border-bottom:1px solid #cfd6d1}
+.rv-assessment__row-index,.rv-assessment__meta{color:#4a5e58;font-size:.86rem;font-weight:700}
+.rv-assessment__row h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:clamp(1.65rem,2.4vw,2.3rem);line-height:1.05;font-weight:600;margin:6px 0 8px}
+.rv-assessment__row p{margin:0}
+.rv-assessment__question{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:clamp(30px,6vw,82px)}
+.rv-assessment__prompt{font-size:1.35rem;line-height:1.45;max-width:58ch;margin:0 0 34px}
+.rv-assessment__evidence{border-top:1px solid #aab9af;padding-top:20px}
+.rv-assessment__evidence h3,.rv-assessment__correction h3,.rv-assessment__result h3{font-size:1rem;margin:24px 0 8px}
+.rv-assessment__evidence ul,.rv-assessment__correction ul,.rv-assessment__result ul{margin:10px 0 0;padding-left:22px}
+.rv-assessment__evidence li,.rv-assessment__correction li,.rv-assessment__result li{margin:10px 0}
+.rv-assessment__answer{background:#e8eee7;padding:28px;align-self:start}
+.rv-assessment__form{display:grid;gap:18px}
+.rv-assessment__form fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
+.rv-assessment__form label{display:flex;flex-direction:column;gap:7px;font-weight:700}
+.rv-assessment__choice{display:flex!important;flex-direction:row!important;align-items:center;gap:12px!important;background:#fff;padding:15px;border:1px solid #cfd6d1;cursor:pointer}
+.rv-assessment__choice:has(input:checked){border-color:#10201d;background:#dff1ce}
+.rv-assessment__choice input{accent-color:#18483c;width:18px;height:18px;flex:none}
+.rv-assessment__form textarea{min-height:120px;resize:vertical}
+.rv-assessment__form small,.rv-assessment__note{color:#40554b}
+.rv-assessment__text-link{display:inline-block;margin-top:18px;font-weight:750}
+.rv-assessment__result{display:grid;gap:24px}
+.rv-assessment__panel{padding:28px 0;border-top:1px solid #aab9af}
+.rv-assessment__panel h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:2.2rem;margin:0 0 10px}
+.rv-assessment__correction{display:grid;grid-template-columns:1.2fr .8fr;gap:20px 46px}
+.rv-assessment__correction section{border-top:1px solid #aab9af;padding-top:22px}
+.rv-assessment__correction section:last-child:nth-child(odd){grid-column:1/-1}
+.rv-assessment__correction-summary{font-size:1.35rem;font-weight:700}
+.rv-assessment__preview-nav{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid #cfd6d1;font-weight:750}
+.rv-assessment__preview-banner{display:inline-block;margin:30px 0 0;padding:7px 11px;background:#10201d;color:#cfea55;font-size:.78rem;letter-spacing:.08em;font-weight:800}
+.rv-assessment--preview .rv-assessment__hero{padding-top:18px}
+.rv-assessment__sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.rv-assessment--preview .rv-assessment__choice{cursor:default}
+.rv-assessment--preview :disabled{opacity:.72}
+@media(max-width:700px){.rv-assessment__main{padding:24px 20px 70px}.rv-assessment__hero{padding:30px 0}.rv-assessment__filters{align-items:stretch}.rv-assessment__filters label{width:100%}.rv-assessment__filters select{flex:1}.rv-assessment__row{grid-template-columns:32px minmax(0,1fr);gap:12px}.rv-assessment__row-action{grid-column:2}.rv-assessment__question,.rv-assessment__correction{grid-template-columns:1fr}.rv-assessment__answer{padding:22px}.rv-assessment__correction section:last-child:nth-child(odd){grid-column:auto}}
+@media(prefers-reduced-motion:no-preference){.rv-assessment button,.rv-assessment__button{transition:background-color .2s ease,transform .2s ease}.rv-assessment button:hover,.rv-assessment__button:hover{transform:translateY(-2px)}}

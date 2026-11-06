@@ -6,3 +6,665 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum PublicationState {
+  draft
+  reviewed
+  retired
+}
+
+enum AttemptState {
+  ready
+  playing
+  deciding
+  debrief
+  completed
+  abandoned
+}
+
+enum AssessmentAttemptState {
+  ready
+  finalized
+}
+
+model AnonymousSession {
+  id         String   @id @default(cuid())
+  tokenHash  String   @unique
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+  plans      SessionPlan[]
+  attempts   Attempt[]
+  claims     FinalizationClaim[]
+  assessmentAttempts AssessmentAttempt[]
+  assessmentClaims AssessmentFinalizationClaim[]
+  savedAcademyLessons SavedAcademyLesson[]
+  communityRatings CommunityRating[]
+  communityComments CommunityComment[]
+  communityReactions CommunityReaction[]
+  communityRequestKeys CommunityRequestKey[]
+  communityQuotaCounter CommunityQuotaCounter?
+
+  @@index([expiresAt])
+}
+
+model CompetitionProfile {
+  profileId    String
+  version      Int
+  contentHash  String
+  settings     Json
+  createdAt    DateTime @default(now())
+  scenarios    ScenarioVersion[]
+  plans        SessionPlan[]
+
+  @@id([profileId, version])
+}
+
+model ScenarioVersion {
+  scenarioId               String
+  version                  Int
+  contentHash              String
+  sourceSchemaVersion       Int @default(1)
+  canonicalSource           Json?
+  lawsEdition              String
+  sourceReferences         Json
+  publicContent            Json
+  privateContent           Json
+  competitionProfileId     String
+  competitionProfileVersion Int
+  createdAt                DateTime @default(now())
+  competitionProfile       CompetitionProfile @relation(fields: [competitionProfileId, competitionProfileVersion], references: [profileId, version], onDelete: Restrict)
+  publication              ScenarioPublication?
+  reviewRecords            ScenarioReviewRecord[]
+  planItems                SessionPlanItem[]
+
+  @@id([scenarioId, version])
+  @@unique([scenarioId, contentHash])
+  @@unique([scenarioId, version, contentHash])
+}
+
+model ScenarioReviewRecord {
+  reviewId                       String
+  scenarioId                     String
+  scenarioVersion                Int
+  contentHash                    String
+  reviewerPrincipal              String
+  reviewedAt                     DateTime @default(now())
+  briefApproval                  Json
+  renderedEvidenceApproval       Json
+  captureEvidence                Json
+  rendererBuildHash              String
+  sourcesAndLicensesChecked      Boolean
+  observationCalibrationApproved Boolean
+  scenario                       ScenarioVersion @relation(fields: [scenarioId, scenarioVersion, contentHash], references: [scenarioId, version, contentHash], onDelete: Restrict)
+  publication                    ScenarioPublication?
+
+  @@id([reviewId, scenarioId, scenarioVersion])
+}
+
+model ScenarioPublication {
+  scenarioId       String
+  scenarioVersion  Int
+  state            PublicationState @default(draft)
+  revision         Int              @default(0)
+  reviewRecordId   String?
+  reviewedAt       DateTime?
+  retiredAt        DateTime?
+  scenario         ScenarioVersion  @relation(fields: [scenarioId, scenarioVersion], references: [scenarioId, version], onDelete: Restrict)
+  reviewRecord     ScenarioReviewRecord? @relation(fields: [reviewRecordId, scenarioId, scenarioVersion], references: [reviewId, scenarioId, scenarioVersion], onDelete: Restrict)
+  events           ScenarioPublicationEvent[]
+
+  @@id([scenarioId, scenarioVersion])
+  @@unique([reviewRecordId, scenarioId, scenarioVersion])
+}
+
+model ScenarioPublicationEvent {
+  id               String           @id @default(cuid())
+  scenarioId       String
+  scenarioVersion  Int
+  priorState       PublicationState
+  nextState        PublicationState
+  priorRevision    Int
+  nextRevision     Int
+  actor            String
+  reason           String
+  occurredAt       DateTime         @default(now())
+  publication      ScenarioPublication @relation(fields: [scenarioId, scenarioVersion], references: [scenarioId, scenarioVersion], onDelete: Restrict)
+
+  @@unique([scenarioId, scenarioVersion, nextRevision])
+}
+
+model SessionPlan {
+  id          String   @id @default(cuid())
+  ownerId     String
+  owner       AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  competitionProfileId String
+  competitionProfileVersion Int
+  competitionProfile CompetitionProfile @relation(fields: [competitionProfileId, competitionProfileVersion], references: [profileId, version], onDelete: Restrict)
+  planVersion Int      @default(1)
+  seed        String
+  locale      String
+  role        String
+  createdAt   DateTime @default(now())
+  items       SessionPlanItem[]
+
+  @@unique([id, ownerId])
+}
+
+model SessionPlanItem {
+  id               String   @id @default(cuid())
+  planId           String
+  ownerId          String
+  order            Int
+  scenarioId       String
+  scenarioVersion  Int
+  transition       Json?
+  plan             SessionPlan @relation(fields: [planId, ownerId], references: [id, ownerId], onDelete: Cascade)
+  scenario         ScenarioVersion @relation(fields: [scenarioId, scenarioVersion], references: [scenarioId, version], onDelete: Restrict)
+  attempts         Attempt[]
+
+  @@unique([planId, order])
+  @@unique([id, ownerId])
+}
+
+model Attempt {
+  id                   String @id @default(cuid())
+  ownerId              String
+  planItemId           String
+  state                AttemptState @default(ready)
+  runRevision          Int @default(0)
+  lastSafeTick         Int @default(0)
+  decidingTick         Int?
+  decidingRunRevision  Int?
+  locale               String
+  role                 String
+  clientBuild          String?
+  createdAt            DateTime @default(now())
+  startedAt            DateTime?
+  finalizedAt          DateTime?
+  owner                AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  planItem             SessionPlanItem @relation(fields: [planItemId, ownerId], references: [id, ownerId], onDelete: Restrict)
+  runStarts            AttemptRunStart[]
+  trace                ObservationTrace?
+  decisions            Decision[]
+  evaluation           Evaluation?
+  claims               FinalizationClaim[]
+
+  @@unique([id, ownerId])
+  @@index([ownerId, createdAt])
+}
+
+model AttemptRunStart {
+  attemptId            String
+  runRevision          Int
+  scenarioContentHash  String
+  role                 String
+  initialView          Json
+  traceVersion         Int
+  visibilityModelVersion Int
+  cameraRigVersion     Int
+  eyeCalibrationVersion Int
+  observationRubricVersion Int
+  createdAt            DateTime @default(now())
+  attempt              Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  trace                ObservationTrace?
+
+  @@id([attemptId, runRevision])
+}
+
+model ObservationTrace {
+  attemptId      String @id
+  runRevision    Int
+  traceVersion   Int
+  payload        Json
+  summary        Json
+  createdAt      DateTime @default(now())
+  attempt        Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  runStart       AttemptRunStart @relation(fields: [attemptId, runRevision], references: [attemptId, runRevision], onDelete: Restrict)
+
+  @@unique([attemptId, runRevision])
+}
+
+model Decision {
+  id            String @id @default(cuid())
+  attemptId     String
+  kind          String
+  decisionTick  Int
+  stopPlay      Boolean
+  restart       String
+  discipline    String
+  offenderActorId String?
+  confirmedAt   DateTime @default(now())
+  attempt       Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  evaluation    Evaluation?
+  claims        FinalizationClaim[]
+
+  @@unique([attemptId, kind])
+  @@unique([id, attemptId])
+}
+
+model Evaluation {
+  id                 String @id @default(cuid())
+  attemptId          String @unique
+  decisionId         String @unique
+  evaluationVersion  Int
+  observationRubricVersion Int
+  result             Json
+  createdAt          DateTime @default(now())
+  attempt            Attempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  decision           Decision @relation(fields: [decisionId, attemptId], references: [id, attemptId], onDelete: Restrict)
+
+  @@unique([decisionId, attemptId])
+}
+
+model FinalizationClaim {
+  id              String @id @default(cuid())
+  ownerId         String
+  attemptId       String
+  idempotencyKey  String
+  payloadDigest   String
+  decisionId      String
+  createdAt       DateTime @default(now())
+  owner           AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  attempt         Attempt @relation(fields: [attemptId, ownerId], references: [id, ownerId], onDelete: Cascade)
+  decision        Decision @relation(fields: [decisionId, attemptId], references: [id, attemptId], onDelete: Restrict)
+
+  @@unique([ownerId, attemptId, idempotencyKey])
+}
+
+// Draft content stays separate from simulator publication and learner attempts.
+// SQL migrations add immutable-row, transition, audit, and role guards.
+model ContentReviewerPrincipal {
+  principalId             String @id
+  databaseRole            String @unique
+  issuanceEvidenceRef     String
+  issuanceEvidenceSha256  String
+  issuedAt                DateTime @default(now())
+  academyReviews          AcademyReviewRecord[]
+  assessmentReviews       AssessmentReviewRecord[]
+}
+
+model AcademyLessonVersion {
+  lessonId           String
+  version            Int
+  contentHash        String
+  sourceSchemaVersion Int
+  canonicalEnvelope  String @db.Text
+  sourceJson         Json
+  lawsEdition        String
+  topicId            String
+  createdAt          DateTime @default(now())
+  reviews            AcademyReviewRecord[]
+  publication        AcademyPublication?
+  saves              SavedAcademyLesson[]
+
+  @@id([lessonId, version])
+  @@unique([lessonId, version, contentHash])
+}
+
+model AcademyReviewRecord {
+  reviewId             String @id
+  lessonId             String
+  lessonVersion        Int
+  contentHash          String
+  reviewerPrincipal    String
+  evidenceRef          String
+  evidenceSha256       String
+  decisions            Json
+  reviewedAt           DateTime @default(now())
+  source               AcademyLessonVersion @relation(fields: [lessonId, lessonVersion, contentHash], references: [lessonId, version, contentHash], onDelete: Restrict)
+  principal            ContentReviewerPrincipal @relation(fields: [reviewerPrincipal], references: [principalId], onDelete: Restrict)
+  revocations          AcademyReviewRevocation[]
+  boundPublication     AcademyPublication?
+  publicationEvents    AcademyPublicationEvent[]
+
+  @@unique([reviewId, lessonId, lessonVersion, contentHash])
+}
+
+model SavedAcademyLesson {
+  ownerId       String
+  lessonId      String
+  lessonVersion Int
+  contentHash   String
+  savedAt       DateTime @default(now()) @db.Timestamptz(3)
+  owner         AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  lesson        AcademyLessonVersion @relation(fields: [lessonId, lessonVersion, contentHash], references: [lessonId, version, contentHash], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([ownerId, lessonId, lessonVersion])
+  @@index([ownerId, savedAt])
+}
+
+model AcademyReviewRevocation {
+  revocationId        String @id
+  reviewId            String @unique
+  lessonId            String
+  lessonVersion       Int
+  contentHash         String
+  actor               String
+  reason              String
+  revokedAt           DateTime @default(now())
+  review              AcademyReviewRecord @relation(fields: [reviewId, lessonId, lessonVersion, contentHash], references: [reviewId, lessonId, lessonVersion, contentHash], onDelete: Restrict)
+}
+
+model AcademyPublication {
+  lessonId            String
+  lessonVersion       Int
+  contentHash         String
+  state               PublicationState @default(draft)
+  revision            Int @default(0)
+  reviewId            String? @unique
+  reviewedAt          DateTime?
+  retiredAt           DateTime?
+  source              AcademyLessonVersion @relation(fields: [lessonId, lessonVersion, contentHash], references: [lessonId, version, contentHash], onDelete: Restrict)
+  review              AcademyReviewRecord? @relation(fields: [reviewId, lessonId, lessonVersion, contentHash], references: [reviewId, lessonId, lessonVersion, contentHash], onDelete: Restrict)
+  events              AcademyPublicationEvent[]
+
+  @@id([lessonId, lessonVersion])
+  @@unique([lessonId, lessonVersion, contentHash])
+  @@unique([reviewId, lessonId, lessonVersion, contentHash])
+}
+
+model AcademyPublicationEvent {
+  eventId              String @id
+  lessonId             String
+  lessonVersion        Int
+  contentHash          String
+  reviewId             String?
+  priorState           PublicationState
+  nextState            PublicationState
+  priorRevision        Int
+  nextRevision         Int
+  actor                String
+  reason               String
+  occurredAt           DateTime @default(now())
+  publication          AcademyPublication @relation(fields: [lessonId, lessonVersion, contentHash], references: [lessonId, lessonVersion, contentHash], onDelete: Restrict)
+  review               AcademyReviewRecord? @relation(fields: [reviewId, lessonId, lessonVersion, contentHash], references: [reviewId, lessonId, lessonVersion, contentHash], onDelete: Restrict)
+
+  @@unique([lessonId, lessonVersion, nextRevision])
+}
+
+model AssessmentItemVersion {
+  itemId             String
+  version            Int
+  contentHash        String
+  rubricVersion      Int
+  rubricHash         String
+  sourceSchemaVersion Int
+  canonicalEnvelope  String @db.Text
+  rubricEnvelope     String @db.Text
+  sourceJson         Json
+  lawsEdition        String
+  topicId            String
+  level              String
+  itemType           String
+  createdAt          DateTime @default(now())
+  reviews            AssessmentReviewRecord[]
+  publication        AssessmentPublication?
+  attempts           AssessmentAttempt[]
+
+  @@id([itemId, version])
+  @@unique([itemId, version, contentHash])
+  @@unique([itemId, version, contentHash, rubricVersion, rubricHash])
+}
+
+model AssessmentReviewRecord {
+  reviewId             String @id
+  itemId               String
+  itemVersion          Int
+  contentHash          String
+  rubricVersion        Int
+  rubricHash           String
+  reviewerPrincipal    String
+  evidenceRef          String
+  evidenceSha256       String
+  decisions            Json
+  reviewedAt           DateTime @default(now())
+  source               AssessmentItemVersion @relation(fields: [itemId, itemVersion, contentHash, rubricVersion, rubricHash], references: [itemId, version, contentHash, rubricVersion, rubricHash], onDelete: Restrict)
+  principal            ContentReviewerPrincipal @relation(fields: [reviewerPrincipal], references: [principalId], onDelete: Restrict)
+  revocations          AssessmentReviewRevocation[]
+  boundPublication     AssessmentPublication?
+  publicationEvents    AssessmentPublicationEvent[]
+
+  @@unique([reviewId, itemId, itemVersion, contentHash])
+}
+
+model AssessmentReviewRevocation {
+  revocationId        String @id
+  reviewId            String @unique
+  itemId              String
+  itemVersion         Int
+  contentHash         String
+  actor               String
+  reason              String
+  revokedAt           DateTime @default(now())
+  review              AssessmentReviewRecord @relation(fields: [reviewId, itemId, itemVersion, contentHash], references: [reviewId, itemId, itemVersion, contentHash], onDelete: Restrict)
+}
+
+model AssessmentPublication {
+  itemId              String
+  itemVersion         Int
+  contentHash         String
+  state               PublicationState @default(draft)
+  revision            Int @default(0)
+  reviewId            String? @unique
+  reviewedAt          DateTime?
+  retiredAt           DateTime?
+  source              AssessmentItemVersion @relation(fields: [itemId, itemVersion, contentHash], references: [itemId, version, contentHash], onDelete: Restrict)
+  review              AssessmentReviewRecord? @relation(fields: [reviewId, itemId, itemVersion, contentHash], references: [reviewId, itemId, itemVersion, contentHash], onDelete: Restrict)
+  events              AssessmentPublicationEvent[]
+
+  @@id([itemId, itemVersion])
+  @@unique([itemId, itemVersion, contentHash])
+  @@unique([reviewId, itemId, itemVersion, contentHash])
+}
+
+model AssessmentPublicationEvent {
+  eventId              String @id
+  itemId               String
+  itemVersion          Int
+  contentHash          String
+  reviewId             String?
+  priorState           PublicationState
+  nextState            PublicationState
+  priorRevision        Int
+  nextRevision         Int
+  actor                String
+  reason               String
+  occurredAt           DateTime @default(now())
+  publication          AssessmentPublication @relation(fields: [itemId, itemVersion, contentHash], references: [itemId, itemVersion, contentHash], onDelete: Restrict)
+  review               AssessmentReviewRecord? @relation(fields: [reviewId, itemId, itemVersion, contentHash], references: [reviewId, itemId, itemVersion, contentHash], onDelete: Restrict)
+
+  @@unique([itemId, itemVersion, nextRevision])
+}
+
+model AssessmentAttempt {
+  attemptId          String @id @default(cuid())
+  ownerId            String
+  itemId             String
+  itemVersion        Int
+  contentHash        String
+  rubricVersion      Int
+  rubricHash         String
+  lawsEdition        String
+  state              AssessmentAttemptState @default(ready)
+  startedAt          DateTime @default(now())
+  finalizedAt        DateTime?
+  owner              AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  item               AssessmentItemVersion @relation(fields: [itemId, itemVersion, contentHash, rubricVersion, rubricHash], references: [itemId, version, contentHash, rubricVersion, rubricHash], onDelete: Restrict)
+  submission         AssessmentSubmission?
+  result             AssessmentResult?
+  claims             AssessmentFinalizationClaim[]
+
+  @@unique([attemptId, ownerId])
+  @@index([ownerId, startedAt])
+}
+
+model AssessmentSubmission {
+  attemptId          String @id
+  normalizedAnswer   Json
+  submissionDigest   String
+  submittedAt        DateTime @default(now())
+  attempt            AssessmentAttempt @relation(fields: [attemptId], references: [attemptId], onDelete: Cascade)
+  result             AssessmentResult?
+
+  @@unique([attemptId, submissionDigest])
+}
+
+model AssessmentResult {
+  resultId           String @id @default(cuid())
+  attemptId          String @unique
+  submissionDigest   String
+  algorithmVersion   Int
+  correctionVersion  Int
+  evaluation         Json
+  finalizedAt        DateTime @default(now())
+  attempt            AssessmentAttempt @relation(fields: [attemptId], references: [attemptId], onDelete: Cascade)
+  submission         AssessmentSubmission @relation(fields: [attemptId, submissionDigest], references: [attemptId, submissionDigest], onDelete: NoAction, onUpdate: NoAction)
+  claims             AssessmentFinalizationClaim[]
+
+  @@unique([resultId, attemptId])
+  @@unique([attemptId, submissionDigest])
+}
+
+model AssessmentFinalizationClaim {
+  claimId            String @id @default(cuid())
+  ownerId            String
+  attemptId          String
+  idempotencyKey     String
+  submissionDigest   String
+  resultId           String
+  createdAt          DateTime @default(now())
+  owner              AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  attempt            AssessmentAttempt @relation(fields: [attemptId, ownerId], references: [attemptId, ownerId], onDelete: Cascade)
+  result             AssessmentResult @relation(fields: [resultId, attemptId], references: [resultId, attemptId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([ownerId, attemptId, idempotencyKey])
+}
+
+model CommunityFixtureVersion {
+  matchId           String
+  version           Int
+  contentHash       String
+  canonicalEnvelope String @db.Text
+  sourceJson        Json
+  importedAt        DateTime @default(now()) @db.Timestamptz(3)
+  ratings           CommunityRating[]
+  comments          CommunityComment[]
+  receipts          CommunityReceipt[]
+
+  @@id([matchId, version])
+  @@unique([matchId, version, contentHash])
+}
+
+model CommunityRating {
+  ownerId        String
+  matchId        String
+  fixtureVersion Int
+  contentHash    String
+  value          Int?
+  revision       Int @default(0)
+  updatedAt      DateTime @default(now()) @db.Timestamptz(3)
+  owner          AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "CommunityRating_ownerId_fkey")
+  fixture        CommunityFixtureVersion @relation(fields: [matchId, fixtureVersion, contentHash], references: [matchId, version, contentHash], onDelete: Restrict, onUpdate: Restrict, map: "CommunityRating_fixture_fkey")
+
+  @@id([ownerId, matchId, fixtureVersion])
+  @@index([matchId, fixtureVersion, contentHash, value], map: "CommunityRating_fixture_value_idx")
+}
+
+model CommunityComment {
+  id             String @id
+  ownerId        String
+  matchId        String
+  fixtureVersion Int
+  contentHash    String
+  observation    String? @db.Text
+  interpretation String? @db.Text
+  state          String @default("pending")
+  revision       Int @default(0)
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @default(now()) @db.Timestamptz(3)
+  removedAt      DateTime? @db.Timestamptz(3)
+  owner          AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "CommunityComment_ownerId_fkey")
+  fixture        CommunityFixtureVersion @relation(fields: [matchId, fixtureVersion, contentHash], references: [matchId, version, contentHash], onDelete: Restrict, onUpdate: Restrict, map: "CommunityComment_fixture_fkey")
+  reactions      CommunityReaction[]
+  receipts       CommunityReceipt[]
+
+  @@unique([id, matchId, fixtureVersion, contentHash], map: "CommunityComment_target_key")
+  @@index([ownerId, createdAt, id], map: "CommunityComment_owner_created_idx")
+  @@index([matchId, fixtureVersion, contentHash, state, createdAt, id], map: "CommunityComment_fixture_state_created_idx")
+}
+
+model CommunityReaction {
+  ownerId        String
+  commentId      String
+  matchId        String
+  fixtureVersion Int
+  contentHash    String
+  value          String?
+  revision       Int @default(0)
+  updatedAt      DateTime @default(now()) @db.Timestamptz(3)
+  owner          AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "CommunityReaction_ownerId_fkey")
+  comment        CommunityComment @relation(fields: [commentId, matchId, fixtureVersion, contentHash], references: [id, matchId, fixtureVersion, contentHash], onDelete: Cascade, onUpdate: Restrict, map: "CommunityReaction_comment_fkey")
+
+  @@id([ownerId, commentId])
+  @@index([commentId, value], map: "CommunityReaction_comment_value_idx")
+}
+
+model CommunityRequestKey {
+  ownerId     String
+  requestKey  String
+  operation   String
+  payloadHash String
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  owner       AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "CommunityRequestKey_ownerId_fkey")
+  receipt     CommunityReceipt?
+
+  @@id([ownerId, requestKey])
+  @@unique([ownerId, requestKey, operation, payloadHash], map: "CommunityRequestKey_owner_key_operation_hash_key")
+  @@index([ownerId, createdAt], map: "CommunityRequestKey_owner_created_idx")
+}
+
+model CommunityReceipt {
+  ownerId          String
+  requestKey       String
+  operation        String
+  payloadHash      String
+  matchId          String
+  fixtureVersion   Int
+  contentHash      String
+  commentId        String?
+  targetRevision   Int
+  resultCode       String
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  receiptExpiresAt DateTime @db.Timestamptz(3)
+  key              CommunityRequestKey @relation(fields: [ownerId, requestKey, operation, payloadHash], references: [ownerId, requestKey, operation, payloadHash], onDelete: Cascade, onUpdate: Restrict, map: "CommunityReceipt_requestKey_fkey")
+  fixture          CommunityFixtureVersion @relation(fields: [matchId, fixtureVersion, contentHash], references: [matchId, version, contentHash], onDelete: Restrict, onUpdate: Restrict, map: "CommunityReceipt_fixture_fkey")
+  comment          CommunityComment? @relation(fields: [commentId, matchId, fixtureVersion, contentHash], references: [id, matchId, fixtureVersion, contentHash], onDelete: Cascade, onUpdate: Restrict, map: "CommunityReceipt_comment_fkey")
+
+  @@id([ownerId, requestKey])
+  @@unique([ownerId, requestKey, operation, payloadHash], map: "CommunityReceipt_ownerId_requestKey_operation_payloadHash_key")
+  @@index([commentId], map: "CommunityReceipt_comment_idx")
+  @@index([receiptExpiresAt], map: "CommunityReceipt_expiry_idx")
+}
+
+model CommunityQuotaCounter {
+  ownerId   String @id
+  updatedAt DateTime @default(now()) @db.Timestamptz(3)
+  owner     AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "CommunityQuotaCounter_ownerId_fkey")
+  events    CommunityQuotaEvent[]
+}
+
+model CommunityQuotaEvent {
+  id         BigInt @id @default(autoincrement())
+  ownerId    String
+  kind       String
+  occurredAt DateTime @db.Timestamptz(3)
+  counter    CommunityQuotaCounter @relation(fields: [ownerId], references: [ownerId], onDelete: Cascade, onUpdate: Restrict, map: "CommunityQuotaEvent_counter_fkey")
+
+  @@index([ownerId, kind, occurredAt], map: "CommunityQuotaEvent_owner_kind_time_idx")
+}
+
+model CommunityExposure {
+  id        Int @id
+  mode      String @default("private")
+  updatedAt DateTime @default(now()) @db.Timestamptz(3)
+}

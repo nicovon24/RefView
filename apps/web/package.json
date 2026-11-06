@@ -8,10 +8,16 @@
     "build": "next build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run src/lib/i18n/locale.test.ts",
-    "test:db": "vitest run src/lib/db/connection.test.ts",
+    "test": "vitest run src/lib/i18n/locale.test.ts src/lib/db/session-runtime.test.ts src/lib/db/application-runtime.test.ts src/lib/authoring/renderer-fingerprint-v1.test.ts src/lib/authoring/review-evidence-v1.test.ts src/features/academy src/features/assessments/source-v1.test.ts src/features/assessments/evaluation-v1.test.ts src/features/assessments/public-dto-v1.test.ts src/features/community/fixtures.test.ts src/features/community/fixture-source-v1.test.ts src/features/profile/device-preferences.test.ts src/features/simulator/controls src/features/simulator/incident src/features/simulator/rigged-player",
+    "test:db": "vitest run src/lib/db/connection.test.ts src/lib/db/publication.test.ts src/lib/db/attempt-lifecycle.test.ts src/lib/db/finalization.test.ts src/lib/db/authored-publication-schema.test.ts src/lib/db/authored-publication-v2.test.ts src/lib/db/authored-finalization-v2.test.ts src/lib/auth/anonymous-session.test.ts src/lib/auth/application-owner.test.ts src/lib/auth/application-owner-lock.test.ts src/lib/auth/application-owner-retention.test.ts src/features/profile/owner-session-actions.test.ts src/features/academy/published-reader-v1.test.ts src/features/assessments/assessment-persistence-schema.test.ts src/features/assessments/published-reader-v1.test.ts src/features/assessments/pinned-reader-v1.test.ts --maxWorkers=1",
+    "test:db:restricted": "vitest run src/features/assessments/owner-service-v1.test.ts --maxWorkers=1",
+    "test:db:restricted-owner": "vitest run src/lib/auth/application-owner-restricted-lifecycle.test.ts --maxWorkers=1",
+    "test:db:community": "vitest run src/features/community/community-foundation-schema.test.ts --maxWorkers=1",
     "db:generate": "prisma generate",
-    "db:validate": "prisma validate"
+    "db:validate": "prisma validate",
+    "owners:purge": "tsx scripts/purge-expired-owners.ts",
+    "content:drafts": "node --conditions=react-server --import tsx scripts/content-admin-draft.ts",
+    "content:drafts:test": "node --conditions=react-server --import tsx --test scripts/content-admin-draft.test.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.1",
@@ -20,11 +26,15 @@
     "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.2",
     "@react-three/rapier": "2.2.0",
+    "@refview/content": "workspace:*",
+    "@refview/domain": "workspace:*",
+    "@refview/simulation": "workspace:*",
     "class-variance-authority": "0.7.1",
     "next": "16.4.4",
     "pg": "8.23.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
+    "server-only": "0.0.1",
     "three": "0.187.0",
     "xstate": "5.33.3",
     "zod": "4.6.7"
@@ -41,6 +51,7 @@
     "eslint-config-next": "16.4.4",
     "prisma": "7.10.1",
     "tailwindcss": "4.3.4",
+    "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vitest": "5.1.0"
   }

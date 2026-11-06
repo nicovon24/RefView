@@ -1,48 +1,60 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { ScenePreview } from '@/features/simulator/scene/ScenePreview';
-import { copy } from '@/lib/i18n/locale';
+import { homeCopy } from '@/features/home/copy';
+import { ArrowIcon } from '@/components/site/ArrowIcon';
+import { SiteHeader } from '@/components/site/SiteHeader';
+import '@/components/site/site-buttons.css';
+import '@/features/home/home.css';
 
 export default async function LocaleHome({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (locale !== 'es' && locale !== 'en') notFound();
-  const t = copy[locale];
+  const t = homeCopy[locale];
+  const incidentHref = `/${locale}/simulator/incident-preview`;
+  const controlsHref = `/${locale}/simulator/controls`;
+  const playtestHref = `/${locale}/simulator/incident-playtest`;
 
   return (
-    <main className="page-shell">
-      <header className="site-header">
-        <Link className="brand" href={`/${locale}`} aria-label="RefView home">
-          <span className="brand-mark" aria-hidden="true">R<span>V</span></span>
-          <span>REFVIEW</span>
-        </Link>
-        <nav className="language-nav" aria-label={t.language}>
-          <Link aria-current={locale === 'es' ? 'page' : undefined} href="/es" lang="es">ES</Link>
-          <span aria-hidden="true">/</span>
-          <Link aria-current={locale === 'en' ? 'page' : undefined} href="/en" lang="en">EN</Link>
-        </nav>
-      </header>
+    <main className="rv-home">
+      <a className="rv-home__skip" href="#home-title">{t.skip}</a>
+      <SiteHeader locale={locale} active="home" />
 
-      <div className="hero-grid">
-        <section className="hero-copy" aria-labelledby="page-title">
-          <p className="eyebrow"><span className="signal-dot" />{t.eyebrow}</p>
-          <h1 id="page-title">{t.title}</h1>
-          <p className="intro">{t.intro}</p>
-          <div className="hero-actions">
-            <Button asChild><Link href="/prototype/index.html">{t.prototype}<span aria-hidden="true">↗</span></Link></Button>
+      <div className="rv-home__main">
+        <section className="rv-home__hero" aria-labelledby="home-title">
+          <div className="rv-home__hero-scene" aria-hidden="true"><ScenePreview locale={locale} /></div>
+          <div className="rv-home__hero-copy">
+            <h1 id="home-title" tabIndex={-1}>{t.title}</h1>
+            <p className="rv-home__intro">{t.intro}</p>
+            <div className="rv-home__actions">
+              <Link className="rv-site-button rv-site-button--primary" href={incidentHref}>{t.openIncident}<ArrowIcon /></Link>
+              <Link className="rv-site-button rv-site-button--ghost" href={playtestHref}>{t.openPlaytest}<ArrowIcon diagonal /></Link>
+            </div>
+            <p className="rv-home__hero-note">{t.incidentNote}</p>
           </div>
-          <p className="next-step">{t.next}</p>
+          <aside className="rv-home__scene-card" aria-label={t.sceneSection}>
+            <span>{t.sceneState}</span>
+            <strong>{t.sceneTitle}</strong>
+            <small>{t.sceneCaption}</small>
+          </aside>
         </section>
-        <section className="scene-card" aria-labelledby="scene-title">
-          <div className="scene-heading">
-            <div><p className="scene-kicker">01 / WEBGL</p><h2 id="scene-title">{t.scene}</h2></div>
-            <span className="scene-live">LIVE TEST</span>
+
+        <section className="rv-home__paths" aria-label={t.explore}>
+          <div className="rv-home__path-intro"><h2>{t.nextTitle}</h2><p>{t.nextDescription}</p></div>
+          <div className="rv-home__path-list">
+            <Link href={playtestHref} className="rv-home__path">
+              <span><strong>{t.playtestTitle}</strong><small>{t.playtestDescription}</small></span><ArrowIcon diagonal />
+            </Link>
+            <Link href={controlsHref} className="rv-home__path">
+              <span><strong>{t.controlsTitle}</strong><small>{t.controlsDescription}</small></span><ArrowIcon diagonal />
+            </Link>
+            <Link href="/prototype/index.html" className="rv-home__path">
+              <span><strong>{t.prototypeTitle}</strong><small>{t.prototypeDescription}</small></span><ArrowIcon diagonal />
+            </Link>
           </div>
-          <ScenePreview locale={locale} />
-          <div className="scene-footer"><span className="scene-led" />{t.sceneDescription}</div>
         </section>
       </div>
-      <footer className="site-footer"><span>{t.status}</span><span>© REFVIEW</span></footer>
+      <footer className="rv-home__footer"><span>{t.footer}</span><span>© RefView</span></footer>
     </main>
   );
 }

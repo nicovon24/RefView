@@ -118,7 +118,7 @@ The interface changes density with the task. Simulator controls sit at the edge 
 - Visible distinctions between authored evidence, interpretation, and illustrative content.
 - Spanish-first content with complete English counterparts.
 
-This is a scan of the finished static prototype in [`docs/prototype/`](docs/prototype/README.md), using its final CSS cascade and recorded desktop/mobile renders. The supplied finish-review disposition is SHIP for that prototype, not production acceptance. The production application remains absent. This file records visual guidance, not task status. The detailed surface composition remains in the [surface brief](.impeccable/surfaces/docs-prototype-index-html.md).
+This is a scan of the static prototype in [`docs/prototype/`](docs/prototype/README.md), using its CSS cascade and recorded desktop/mobile renders at that review checkpoint. The supplied finish-review disposition was SHIP for that prototype, not production acceptance. The Next.js application now implements the shared site shell, home route, and local simulator previews; the remaining Academy, Community, Assessment, Profile, and Coach concept journeys are still illustrative. This file records visual guidance, not task status. The detailed surface composition remains in the [surface brief](.impeccable/surfaces/docs-prototype-index-html.md).
 
 ## Colors
 
