@@ -3,8 +3,10 @@
 import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import { readAccountPrincipal } from '@/lib/auth/account-principal';
 import { openApplicationDatabase, validateApplicationRuntime } from '@/lib/db/application-runtime';
-import { finalizeAssessmentV1, startAssessmentV1 } from './owner-service-v1';
+import { finalizeAccountAssessmentV1, finalizeAssessmentV1, startAccountAssessmentV1,
+  startAssessmentV1 } from './owner-service-v1';
 
 const localeSchema = z.enum(['es', 'en']);
 const itemSchema = z.string().max(100).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -13,10 +15,11 @@ const versionSchema = z.number().int().positive().safe();
 
 async function authorize() {
   const runtime = validateApplicationRuntime(process.env);
-  if ((await headers()).get('origin') !== runtime.origin) {
+  const requestHeaders = await headers();
+  if (requestHeaders.get('origin') !== runtime.origin) {
     throw new Error('Application action origin is unavailable');
   }
-  return openApplicationDatabase();
+  return { database: openApplicationDatabase(), principal: await readAccountPrincipal(requestHeaders) };
 }
 
 function exactForm(form: FormData, keys: readonly string[]) {
@@ -33,18 +36,21 @@ function exactForm(form: FormData, keys: readonly string[]) {
 
 export async function startAssessmentAction(localeValue: string, itemIdValue: string,
   versionValue: number, form: FormData) {
-  const database = await authorize();
+  const { database, principal } = await authorize();
   exactForm(form, []);
   const locale = localeSchema.parse(localeValue);
   const itemId = itemSchema.parse(itemIdValue);
   const version = versionSchema.parse(versionValue);
-  const attempt = await startAssessmentV1(database, await cookies(), { locale, itemId, version });
+  const input = { locale, itemId, version };
+  const attempt = principal.kind === 'account'
+    ? await startAccountAssessmentV1(database, principal, input)
+    : await startAssessmentV1(database, await cookies(), input);
   redirect(`/${locale}/assessments/attempt/${attempt.attemptId}`);
 }
 
 export async function finalizeAssessmentAction(localeValue: string, attemptIdValue: string,
   kindValue: string, form: FormData) {
-  const database = await authorize();
+  const { database, principal } = await authorize();
   const locale = localeSchema.parse(localeValue);
   const attemptId = uuidSchema.parse(attemptIdValue);
   const kind = z.enum(['ruleQuestion', 'restartDiscipline', 'authoredIncidentAnalysis']).parse(kindValue);
@@ -58,6 +64,8 @@ export async function finalizeAssessmentAction(localeValue: string, attemptIdVal
     : { kind, stopPlay: fields.restart !== 'playOn', restart: fields.restart,
       discipline: fields.discipline, offenderHandle: fields.offenderHandle || null,
       ...(kind === 'authoredIncidentAnalysis' ? { reasoning: fields.reasoning } : {}) };
-  await finalizeAssessmentV1(database, await cookies(), { attemptId, idempotencyKey, answer, locale });
+  const input = { attemptId, idempotencyKey, answer, locale };
+  if (principal.kind === 'account') await finalizeAccountAssessmentV1(database, principal, input);
+  else await finalizeAssessmentV1(database, await cookies(), input);
   redirect(`/${locale}/assessments/attempt/${attemptId}`);
 }

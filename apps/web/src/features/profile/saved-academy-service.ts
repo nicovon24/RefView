@@ -1,6 +1,8 @@
 import 'server-only';
+import { randomBytes } from 'node:crypto';
 import { z } from 'zod';
 import type { PrismaClient } from '../../generated/prisma/client';
+import { withAccountTransaction, type AccountPrincipal } from '../../lib/auth/account-principal';
 import { applicationOwnerTokenHash, resolveExclusiveApplicationOwner, withApplicationOwner,
   type ApplicationOwnerCookieStore, type ApplicationOwnerTransaction } from '../../lib/auth/application-owner';
 import { projectCatalogLesson, type AcademyLocale, type CatalogLesson } from '../academy/catalog-ui-v1-data';
@@ -103,6 +105,51 @@ export async function listSavedAcademyLessons(database: PrismaClient,
     });
   } catch (error) {
     if (error instanceof Error && error.message === 'application owner unavailable') return { kind: 'missing' };
+    return { kind: 'unavailable' };
+  }
+}
+
+/** Account lock precedes publication reads and the SQL-owned primary bucket write. */
+export async function saveAccountAcademyLesson(database: PrismaClient,
+  principal: AccountPrincipal, input: unknown): Promise<{ kind: 'saved' }> {
+  const ref = identity.parse(input);
+  return withAccountTransaction(database, principal, async (tx) => {
+    const compiled = await loadPublishedAcademyLessonV1(tx, ref);
+    if (!compiled) throw unavailable();
+    const unissuedHash = `sha256:${randomBytes(32).toString('hex')}`;
+    await tx.$queryRaw`SELECT public.application_account_save_academy(
+      ${principal.token}, ${unissuedHash}, ${ref.lessonId}, ${ref.version},
+      ${compiled.contentHash})::text`;
+    return { kind: 'saved' } as const;
+  });
+}
+
+/** Removes every matching exact-version save across the account's owner buckets. */
+export async function unsaveAccountAcademyLesson(database: PrismaClient,
+  principal: AccountPrincipal, input: unknown): Promise<{ kind: 'unsaved' }> {
+  const ref = identity.parse(input);
+  return withAccountTransaction(database, principal, async (tx) => {
+    await tx.$queryRaw`SELECT public.application_account_unsave_academy(
+      ${principal.token}, ${ref.lessonId}, ${ref.version})::text`;
+    return { kind: 'unsaved' } as const;
+  });
+}
+
+/** The SQL list deduplicates exact versions across all account owner buckets. */
+export async function listAccountSavedAcademyLessons(database: PrismaClient,
+  principal: AccountPrincipal, input: unknown): Promise<SavedList> {
+  const request = listInput.parse(input);
+  try {
+    return await withAccountTransaction(database, principal, async (tx) => {
+      const rows = await tx.$queryRaw<SavedRow[]>`
+        SELECT lesson_id AS "lessonId", lesson_version AS version,
+          content_hash AS "contentHash", saved_at AS "savedAt"
+        FROM public.application_account_list_saved_academy(${principal.token}, ${request.limit ?? 50})`;
+      const lessons: SavedLesson[] = [];
+      for (const row of rows) lessons.push(await projectSaved(tx, row, request.locale));
+      return { kind: 'ready', lessons } as const;
+    });
+  } catch {
     return { kind: 'unavailable' };
   }
 }

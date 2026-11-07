@@ -1,9 +1,0 @@
-# Academy law topic expansion design
-
-The 17 Law cards remain the directory. A small locally authored SVG icon denotes each Law visually; it is `aria-hidden` and cannot replace the visible Law number, title, or scope. The directory retains its existing editorial paper/green styling.
-
-The first expansion contains six static orientation hubs across Laws 11, 12, and 14. In the Spanish PDF: Law 12 contact/severity (section 1, pp.123–124), handball (section 1, pp.124–126), indirect-free-kick offences (section 2, pp.126–128), and discipline (section 4, pp.128–136); Law 11 position and involvement (sections 1–2, pp.117–119); Law 14 penalty procedure (section 1, pp.145–146). The official English PDF is 260 pages, versus 276 in Spanish. Its corresponding physical pages are 115–116, 116–118, 118–119, 119–127, 109–111, and 135–136 respectively. The page range is a source locator, not a copied passage. The selection is a first editorial slice, not complete coverage of these Laws.
-
-`LawTopic` metadata gains an original bilingual explanation, two or three bilingual key concepts, and a versioned source section/page range. A topic route validates locale, canonical Law number, slug, and primary-law membership before reading the published catalog. The catalog remains the only source of lesson links, filtered by exact topic and `IFAB-2026-27`. The current publishable lesson topic schema recognizes only `challenge`; this UI pass does not broaden it or fabricate published lessons for new topics. Empty and unavailable catalog reads remain distinguishable. The real-play area remains empty.
-
-The official online Law is a convenience reference and may change edition. The 2026/27 PDF is the edition authority. Localized page-fragment links use physical page indices checked in each language's PDF. No external icon library, copied PDF artwork, new media asset, database change, or simulator work is needed.

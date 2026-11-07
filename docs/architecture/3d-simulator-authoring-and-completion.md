@@ -46,7 +46,7 @@ The largest current blockers are visual contact calibration for the selected rig
 
 ## Source contracts and implementation
 
-- [First incident requirements](../features/01-playable-incident/requirements.md) and [review evidence](../features/01-playable-incident/review.md)
-- [Rigged presentation requirements](../features/15-rigged-football-presentation/requirements.md), [design](../features/15-rigged-football-presentation/design.md) and [review](../features/15-rigged-football-presentation/review.md)
-- [Canonical source and publication contract](../contracts/authoring-and-publication-v2.md), [motion refresh](../contracts/rigged-motion-refresh-v2.md) and [renderer fingerprint](../contracts/renderer-fingerprint-v1.md)
+- [First incident requirements](../features/05-simulator-incident/requirements.md#01-playable-incident) and [review evidence](../features/05-simulator-incident/review.md#01-playable-incident)
+- [Rigged presentation requirements](../features/06-simulator-experience/requirements.md#15-rigged-football-presentation), [design](../features/06-simulator-experience/design.md#15-rigged-football-presentation) and [review](../features/06-simulator-experience/review.md#15-rigged-football-presentation)
+- [Canonical source and publication contract](../contracts/learning-publication.md#authoring-and-publication-v2), [motion refresh](../contracts/simulator-presentation.md#rigged-motion-refresh-v2) and [renderer fingerprint](../contracts/observation-evaluation.md#renderer-fingerprint-v1)
 - [Exact scene adapter](../../apps/web/src/features/simulator/incident/playtest/exact-scene.ts), [rigged resource loader](../../apps/web/src/features/simulator/rigged-player/resources/loader.ts) and [technology choices](technology-stack.md)

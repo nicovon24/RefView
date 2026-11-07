@@ -43,8 +43,103 @@ model AnonymousSession {
   communityReactions CommunityReaction[]
   communityRequestKeys CommunityRequestKey[]
   communityQuotaCounter CommunityQuotaCounter?
+  accountBinding AccountOwnerBinding?
+  attachmentReceipt AccountOwnerAttachmentReceipt?
 
   @@index([expiresAt])
+}
+
+// Better Auth 1.7.18 core models. The provider callback remains disabled until
+// the migration and account-owner admission boundary pass independent review.
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  ownerBindings AccountOwnerBinding[]
+  attachmentReceipts AccountOwnerAttachmentReceipt[]
+  socialContributor SocialContributor?
+  socialOperationKeys SocialOperationKey[]
+  socialPostReactions SocialPostReaction[]
+  socialPostReports SocialPostReport[]
+  socialRateEvents SocialRateEvent[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@unique([providerId, accountId], map: "account_provider_subject_key")
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model AccountOwnerBinding {
+  ownerId    String   @id
+  accountId  String
+  isPrimary  Boolean  @default(false)
+  attachedAt DateTime @default(now()) @db.Timestamptz(3)
+  owner      AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  account    User @relation(fields: [accountId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([accountId])
+}
+
+model AccountOwnerAttachmentReceipt {
+  ownerId         String   @id
+  accountId       String
+  sourceTokenHash String   @unique
+  expiresAt       DateTime @db.Timestamptz(3)
+  owner           AnonymousSession @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  account         User @relation(fields: [accountId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([accountId, expiresAt])
 }
 
 model CompetitionProfile {
@@ -664,6 +759,139 @@ model CommunityQuotaEvent {
 }
 
 model CommunityExposure {
+  id        Int @id
+  mode      String @default("private")
+  updatedAt DateTime @default(now()) @db.Timestamptz(3)
+}
+
+// Account-owned social records are separate from anonymous fictional fixtures.
+// Shared exposure remains private until restricted local acceptance.
+model SocialContributor {
+  id          String   @id @db.Uuid
+  accountId   String   @unique
+  displayName String
+  revision    Int      @default(0)
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @default(now()) @db.Timestamptz(3)
+  account     User     @relation(fields: [accountId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  matches     SocialMatch[]
+  posts       SocialPlayPost[]
+}
+
+model SocialMatch {
+  id                   String   @id @db.Uuid
+  creatorContributorId String   @db.Uuid
+  homeTeam             String
+  awayTeam             String
+  competition          String?
+  matchDate            DateTime @db.Date
+  identityKey          String
+  state                String   @default("pending")
+  sharedEligible       Boolean  @default(false)
+  publishedAt          DateTime? @db.Timestamptz(3)
+  revision             Int      @default(0)
+  createdAt            DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime @default(now()) @db.Timestamptz(3)
+  creator              SocialContributor @relation(fields: [creatorContributorId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  posts                SocialPlayPost[]
+  moderationEvents     SocialModerationEvent[]
+
+  // PostgreSQL owns the partial global active-identity unique index.
+  @@index([state, createdAt, id])
+}
+
+model SocialPlayPost {
+  id                   String   @id @db.Uuid
+  matchId              String   @db.Uuid
+  authorContributorId  String   @db.Uuid
+  opinion              String   @db.Text
+  period               String?
+  minute               Int?
+  state                String   @default("pending")
+  sharedEligible       Boolean  @default(false)
+  publishedAt          DateTime? @db.Timestamptz(3)
+  revision             Int      @default(0)
+  createdAt            DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime @default(now()) @db.Timestamptz(3)
+  match                SocialMatch @relation(fields: [matchId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  author               SocialContributor @relation(fields: [authorContributorId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  reactions            SocialPostReaction[]
+  reports              SocialPostReport[]
+  moderationEvents     SocialModerationEvent[]
+
+  @@index([matchId, createdAt, id])
+  @@index([authorContributorId, createdAt, id])
+}
+
+model SocialPostReaction {
+  postId       String @db.Uuid
+  accountId    String
+  choice       String
+  revision     Int @default(0)
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime @default(now()) @db.Timestamptz(3)
+  post         SocialPlayPost @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  account      User @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@id([postId, accountId])
+  @@index([accountId, updatedAt])
+}
+
+model SocialPostReport {
+  postId       String @db.Uuid
+  accountId    String
+  reason       String
+  detail       String?
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  post         SocialPlayPost @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  account      User @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@id([postId, accountId])
+  @@index([createdAt])
+}
+
+model SocialRateEvent {
+  id        String @id @db.Uuid
+  accountId String
+  kind      String
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  account   User @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@index([accountId, kind, createdAt])
+}
+
+model SocialModerationEvent {
+  id                 String @id @db.Uuid
+  matchId            String? @db.Uuid
+  postId             String? @db.Uuid
+  priorState         String
+  nextState          String
+  priorRevision      Int
+  reason             String
+  moderatorRole      String
+  createdAt          DateTime @default(now()) @db.Timestamptz(3)
+  match              SocialMatch? @relation(fields: [matchId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  post               SocialPlayPost? @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model SocialOperationKey {
+  accountId    String
+  keyHash      String
+  operation    String
+  issuedAt     DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt    DateTime @db.Timestamptz(3)
+  payloadHash  String?
+  consumedAt   DateTime? @db.Timestamptz(3)
+  resultCode   String?
+  resultId     String? @db.Uuid
+  account      User @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@id([accountId, keyHash])
+  @@index([accountId, issuedAt])
+  @@index([expiresAt])
+}
+
+model SocialExposure {
   id        Int @id
   mode      String @default("private")
   updatedAt DateTime @default(now()) @db.Timestamptz(3)

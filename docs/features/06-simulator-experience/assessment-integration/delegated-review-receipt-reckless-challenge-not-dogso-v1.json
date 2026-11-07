@@ -1,0 +1,16 @@
+{
+  "kind": "assessment",
+  "id": "reckless-challenge-not-dogso",
+  "version": 1,
+  "contentHash": "sha256:cc16f97584047ec7ae6fd88873f3343846e848cc5e12e1ee53bf931d8dcdd124",
+  "rubricHash": "sha256:df1d22b252515c522b87aa5bc878c1cad20c02e9f6745b4ebccade7dcff9c577",
+  "evidenceSha256": "sha256:b1e23299862b74902851c1a5a4acfcb62f610dbd764814a820a698d9a3a5e593",
+  "decisions": {
+    "footballInterpretationApproved": true,
+    "sourcesAndProvenanceApproved": true,
+    "spanishEnglishEquivalenceApproved": true,
+    "acceptedAlternativesApproved": true,
+    "correctionApproved": true,
+    "rubricMeaningApproved": true
+  }
+}

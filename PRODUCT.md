@@ -2,7 +2,7 @@
 
 ## Vision
 
-RefView is a football refereeing platform that combines an immersive simulator, an academy for learning the Laws of the Game, a community for discussing refereeing performances, structured assessments, and an optional AI Coach.
+RefView is a football refereeing platform that combines an immersive simulator, an academy for learning the Laws of the Game, a community for discussing refereeing performances, and an optional AI Coach. Evaluation and practice belong inside the simulator experience rather than a standalone Assessment area.
 
 The full product is the horizon. The first MVP proves that one authored 3D incident can be observed, decided, replayed, evaluated, and learned from in a desktop browser.
 
@@ -12,7 +12,7 @@ Referees in training, practicing referees, fans, players, and coaches. The produ
 
 ## Development order
 
-The current delivery sequence is Academy, Assessments, the clearly fictional Community visual journey, and early Profile. The local 3D playtest and saved/scored first simulator incident come last. Academy currently focuses on original bilingual illustrated guides for all 17 Laws, deeper navigable topics, and official 2026/27 references. Nicolas deferred the lesson editorial/publication path while that rules experience is built. Its compatible practice link is completed when a real Assessment is published. Simulator history joins Profile once real owned attempts exist. Cosmetic simulator refinement follows functional acceptance; incident evidence defects still block training publication. This changes delivery priority, not the first MVP's acceptance criteria.
+The current delivery sequence is Academy, locally shared Community contributions, early Profile, and then the local 3D playtest with the saved/scored first simulator incident. Standalone Assessment routes and Profile history are currently unavailable in the app; evaluation and practice work will be integrated into the 3D simulator. Academy provides original bilingual illustrated guides for all 17 Laws, deeper navigable topics, and official 2026/27 references. One reviewed lesson and three reviewed exercises remain published in the local database for the future integrated flow. Simulator history joins Profile once real owned attempts exist. Cosmetic simulator refinement follows functional acceptance; incident evidence defects still block simulator training publication.
 
 Profile and language preferences support every stage. Monetization is outside the first prototype; a meaningful free experience is required.
 
@@ -61,11 +61,11 @@ The Coach receives only permitted attempt evidence, curated facts, deterministic
 ## Product journeys
 
 - Simulator: choose role -> choose scenario or session -> briefing -> play -> decide -> debrief -> replay -> continue.
-- Academy: browse original Law summaries -> explore a topic -> read a reviewed published lesson with example and precise rule reference -> ask a prepared follow-up -> open related published practice when available.
+- Academy: browse original Law summaries -> explore a topic -> read a reviewed published lesson with example and precise rule reference -> ask a prepared follow-up.
 - Community: chronological feed of person-authored opinions about selected plays -> match conversation -> optional photo, file, or external link -> agreement/disagreement -> comments and replies. Fans and referees who self-report watching the match may separately rate the referee's performance in that match. Repository-authored posts and generated images remain visibly labeled examples. Actual uploads require a reviewed media contract; direct video file upload is outside the first social version.
-- Assessments: choose practice -> answer or analyze -> reasoned correction -> targeted next practice.
+- Simulator evaluation: observe an authored incident -> decide -> receive evidence-based correction -> continue to a related situation.
 - Profile: progress, attempts, saved content, preferences, and language.
 
 ## Current state
 
-Product and technical planning are documented, and a bilingual interactive visual prototype exists under `docs/prototype/`. Its two football views are generated still concepts. The Next.js application includes bilingual illustrated guides to all 17 Laws, neutral referee controls, an authored WebGL incident review workspace, and an unsaved/unscored local incident playtest. Procedural motion and the review workspace were refined under RV-019. An approved training publication and complete user-facing saved/evaluated attempt flow do not exist yet.
+Product and technical planning are documented, and a bilingual interactive visual prototype exists under `docs/prototype/`. Its two football views are generated still concepts. The Next.js application includes bilingual illustrated guides to all 17 Laws, one locally published reviewed lesson, a locally shared Community match/post and reaction path without fictional feed cards, neutral referee controls, an authored WebGL incident review workspace, and an unsaved/unscored local incident playtest. Three reviewed exercises remain published in the local database, but Assessment routes, Profile attempt history, and Academy practice links are currently removed from the app. They will return as part of the 3D simulator experience. A saved/scored authored simulator attempt and simulator training publication do not exist yet. Broader Community discussions, ratings, and uploads remain future work.

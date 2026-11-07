@@ -19,5 +19,5 @@ export default async function AcademyInterfacePreview({ params }: Props) {
   const { locale } = await params;
   if (locale !== 'es' && locale !== 'en') notFound();
   const lesson = projectPublicLesson(academyLessonSourceV1, locale);
-  return <AcademyLessonView locale={locale} lesson={{ ...lesson, practice: [] }} mode="preview" />;
+  return <AcademyLessonView locale={locale} lesson={lesson} mode="preview" />;
 }

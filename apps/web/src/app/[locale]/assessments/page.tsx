@@ -28,7 +28,7 @@ export default async function AssessmentsPage({ params, searchParams }: {
     await readApplicationOwner(openApplicationDatabase(), await cookies()).catch(() => ({ status: 'unavailable' as const })) : null;
   return <div className="rv-assessment">
     <a className="rv-assessment__skip" href="#assessment-title">{locale === 'es' ? 'Ir al contenido' : 'Skip to content'}</a>
-    <SiteHeader locale={locale} active="assessments" />
+    <SiteHeader locale={locale} active="home" />
     <main className="rv-assessment__main">
       <header className="rv-assessment__hero"><h1 id="assessment-title">{t.title}</h1><p>{t.intro}</p></header>
       <section className="rv-assessment__section" aria-labelledby="assessment-browse"><h2 id="assessment-browse">{t.browse}</h2>

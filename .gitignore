@@ -8,6 +8,7 @@
 node_modules/
 .next/
 .next-session-test/
+.next-social-acceptance/
 dist/
 # Local captures, review output, downloaded research, and optional diagnostics.
 # Force-add only the small set of reviewed evidence needed by a specific commit.

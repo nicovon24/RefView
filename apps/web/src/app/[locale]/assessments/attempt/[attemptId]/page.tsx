@@ -30,7 +30,7 @@ export default async function AssessmentAttemptPage({ params }: {
   const read = await readAssessmentAttempt(attemptId, locale);
   const attempt = read.kind === 'ready' && read.value.state === 'ready' ? read.value.attempt : null;
   const result = read.kind === 'ready' && read.value.state === 'finalized' ? read.value.result : null;
-  return <div className="rv-assessment"><SiteHeader locale={locale} active="assessments" languagePath={`/assessments/attempt/${attemptId}`} /><main className="rv-assessment__main">
+  return <div className="rv-assessment"><SiteHeader locale={locale} active="home" languagePath={`/assessments/attempt/${attemptId}`} /><main className="rv-assessment__main">
     <header className="rv-assessment__hero"><h1>{attempt?.title ?? result?.title ?? t.title}</h1>
       <p>{attempt ? t.prompt : result ? t.result : t.missing}</p></header>
     <section className="rv-assessment__section">

@@ -73,10 +73,6 @@ export default async function EditorialPreviewPage({ params }: Props) {
               </details>)}
             </div>
           </section>
-          <section aria-labelledby="practice-heading" className="rv-academy-draft__section rv-academy-draft__practice">
-            <h2 id="practice-heading">{copy.practiceTitle}</h2>
-            <p>{copy.practiceUnavailable}</p>
-          </section>
         </article>
         <aside className="rv-academy-draft__reference" aria-labelledby="reference-heading">
           <h2 id="reference-heading">{copy.referencesTitle}</h2>

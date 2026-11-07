@@ -1,10 +1,11 @@
 import 'server-only';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
+import { readAccountPrincipal } from '@/lib/auth/account-principal';
 import { openApplicationDatabase } from '@/lib/db/application-runtime';
 import { loadPublishedAssessmentV1 } from './published-reader-v1';
 import { loadPinnedAssessmentV1 } from './pinned-reader-v1';
 import { projectAssessmentCatalogItemV1 } from './public-dto-v1';
-import { restoreAssessmentV1 } from './owner-service-v1';
+import { restoreAccountAssessmentV1, restoreAssessmentV1 } from './owner-service-v1';
 
 export type AssessmentLocale = 'es' | 'en';
 export type CatalogItem = ReturnType<typeof projectAssessmentCatalogItemV1>;
@@ -44,7 +45,10 @@ export async function readAssessmentAttempt(attemptId: string, locale: Assessmen
 > {
   try {
     const database = openApplicationDatabase();
-    const value = await restoreAssessmentV1(database, await cookies(), { attemptId, locale });
+    const principal = await readAccountPrincipal(await headers());
+    const value = principal.kind === 'account'
+      ? await restoreAccountAssessmentV1(database, principal, { attemptId, locale })
+      : await restoreAssessmentV1(database, await cookies(), { attemptId, locale });
     const optionLabels: Record<string, string> = {};
     if (value.state === 'finalized' && value.result.submittedAnswer.kind === 'ruleQuestion') {
       const compiled = await loadPinnedAssessmentV1(database,

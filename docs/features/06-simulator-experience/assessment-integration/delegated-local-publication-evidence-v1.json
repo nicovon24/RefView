@@ -1,0 +1,62 @@
+{
+  "artifactKind": "refview-delegated-local-publication-evidence-v1",
+  "scope": "Local refview database only; one Academy lesson and three Assessment items at version 1",
+  "accountableApprover": "nicolas",
+  "technicalOperator": "Codex assistant acting under Nicolas's explicit local execution instruction",
+  "operatorBoundary": "The assistant executes the reviewed CLI; it does not supply new football interpretation, bilingual approval, accepted answers, corrections, or rubric meaning.",
+  "credentialIssuance": {
+    "ref": "artifacts/content-reviewer-issuance-nicolas-v2.json",
+    "sha256": "sha256:4bc5b05d176ffaabf5f3cf255552cb73e06c170e3e34c67d227ec9ba19005947",
+    "attestation": "Nicolas replied: Sí, lo confirmo y verificá para publicar. (2026-11-06, in this conversation, in response to the exact receipt path, digest, and scope.)"
+  },
+  "delegation": {
+    "instruction": "Nicolas replied: NO LO VOY A AHCER HACELO VOS. (2026-11-06, in this conversation, about completing the reviewer credential operation.)",
+    "publicationAuthorization": "Nicolas replied: Sí, lo confirmo y verificá para publicar. (2026-11-06, in this conversation, about local publication of the already approved lesson and three exercises.)"
+  },
+  "originalApprovalRecords": [
+    "docs/features/04-academy/review.md",
+    "docs/features/06-assessments/item-brief.md",
+    "docs/features/06-assessments/review.md"
+  ],
+  "reviewedSources": [
+    {
+      "kind": "academy",
+      "id": "careless-trip-in-penalty-area",
+      "version": 1,
+      "contentHash": "sha256:4056b7d5cac8d8886003602464dd82cb633fbc74e198c49597049a52cdf59f6b",
+      "sourceEvidenceRef": "docs/features/04-academy/review-evidence-v1.json",
+      "sourceEvidenceSha256": "sha256:59b6703690e8f961d9c806a625c8a200f00c4c9b14c44dc113b6bbde527b452a",
+      "originalReceiptRef": "docs/features/04-academy/review-receipt-candidate-v1.json"
+    },
+    {
+      "kind": "assessment",
+      "id": "careless-trip-penalty-restart",
+      "version": 1,
+      "contentHash": "sha256:cfd82af1ae1d01b0fc54b79290945ecfeb3a7cf2b91124480cb0df22143bef7f",
+      "rubricHash": "sha256:ffef04600b4366e59d8c281933e189c0d798c4ee675fd297776e706fa8c6e1f1",
+      "sourceEvidenceRef": "docs/features/06-assessments/review-evidence-v1.json",
+      "sourceEvidenceSha256": "sha256:68b59e61d24d4c19c48cde4b3342e65e6a88e8b5b7311f6b81bb73e9a33956bc",
+      "originalReceiptRef": "docs/features/06-assessments/review-receipt-candidate-careless-trip-penalty-restart-v1.json"
+    },
+    {
+      "kind": "assessment",
+      "id": "challenge-severity-rule",
+      "version": 1,
+      "contentHash": "sha256:dc5bb1d47f34a86a0112c411e3109a51ec743822fcfcfc8453232bf38c7fa7cf",
+      "rubricHash": "sha256:1802297539b604a8e9caa535cc47e61cb9dead4c6f84fe0b170f643918553bfc",
+      "sourceEvidenceRef": "docs/features/06-assessments/review-evidence-v1.json",
+      "sourceEvidenceSha256": "sha256:68b59e61d24d4c19c48cde4b3342e65e6a88e8b5b7311f6b81bb73e9a33956bc",
+      "originalReceiptRef": "docs/features/06-assessments/review-receipt-candidate-challenge-severity-rule-v1.json"
+    },
+    {
+      "kind": "assessment",
+      "id": "reckless-challenge-not-dogso",
+      "version": 1,
+      "contentHash": "sha256:cc16f97584047ec7ae6fd88873f3343846e848cc5e12e1ee53bf931d8dcdd124",
+      "rubricHash": "sha256:df1d22b252515c522b87aa5bc878c1cad20c02e9f6745b4ebccade7dcff9c577",
+      "sourceEvidenceRef": "docs/features/06-assessments/review-evidence-v1.json",
+      "sourceEvidenceSha256": "sha256:68b59e61d24d4c19c48cde4b3342e65e6a88e8b5b7311f6b81bb73e9a33956bc",
+      "originalReceiptRef": "docs/features/06-assessments/review-receipt-candidate-reckless-challenge-not-dogso-v1.json"
+    }
+  ]
+}

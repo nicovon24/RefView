@@ -115,6 +115,8 @@ export default async function EditorialPreviewPage({ params, searchParams }: Pro
     if (query.interface !== 'catalog' && !draft) notFound();
     const catalog = assessmentDraftsV1.map((candidate) => projectAssessmentCatalogItemV1(candidate, locale));
     const current = draft!;
+    const suggested = query.interface === 'correction' ? assessmentDraftsV1.find(({ source }) =>
+      current.source.recommendationRefs.some((reference) => reference.targetItemId === source.itemId && reference.targetVersion === source.version)) : undefined;
     const question = query.interface === 'question' ? projectAssessmentActiveAttemptV1(current, 'interface-preview', locale) : null;
     const source = query.interface === 'correction' ? current.source : null;
     const correction = source ? {
@@ -127,10 +129,13 @@ export default async function EditorialPreviewPage({ params, searchParams }: Pro
     } : null;
     return <div className="rv-assessment rv-assessment--preview"><a className="rv-assessment__skip" href="#assessment-title">{locale === 'es' ? 'Ir al contenido' : 'Skip to content'}</a>
       <main className="rv-assessment__main"><nav className="rv-assessment__preview-nav"><Link href={`${base}?interface=catalog`}>{ui.previewCatalog}</Link><span><Link href={`/es/assessments/editorial-preview?interface=${query.interface}${query.item ? `&item=${query.item}` : ''}`} lang="es">ES</Link> / <Link href={`/en/assessments/editorial-preview?interface=${query.interface}${query.item ? `&item=${query.item}` : ''}`} lang="en">EN</Link></span></nav>
-        <p className="rv-assessment__preview-banner">{ui.previewBanner}</p><header className="rv-assessment__hero"><h1 id="assessment-title">{query.interface === 'catalog' ? ui.previewCatalog : current.source.localized[locale].title}</h1><p>{query.interface === 'catalog' ? ui.previewIntro : ui.previewNoAttempt}</p></header>
+        <p className="rv-assessment__preview-banner">{ui.previewBanner}</p><header className="rv-assessment__hero"><h1 id="assessment-title">{query.interface === 'catalog' ? ui.previewCatalog : current.source.localized[locale].title}</h1><p>{query.interface === 'catalog' ? ui.previewIntro : query.interface === 'question' ? ui.previewQuestionIntro : ui.previewCorrectionIntro}</p></header>
         {query.interface === 'catalog' && <section className="rv-assessment__section"><h2>{ui.browse}</h2><AssessmentCatalog locale={locale} items={catalog} previewHref={(item) => `${base}?interface=question&item=${item.itemId}`} /></section>}
         {question && <section className="rv-assessment__section"><AssessmentQuestion locale={locale} attempt={question} preview correctionHref={`${base}?interface=correction&item=${current.source.itemId}`} /></section>}
-        {correction && <section className="rv-assessment__section"><p className="rv-assessment__note">{ui.previewCorrectionNote}</p><AssessmentCorrection locale={locale} correction={correction} next={<Link href={`${base}?interface=catalog`}>{ui.browse}</Link>} /></section>}
+        {correction && <section className="rv-assessment__section"><p className="rv-assessment__note">{ui.previewCorrectionNote}</p><AssessmentCorrection locale={locale} correction={correction} nextTitle={ui.previewNextTitle} next={<nav className="rv-assessment__preview-next" aria-label={ui.previewNextTitle}>
+          {suggested && <Link className="rv-assessment__button" href={`${base}?interface=question&item=${suggested.source.itemId}`}>{ui.previewNext}: {suggested.source.localized[locale].title}</Link>}
+          <Link href={`${base}?interface=catalog`}>{ui.previewBackToCatalog}</Link>
+        </nav>} /></section>}
       </main></div>;
   }
   const t = copy[locale];

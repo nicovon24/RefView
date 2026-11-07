@@ -1,6 +1,6 @@
 # RefView agent guide
 
-RefView is a Spanish-first, bilingual football refereeing product. The current delivery order is Academy Law summaries and controlled lesson publication, Assessments, the clearly fictional Community visual journey, and early Profile, followed last by the local 3D playtest and saved/scored first authored simulator incident. Cosmetic simulator refinement follows functional acceptance. Evidence-critical incident defects still block training publication. Code, identifiers, configuration, comments, and technical documentation must be written in English.
+RefView is a Spanish-first, bilingual football refereeing product. The current delivery order is Academy Law summaries and controlled lesson publication, locally shared Community contributions, and early Profile, followed by the local 3D playtest and saved/scored first authored simulator incident. Evaluation and practice should be integrated into the 3D simulation; standalone Assessment routes are currently unavailable in the app. Cosmetic simulator refinement follows functional acceptance. Evidence-critical incident defects still block simulator training publication. Code, identifiers, configuration, comments, and technical documentation must be written in English.
 
 ## Resume protocol
 
@@ -48,14 +48,18 @@ TDD is required for deterministic domain behavior, including timeline, replay, s
 
 ## SDD workflow
 
-Use proportional SDD under `docs/features/<slug>/`:
+Use proportional SDD under one of the grouped product areas in `docs/features/`:
 
 - `requirements.md`: objective, scope, limits, observable `REQ-*` acceptance, and evidence links.
 - `design.md`: contracts, alternatives, boundaries, and risks.
 - `tasks.md`: task contracts and dependencies without status columns.
 - `review.md`: independent review evidence when required.
 
+Keep one requirements, design, tasks, and review document per grouped area where applicable. Give each constituent feature a stable anchored section in those shared documents; supporting briefs, licenses, and review receipts stay alongside the area. Do not recreate a separate feature directory for a slice already represented in an area. Learning and assessment specifications are a nested workstream of the 3D simulator area, not a top-level feature area. The `docs/features/README.md` index defines the current areas.
+
 The coordinator owns shared contracts, project documentation, root configuration, the lockfile, schema coordination, integration, and task status. Resolve shared contracts before delegating dependent work.
+
+Reusable system contracts are grouped into the six domain documents indexed at `docs/contracts/README.md`. Add a section with a stable anchor to the relevant domain document instead of creating a separate file for each small contract. `docs/specs/tasks.md` remains the sole task-status tracker.
 
 ## Delegation and model policy
 

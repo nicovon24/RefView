@@ -1,8 +1,6 @@
 import 'server-only';
 import { openApplicationDatabase } from '@/lib/db/application-runtime';
 import { loadPublishedAcademyLessonV1 } from './published-reader-v1';
-import { loadPublishedAssessmentV1 } from '@/features/assessments/published-reader-v1';
-import { readAssessmentCatalog } from '@/features/assessments/route-ui-v1-data';
 import type { AcademyLessonSourceV1 } from './lesson-source-v1';
 
 export type AcademyLocale = 'es' | 'en';
@@ -21,7 +19,6 @@ export type PublicLesson = CatalogLesson & Readonly<{
   example: Readonly<{ facts: string; evidence: string; interpretation: string; ruleApplication: string }>;
   sources: ReadonlyArray<Readonly<{ sourceId: string; displayLabel: string; documentUrl: string; printedPage: number; publisher: string }>>;
   followUps: ReadonlyArray<Readonly<{ followUpId: string; question: string; answer: string; sourceLabels: readonly string[] }>>;
-  practice: ReadonlyArray<Readonly<{ itemId: string; version: number; title: string }>>;
 }>;
 
 export function projectCatalogLesson(source: AcademyLessonSourceV1, locale: AcademyLocale): CatalogLesson {
@@ -51,7 +48,6 @@ export function projectPublicLesson(source: AcademyLessonSourceV1, locale: Acade
       followUpId: item.followUpId, question: item.question[locale], answer: item.answer[locale],
       sourceLabels: item.sourceIds[locale].map((id) => sourceLabels.get(id)!),
     })),
-    practice: [],
   };
 }
 
@@ -83,28 +79,7 @@ export async function readAcademyLesson(lessonId: string, version: number, local
     const compiled = await loadPublishedAcademyLessonV1(database, { lessonId, version });
     if (!compiled) return { kind: 'missing' };
     const lesson = projectPublicLesson(compiled.source, locale);
-    const practice: Array<{ itemId: string; version: number; title: string }> = [];
-    const assessmentCatalog = await readAssessmentCatalog(locale);
-    for (const ref of compiled.source.practiceRefs) {
-      if (ref.kind !== 'assessment' || ref.topicId !== compiled.source.topicId
-        || ref.lawsEdition !== compiled.source.lawsEdition
-        || assessmentCatalog.kind !== 'ready'
-        || !assessmentCatalog.items.some((item) => item.itemId === ref.targetId
-          && item.version === ref.targetVersion && item.topicId === ref.topicId
-          && item.lawsEdition === ref.lawsEdition)) continue;
-      try {
-        const target = await loadPublishedAssessmentV1(database,
-          { itemId: ref.targetId, version: ref.targetVersion });
-        if (target && target.source.topicId === ref.topicId
-          && target.source.lawsEdition === ref.lawsEdition) {
-          practice.push({ itemId: target.source.itemId, version: target.source.version,
-            title: target.source.localized[locale].title });
-        }
-      } catch (error) {
-        console.error('Academy practice availability read failed', error);
-      }
-    }
-    return { kind: 'ready', lesson: { ...lesson, practice } };
+    return { kind: 'ready', lesson };
   } catch (error) {
     console.error('Academy lesson read failed', error);
     return { kind: 'unavailable' };

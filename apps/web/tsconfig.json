@@ -35,7 +35,9 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     ".next-session-test/types/**/*.ts",
-    ".next-session-test/dev/types/**/*.ts"
+    ".next-session-test/dev/types/**/*.ts",
+    ".next-social-acceptance/types/**/*.ts",
+    ".next-social-acceptance/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

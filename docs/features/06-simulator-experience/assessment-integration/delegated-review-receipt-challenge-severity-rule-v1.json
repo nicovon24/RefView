@@ -1,0 +1,16 @@
+{
+  "kind": "assessment",
+  "id": "challenge-severity-rule",
+  "version": 1,
+  "contentHash": "sha256:dc5bb1d47f34a86a0112c411e3109a51ec743822fcfcfc8453232bf38c7fa7cf",
+  "rubricHash": "sha256:1802297539b604a8e9caa535cc47e61cb9dead4c6f84fe0b170f643918553bfc",
+  "evidenceSha256": "sha256:b1e23299862b74902851c1a5a4acfcb62f610dbd764814a820a698d9a3a5e593",
+  "decisions": {
+    "footballInterpretationApproved": true,
+    "sourcesAndProvenanceApproved": true,
+    "spanishEnglishEquivalenceApproved": true,
+    "acceptedAlternativesApproved": true,
+    "correctionApproved": true,
+    "rubricMeaningApproved": true
+  }
+}

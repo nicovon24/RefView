@@ -44,10 +44,10 @@ Avoid additional services, queues, realtime infrastructure, vector databases, or
 ## Detailed contracts
 
 - [Technology stack](technology-stack.md)
-- [Coordinates](../contracts/coordinates.md)
-- [Scenario versions](../contracts/scenario.md)
-- [Clocks and events](../contracts/clocks-and-events.md)
-- [Observation and camera](../contracts/observation-and-camera.md)
-- [Decision and evaluation](../contracts/decision-and-evaluation.md)
-- [Session and persistence](../contracts/session-and-persistence.md)
+- [Coordinates](../contracts/simulator-timeline.md#coordinates)
+- [Scenario versions](../contracts/simulator-timeline.md#scenario)
+- [Clocks and events](../contracts/simulator-timeline.md#clocks-and-events)
+- [Observation and camera](../contracts/observation-evaluation.md#observation-and-camera)
+- [Decision and evaluation](../contracts/observation-evaluation.md#decision-and-evaluation)
+- [Session and persistence](../contracts/simulator-timeline.md#session-and-persistence)
 - [Testing](testing.md)

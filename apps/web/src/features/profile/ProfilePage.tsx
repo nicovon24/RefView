@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState, useTransition } from 'react';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import type { Locale } from '@/lib/i18n/locale';
+import { AccountPanel, type AccountState } from './AccountPanel';
 import { OwnerSessionPanel, type OwnerSessionState } from './OwnerSessionPanel';
 import { unsaveSavedAcademyLesson } from './saved-academy-actions';
 import type { listSavedAcademyLessons } from './saved-academy-service';
@@ -20,7 +21,6 @@ const copy = {
     display: 'Pantalla y movimiento', motion: 'Movimiento reducido', os: 'Seguir el sistema', yes: 'Sí', no: 'No',
     quality: 'Calidad gráfica', high: 'Alta', low: 'Baja', motionEffective: 'Movimiento reducido efectivo',
     reset: 'Restablecer preferencias locales', saved: 'Guardado en este navegador.', defaults: 'Usando valores predeterminados; todavía no hay preferencias guardadas.', resetDone: 'Preferencias locales restablecidas.', unsaved: 'No se pudo acceder al almacenamiento. Los cambios actuales no sobrevivirán a una recarga.',
-    history: 'Historial', historyEmpty: 'Todavía no hay intentos guardados para mostrar. La prueba local del simulador no guarda ni califica intentos.',
     savedContent: 'Contenido guardado', savedEmpty: 'Todavía no hay contenido guardado disponible en este perfil.',
     scope: 'Alcance y eliminación', scopeBody: 'Estas preferencias son solo de este perfil de navegador. No se sincronizan entre dispositivos. Restablecerlas elimina la clave local; borrar los datos del sitio también las elimina.',
     note: 'La vista de controles toma estas preferencias al abrirse. La prueba local del incidente todavía no las usa; sin un valor elegido, cada escena conserva su encuadre predeterminado.',
@@ -33,7 +33,6 @@ const copy = {
     display: 'Display and motion', motion: 'Reduced motion', os: 'Follow system', yes: 'Yes', no: 'No',
     quality: 'Graphics quality', high: 'High', low: 'Low', motionEffective: 'Effective reduced motion',
     reset: 'Reset local preferences', saved: 'Saved in this browser.', defaults: 'Using defaults; no preferences have been saved yet.', resetDone: 'Local preferences reset.', unsaved: 'Storage is unavailable. Current changes will not survive a reload.',
-    history: 'History', historyEmpty: 'There are no saved attempts to show yet. The local simulator playtest does not save or score attempts.',
     savedContent: 'Saved content', savedEmpty: 'There is no saved content available in this profile yet.',
     scope: 'Scope and deletion', scopeBody: 'These preferences belong only to this browser profile. They do not sync across devices. Reset removes the local key; clearing site data removes it too.',
     note: 'The controls preview reads these preferences when it opens. The local incident playtest does not use them yet; without a chosen value, each scene keeps its default framing.',
@@ -53,7 +52,9 @@ const savedCopy = {
     unavailableItem: 'No disponible', generic: 'Lección guardada',
     open: 'Abrir lección', remove: 'Quitar de guardados', removing: 'Quitando…',
     removeError: 'No se pudo quitar la lección. Volvé a intentarlo.',
-    sessionScope: 'Las lecciones guardadas pertenecen a esta sesión privada y vencen con ella.' },
+    sessionScope: 'Las lecciones guardadas pertenecen a esta sesión privada y vencen con ella.',
+    accountScope: 'Las lecciones vinculadas se conservan en tu cuenta hasta que la elimines.',
+    unknownScope: 'No podemos confirmar ahora el estado de los datos guardados.' },
   en: { missing: 'Start a private session to save Academy lessons.',
     unavailable: 'We cannot load your saved lessons right now.',
     empty: 'You have not saved any lessons yet.', browse: 'Explore the Academy',
@@ -61,10 +62,13 @@ const savedCopy = {
     unavailableItem: 'Unavailable', generic: 'Saved lesson',
     open: 'Open lesson', remove: 'Remove saved lesson', removing: 'Removing…',
     removeError: 'Could not remove the lesson. Try again.',
-    sessionScope: 'Saved lessons belong to this private session and expire with it.' },
+    sessionScope: 'Saved lessons belong to this private session and expire with it.',
+    accountScope: 'Linked lessons remain in your account until you delete it.',
+    unknownScope: 'We cannot confirm the saved data status right now.' },
 } as const;
 
-function SavedAcademyPanel({ locale, result }: { locale: Locale; result: SavedLessons }) {
+function SavedAcademyPanel({ locale, result, accountState }: { locale: Locale;
+  result: SavedLessons; accountState: AccountState }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState('');
@@ -96,11 +100,15 @@ function SavedAcademyPanel({ locale, result }: { locale: Locale; result: SavedLe
             </div>
           </li>)}</ul>}
     <p className="rv-profile__saved-error" role="status" aria-live="polite">{error}</p>
-    <p className="rv-profile__saved-scope">{t.sessionScope}</p>
+    <p className="rv-profile__saved-scope">{accountState === 'active' ? t.accountScope
+      : accountState === 'unavailable' ? t.unknownScope : t.sessionScope}</p>
   </section>;
 }
 
-export function ProfilePage({ locale, ownerSession, savedLessons }: { locale: Locale; ownerSession: OwnerSessionState; savedLessons: SavedLessons }) {
+export function ProfilePage({ locale, ownerSession, savedLessons,
+  accountState, googleConfigured }:
+  { locale: Locale; ownerSession: OwnerSessionState; savedLessons: SavedLessons;
+    accountState: AccountState; googleConfigured: boolean }) {
   const router = useRouter();
   const t = copy[locale];
   const [preferences, setPreferences] = useState<DevicePreferences>({ ...defaultPreferences, locale });
@@ -172,9 +180,10 @@ export function ProfilePage({ locale, ownerSession, savedLessons }: { locale: Lo
           <div className="rv-profile__footer"><button type="button" onClick={reset}>{t.reset}</button><p role="status">{ready ? !storageAvailable ? t.unsaved : saveState === 'saved' ? t.saved : saveState === 'reset' ? t.resetDone : t.defaults : ''}</p></div>
         </section>
         <aside className="rv-profile__aside">
-          <OwnerSessionPanel locale={locale} initialState={ownerSession} />
-          <section><h2>{t.history}</h2><p>{t.historyEmpty}</p></section>
-          <SavedAcademyPanel locale={locale} result={savedLessons} />
+          <AccountPanel locale={locale} state={accountState}
+            canAttach={ownerSession.status === 'active'} googleConfigured={googleConfigured} />
+          {accountState === 'missing' && <OwnerSessionPanel locale={locale} initialState={ownerSession} />}
+          <SavedAcademyPanel locale={locale} result={savedLessons} accountState={accountState} />
           <section><h2>{t.scope}</h2><p>{t.scopeBody}</p></section>
         </aside>
       </div>

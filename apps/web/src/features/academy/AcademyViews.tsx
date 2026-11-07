@@ -44,8 +44,8 @@ export function AcademyLessonView({ locale, lesson, mode, saveControl }: {
 }) {
   const t = academyCopy[locale];
   const preview = locale === 'es'
-    ? { title: 'Vista de interfaz · sin publicar', notice: 'Esta lección aprobada se muestra solo para revisar la interfaz. No figura en el catálogo público y no se puede guardar ni practicar desde aquí.', practice: 'Esta vista no inicia una práctica ni guarda resultados. Los ejercicios relacionados aparecerán cuando estén publicados y sean compatibles.' }
-    : { title: 'Interface preview · unpublished', notice: 'This approved lesson is shown only for interface review. It is not in the public catalog and cannot be saved or practiced here.', practice: 'This preview does not start practice or save results. Related exercises will appear when published and compatible.' };
+    ? { title: 'Vista de interfaz · sin publicar', notice: 'Esta lección aprobada se muestra solo para revisar la interfaz. No figura en el catálogo público y no se puede guardar desde aquí.' }
+    : { title: 'Interface preview · unpublished', notice: 'This approved lesson is shown only for interface review. It is not in the public catalog and cannot be saved here.' };
   const languagePath = mode === 'preview' ? '/academy/interface-preview' : `/academy/${lesson.lessonId}?version=${lesson.version}`;
   return <div className="rv-academy">
     <a className="rv-academy__skip" href="#lesson-title">{t.skip}</a>
@@ -74,12 +74,6 @@ export function AcademyLessonView({ locale, lesson, mode, saveControl }: {
             <summary>{item.question}</summary><p className="rv-academy__prepared">{t.prepared}</p><p>{item.answer}</p>
             <p className="rv-academy__citation">{item.sourceLabels.join(' · ')}</p>
           </details>)}</div>
-        </section>
-        <section className="rv-academy__section" aria-labelledby="practice-title"><h2 id="practice-title">{t.practice}</h2>
-          {mode === 'published' && lesson.practice.length ? <ul className="rv-academy__practice">{lesson.practice.map((item) =>
-            <li key={`${item.itemId}:${item.version}`}><span>{item.title}</span>
-              <Link href={`/${locale}/assessments#assessment-${item.itemId}-v${item.version}`}>{t.practiceOpen}</Link>
-            </li>)}</ul> : <p>{mode === 'preview' ? preview.practice : t.practiceUnavailable}</p>}
         </section>
       </article><aside className="rv-academy__references" aria-labelledby="sources-title"><h2 id="sources-title">{t.sources}</h2>
         <ul>{lesson.sources.map((source) => <li key={source.sourceId}><strong>{source.displayLabel}</strong><span>{source.publisher} · {t.edition}: {formatEdition(lesson.lawsEdition)}</span><a href={source.documentUrl} target="_blank" rel="noopener noreferrer">{t.sourceLink} ↗</a></li>)}</ul>

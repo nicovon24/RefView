@@ -49,8 +49,6 @@ export const editorialLesson = {
         { question: '¿Y si el contacto fue sobre la línea?', answer: 'La línea pertenece al área que delimita. Si la infracción se comete sobre la línea del área penal propia, se considera dentro de ella.' },
         { question: '¿Y si la entrada fue temeraria?', answer: 'Una acción temeraria exige amonestación según la Regla 12. Habría que valorar todas las circunstancias, que serían distintas de los hechos de este ejemplo.' },
       ],
-      practiceTitle: 'Práctica relacionada',
-      practiceUnavailable: 'Todavía no hay una práctica publicada y compatible con esta lección.',
     },
     en: {
       title: 'A trip inside the penalty area',
@@ -84,8 +82,6 @@ export const editorialLesson = {
         { question: 'What if the contact was on the line?', answer: 'A boundary line belongs to the area it encloses. An offence on the offender’s penalty-area line is treated as inside the area.' },
         { question: 'What if the challenge was reckless?', answer: 'Law 12 calls for a caution for a reckless challenge. The complete circumstances would need assessment and would differ from this example’s facts.' },
       ],
-      practiceTitle: 'Related practice',
-      practiceUnavailable: 'No published, compatible practice is available for this lesson yet.',
     },
   },
 } as const;

@@ -1,6 +1,11 @@
 export const assessmentCopy = {
   es: {
-    previewQuestion: 'Ver consigna', previewNoAttempt: 'Vista de interfaz: no se guarda ninguna respuesta ni se calcula una puntuación.',
+    previewQuestion: 'Ver consigna', previewNoAttempt: 'Podés explorar una respuesta. Tu selección no se envía, no se guarda ni se evalúa.',
+    previewReasoningNote: 'Escribí una explicación de muestra. No se envía ni se guarda.',
+    previewSourceSaveNote: 'La consigna describe un futuro intento real. En esta vista, tu explicación no se guarda.',
+    previewQuestionIntro: 'Explorá la decisión y después abrí una corrección preparada por separado.',
+    previewCorrectionIntro: 'Una explicación preparada con sus datos y fuentes oficiales.',
+    previewNextTitle: 'Seguí explorando', previewNext: 'Ver siguiente ejercicio de muestra', previewBackToCatalog: 'Volver a los tres ejercicios',
     viewExampleCorrection: 'Ver corrección de ejemplo', previewCatalog: 'Vista de interfaz', previewIntro: 'Tres borradores aprobados para revisar la interfaz. No están publicados y esta vista no crea intentos.',
     previewBanner: 'BORRADOR · NO PUBLICADO', previewCorrection: 'Corrección de ejemplo', previewCorrectionNote: 'Ejemplo preparado del borrador. No evalúa ninguna selección del visitante.',
     title: 'Evaluaciones', intro: 'Ejercicios publicados y revisados sobre decisiones arbitrales.',
@@ -31,7 +36,12 @@ export const assessmentCopy = {
     profile: 'Ir a Perfil', unavailableAttempt: 'No pudimos comprobar este intento. Intentá de nuevo más tarde.',
   },
   en: {
-    previewQuestion: 'View question', previewNoAttempt: 'Interface preview: no answer is saved and no score is calculated.',
+    previewQuestion: 'View question', previewNoAttempt: 'Explore an answer. Your selection is not submitted, saved, or evaluated.',
+    previewReasoningNote: 'Write a sample explanation. It is not submitted or saved.',
+    previewSourceSaveNote: 'The prompt describes a future real attempt. In this preview, your explanation is not saved.',
+    previewQuestionIntro: 'Explore the decision, then open a separate prepared correction.',
+    previewCorrectionIntro: 'A prepared explanation with its facts and official sources.',
+    previewNextTitle: 'Keep exploring', previewNext: 'View the next sample exercise', previewBackToCatalog: 'Back to the three exercises',
     viewExampleCorrection: 'View example correction', previewCatalog: 'Interface preview', previewIntro: 'Three approved drafts for interface review. They are unpublished and this view creates no attempts.',
     previewBanner: 'DRAFT · UNPUBLISHED', previewCorrection: 'Example correction', previewCorrectionNote: 'Prepared example from the draft. It does not evaluate a visitor selection.',
     title: 'Assessments', intro: 'Published, reviewed exercises on refereeing decisions.',

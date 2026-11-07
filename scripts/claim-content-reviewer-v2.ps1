@@ -1,6 +1,6 @@
-# Nicolas runs this locally. It issues a combined Academy and Assessment reviewer credential.
+# Nicolas starts the interactive claim; a bound pending claim can be resumed after a failure.
 [CmdletBinding()]
-param()
+param([switch]$ResumePendingClaim)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 function Reveal([Security.SecureString]$value) {
@@ -13,7 +13,7 @@ function Hash([byte[]]$bytes) {
   try { [BitConverter]::ToString($sha.ComputeHash($bytes)).Replace('-', '').ToLowerInvariant() }
   finally { $sha.Dispose() }
 }
-if (-not [Environment]::UserInteractive -or [Console]::IsInputRedirected) {
+if (-not $ResumePendingClaim -and (-not [Environment]::UserInteractive -or [Console]::IsInputRedirected)) {
   throw 'An interactive console controlled by Nicolas is required.'
 }
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -34,6 +34,9 @@ if (-not (Test-Path -LiteralPath $vaultPath) -or -not (Test-Path -LiteralPath $c
 if (Test-Path -LiteralPath $evidencePath) {
   throw 'Final issuance evidence already exists. Inspect it; a completed claim will not be overwritten.'
 }
+if ($ResumePendingClaim -and -not (Test-Path -LiteralPath $pendingPath)) {
+  throw 'Resume requires the exact existing v2 pending claim.'
+}
 foreach ($name in @('docker', 'node')) {
   if (-not (Get-Command $name -ErrorAction SilentlyContinue)) { throw "$name is required." }
 }
@@ -42,14 +45,20 @@ if ($vault.App -isnot [Security.SecureString] -or $vault.Migration -isnot [Secur
     $vault.Reviewer -isnot [Security.SecureString]) {
   throw 'The vault must contain app, migration, and reviewer SecureStrings.'
 }
-Write-Host 'This rotates refview_reviewer, maps it to nicolas, and grants Academy and Assessment review procedures.'
-Write-Host 'Console confirmation is an operator assertion. Nicolas must inspect and attest the final receipt separately.'
+Write-Host 'This maps refview_reviewer to nicolas and grants Academy and Assessment review procedures.'
+Write-Host 'Nicolas must inspect and attest the final receipt separately.'
 Write-Host 'No content review, admission, or publication is performed.'
-if ((Read-Host 'Type CLAIM NICOLAS REVIEWER to assert you are Nicolas taking control of this credential') -cne 'CLAIM NICOLAS REVIEWER') {
-  throw 'Credential claim was cancelled.'
+if ($ResumePendingClaim) {
+  Write-Host 'Resuming an existing exact-password claim; no new operator assertion is recorded.'
+  $newSecure = $vault.Reviewer
+  $againSecure = $newSecure
+} else {
+  if ((Read-Host 'Type CLAIM NICOLAS REVIEWER to assert you are Nicolas taking control of this credential') -cne 'CLAIM NICOLAS REVIEWER') {
+    throw 'Credential claim was cancelled.'
+  }
+  $newSecure = Read-Host 'New reviewer password (at least 32 characters)' -AsSecureString
+  $againSecure = Read-Host 'Repeat reviewer password' -AsSecureString
 }
-$newSecure = Read-Host 'New reviewer password (at least 32 characters)' -AsSecureString
-$againSecure = Read-Host 'Repeat reviewer password' -AsSecureString
 $newPassword = Reveal $newSecure
 $againPassword = Reveal $againSecure
 $migrationPassword = Reveal $vault.Migration
@@ -75,6 +84,10 @@ if (Test-Path -LiteralPath $pendingPath) {
       $evidence.principalId -cne 'nicolas' -or
       $evidence.databaseRole -cne 'refview_reviewer' -or
       $evidence.database -cne 'refview' -or
+      $evidence.schemaVersion -ne 2 -or
+      $evidence.claimant -cne 'Nicolas (operator assertion; separate attestation pending)' -or
+      $evidence.claimMethod -cne 'interactive Windows console; chosen rotated reviewer password' -or
+      $evidence.issuedAtUtc -cnotmatch '^\d{4}-\d{2}-\d{2}T' -or
       $evidence.scope -cne 'Academy and Assessment local credential; no review or publication') {
     throw 'Pending claim has an unexpected shape. Inspect it before proceeding.'
   }
@@ -116,6 +129,32 @@ if (Test-Path -LiteralPath $pendingPath) {
 $evidenceBytes = [Text.Encoding]::UTF8.GetBytes($pending.evidenceJson)
 $evidenceHash = 'sha256:' + (Hash $evidenceBytes)
 $passwordHex = [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($newPassword)).Replace('-', '')
+
+if ($ResumePendingClaim) {
+  $env:REFVIEW_RESUME_REVIEWER_PASSWORD = $newPassword
+  $resumeProbe = @'
+const { Client } = require('pg');
+(async () => {
+  const client = new Client({ host: '127.0.0.1', port: 55439, database: 'refview',
+    user: 'refview_reviewer', password: process.env.REFVIEW_RESUME_REVIEWER_PASSWORD,
+    connectionTimeoutMillis: 5000 });
+  await client.connect();
+  try {
+    const result = await client.query('SELECT current_database() AS db, session_user AS login');
+    if (result.rows[0]?.db !== 'refview' || result.rows[0]?.login !== 'refview_reviewer')
+      throw Error('prior reviewer rotation identity mismatch');
+  } finally { await client.end(); }
+})().catch(() => { process.stdout.write('Existing reviewer login did not authenticate.\n'); process.exitCode = 1; });
+'@
+  Push-Location (Join-Path $root 'apps/web')
+  try {
+    $resumeProbe | & node -
+    if ($LASTEXITCODE -ne 0) { throw 'Resume requires the previously rotated reviewer credential.' }
+  } finally {
+    Pop-Location
+    Remove-Item Env:REFVIEW_RESUME_REVIEWER_PASSWORD -ErrorAction SilentlyContinue
+  }
+}
 
 # The bootstrap login rotates the role only. An existing mapping must match this v2 pending receipt; v1 mappings are rejected.
 $bootstrapSql = @'
@@ -251,11 +290,16 @@ const denied = ['content_lock_assessment_eligibility(text,integer)'];
       if (e.code !== 'P0002') throw e;
     }
   } finally { await reviewer.end(); }
-})().catch(() => { process.stderr.write('Reviewer claim failed; inspect local state and retry the exact pending claim.\n'); process.exitCode = 1; });
+})().catch((error) => {
+  const code = typeof error.code === 'string' ? error.code : 'unknown';
+  const message = error instanceof Error ? error.message : 'unknown error';
+  process.stdout.write('Reviewer claim failed (' + code + '): ' + message + '\n');
+  process.exitCode = 1;
+});
 '@
   Push-Location (Join-Path $root 'apps/web')
   try {
-    & node -e $nodeScript 2>&1 | Out-Null
+    $nodeScript | & node -
     if ($LASTEXITCODE -ne 0) { throw 'Mapping, grants, or separate-login verification failed. Keep pending evidence for an exact-password retry.' }
   } finally { Pop-Location }
   $temporaryEvidencePath = "$evidencePath.$([Guid]::NewGuid().ToString('N')).tmp"
